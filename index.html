@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>封印解除：五年篇</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,600;1,700;1,800&family=Cinzel:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --display:"Cinzel","Noto Serif TC",serif; --serif:"Noto Serif TC",serif;
+  --bg:#f5f1e6; --card:#fffcf5; --ink:#1c1f3b; --muted:#736c55; --line:#e6dcc4; --sunk:#efe8d6;
+  --accent:#9e7424; --accent-soft:#f3e7c9; --gold:#c9a24a; --btn-ink:#fff;
+  --warn:#b4541c; --warn-soft:#f6e3d3; --ok:#2f7a5a; --ok-soft:#dcefe5;
+  --side:#1c1f3b; --side-ink:#f5efe0; --side-muted:#a7a3c2;
+  --P:#4f55b8; --P-soft:#e6e7f8; --C:#17806f; --C-soft:#d9f0eb; --S:#9e7424; --S-soft:#f3e7c9;
+  --shadow:0 1px 2px rgba(28,31,59,.05),0 4px 14px rgba(28,31,59,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#12142a;--card:#1b1e38;--ink:#ece8f5;--muted:#a19cbf;--line:#2d3058;--sunk:#161936;
+    --accent:#d9b25e;--accent-soft:#3a3320;--gold:#d9b25e;--btn-ink:#1c1f3b;--warn:#f0a36b;--warn-soft:#3d2a1e;--ok:#6fcf9f;--ok-soft:#1d3a2e;
+    --side:#0b0c1d;--side-ink:#ece8f5;--side-muted:#8f8ab0;--P:#a3a8ff;--P-soft:#2a2d5c;--C:#5fd3be;--C-soft:#173b36;--S:#d9b25e;--S-soft:#3a3320;--shadow:none}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif;font-size:15px;line-height:1.6}
+button,input,select,textarea{font:inherit;color:inherit}
+.shell{display:grid;grid-template-columns:236px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--side);color:var(--side-ink);display:flex;flex-direction:column;padding:20px 12px 14px}
+.side h1{font-family:"Noto Serif TC",serif;font-size:19px;margin:0 8px;color:#e8d9b0;letter-spacing:.04em}
+.side .sub{color:var(--side-muted);font-size:12px;margin:0 8px 14px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;border:0;background:transparent;color:var(--side-ink);padding:7px 10px;border-radius:9px;cursor:pointer;text-align:left;font-size:14.5px;margin-bottom:1px}
+.nav:hover{background:rgba(255,255,255,.07)}
+.nav.on{background:rgba(255,255,255,.14);font-weight:700;box-shadow:inset 3px 0 0 var(--gold)}
+.nav .badge{font-size:11px;background:#e3a066;color:#2a1a0b;border-radius:99px;padding:0 7px;font-weight:700}
+.nav .tg{font-size:10px;color:var(--side-muted);letter-spacing:.04em}
+.side .foot{margin-top:auto;font-size:12px;color:var(--side-muted);padding:10px 8px 0;line-height:1.6}
+.side .foot b{color:var(--side-ink);font-weight:500}
+.main{min-width:0;padding:24px 30px 70px}
+.page{max-width:1260px;margin:0 auto}
+.ptitle{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 16px;flex-wrap:wrap}
+.ptitle h2{font-family:"Noto Serif TC",serif;font-size:25px;margin:0}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.gdash{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:start}
+.col{display:grid;gap:16px;align-content:start;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);min-width:0}
+.card h3{font-size:16px;margin:0 0 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.card h4{font-size:14px;margin:14px 0 6px}
+.card.P{border-top:3px solid var(--P)} .card.C{border-top:3px solid var(--C)} .card.S{border-top:3px solid var(--S)}
+.muted{color:var(--muted);font-size:13px}
+.small{font-size:12px}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.between{justify-content:space-between}
+.stat .k{font-size:12px;color:var(--muted)} .stat .v{font-size:24px;font-weight:700;line-height:1.25} .stat .s{font-size:12px;color:var(--muted)}
+.chip{display:inline-block;font-size:11.5px;padding:0 8px;border-radius:999px;background:var(--sunk);color:var(--muted);white-space:nowrap;line-height:20px;vertical-align:1px}
+.chip.P{background:var(--P-soft);color:var(--P)} .chip.C{background:var(--C-soft);color:var(--C)} .chip.S{background:var(--S-soft);color:var(--S)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)} .chip.ok{background:var(--ok-soft);color:var(--ok)} .chip.gold{background:var(--accent-soft);color:var(--accent)}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--gold);border-radius:99px}
+.bar.P>i{background:var(--P)} .bar.C>i{background:var(--C)}
+input[type=text],input[type=number],input[type=date],input[type=month],input[type=search],textarea,select{width:100%;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:6px 10px}
+textarea{min-height:68px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.btn{font-size:14px;border:1px solid var(--accent);background:var(--accent);color:var(--btn-ink);border-radius:9px;padding:5px 13px;cursor:pointer;white-space:nowrap}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.sm{padding:1px 9px;font-size:12.5px}
+.btn.danger{border-color:var(--warn);background:var(--warn)}
+.btn.plain{border-color:var(--line);background:var(--card);color:var(--ink)}
+.x{border:0;background:none;color:var(--muted);cursor:pointer;font-size:16px;padding:0 4px;line-height:1}
+.seg{display:inline-flex;gap:3px;flex-wrap:wrap}
+.seg button{font-size:12.5px;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:7px;padding:2px 10px;cursor:pointer}
+.seg button.on{background:var(--accent);border-color:var(--accent);color:var(--btn-ink)}
+.seg button.on.P{background:var(--P);border-color:var(--P)} .seg button.on.C{background:var(--C);border-color:var(--C)}
+.item{display:flex;gap:10px;align-items:flex-start;padding:8px 4px;border-bottom:1px dashed var(--line)}
+.item:last-child{border-bottom:0}
+.item .t{flex:1;min-width:0}
+.item.done .t .nm{color:var(--muted);text-decoration:line-through}
+.item.skip .t .nm{color:var(--muted);font-style:italic}
+.item input[type=checkbox]{width:17px;height:17px;margin-top:3px;accent-color:var(--accent);flex:0 0 auto;cursor:pointer}
+.rec{padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:8px}
+.rec:hover{background:rgba(127,127,127,.06)}
+.rec:last-child{border-bottom:0}
+.rec .nm{font-weight:500}
+.tool{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.tool input[type=search]{max-width:240px}
+.tool select{width:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:12.5px}
+td.num,th.num{text-align:right;white-space:nowrap}
+.tw{overflow-x:auto}
+.timeline{display:grid;grid-template-columns:1fr 1fr 1.3fr 2fr 2fr;gap:4px;position:relative;margin:8px 0 4px}
+.tl{background:var(--sunk);border-radius:8px;padding:6px 8px;min-width:0;font-size:12px;border:1px solid var(--line)}
+.tl.now{border-color:var(--gold);background:var(--accent-soft)}
+.tl b{display:block;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl .pb{display:flex;gap:3px;margin-top:4px}
+.tl .pb span{flex:1;height:5px;border-radius:9px;background:var(--line);overflow:hidden}
+.tl .pb span i{display:block;height:100%}
+.banner{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--warn-soft);border-radius:12px;padding:9px 16px;margin-bottom:14px}
+.risk{display:flex;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.risk:last-child{border-bottom:0}
+.risk .lv{flex:0 0 auto}
+.top3{display:flex;gap:8px;align-items:center;margin-bottom:7px}
+.top3 input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent);flex:0 0 auto}
+.top3.done input[type=text]{color:var(--muted);text-decoration:line-through}
+.dots{display:inline-flex;gap:3px;vertical-align:middle}
+.dots i{width:11px;height:11px;border-radius:50%;border:1.5px solid var(--accent);display:inline-block}
+.dots i.f{background:var(--accent)} .dots i.t{border-style:dashed;border-color:var(--P)}
+.modal{position:fixed;inset:0;background:rgba(10,10,25,.45);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;z-index:50;overflow:auto}
+.modal .box{background:var(--card);border-radius:14px;max-width:640px;width:100%;padding:18px 20px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.modal h3{margin:0 0 12px;font-size:17px}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px}
+.fgrid .full{grid-column:1/-1}
+.field label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:2px}
+.ferr{color:var(--warn);font-size:13px;min-height:1.2em;margin:8px 0 0}
+.note{background:var(--sunk);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted)}
+.note b{color:var(--ink)}
+.seal{text-align:center;padding:18px 8px 6px}
+.seal h2{font-family:"Noto Serif TC",serif;font-size:30px;margin:14px 0 4px;letter-spacing:.12em;color:var(--accent);animation:sealUp .8s .5s both}
+.seal .sealsub{font-size:16px;margin:0 0 6px;animation:sealUp .8s .7s both}
+.sealmark{position:relative;width:132px;height:132px;margin:0 auto}
+.sealmark .ring{position:absolute;inset:0;border-radius:50%;border:3px solid var(--gold);box-shadow:0 0 0 8px var(--accent-soft);animation:sealRing 1.2s ease-out both}
+.sealmark .glyph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:"Noto Serif TC",serif;font-size:62px;color:var(--gold);animation:sealBreak 1.1s .2s ease-in both}
+@keyframes sealRing{0%{transform:scale(.4) rotate(-90deg);opacity:0}60%{transform:scale(1.08) rotate(10deg);opacity:1}100%{transform:scale(1) rotate(0)}}
+@keyframes sealBreak{0%{opacity:1;transform:scale(1)}70%{opacity:1;transform:scale(1.15)}100%{opacity:.15;transform:scale(1.6);filter:blur(2px)}}
+@keyframes sealUp{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.sealmark .ring,.sealmark .glyph,.seal h2,.seal .sealsub{animation:none}}
+.optcards{display:none}
+.optc{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg)}
+.optc .cr{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:3px 0}
+.optc select,.optc input{width:76px}
+.report .rhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding:18px 22px;border-radius:14px;background:var(--side);color:var(--side-ink)}
+.report .rhead h1{font-family:"Noto Serif TC",serif;margin:4px 0;font-size:28px;color:#e8d9b0}
+.report .rhead .muted{color:var(--side-muted)}
+.report .rseal{font-family:"Noto Serif TC",serif;font-size:40px;color:var(--gold);letter-spacing:.1em}
+.report .rstats{margin-bottom:16px}
+@media print{ .side,.noprint,.toast,#modal{display:none!important} .shell{display:block} .main{padding:0} body{background:#fff} .card{box-shadow:none;break-inside:avoid} .report .rhead{-webkit-print-color-adjust:exact;print-color-adjust:exact} }
+/* ===== 動畫 ===== */
+/* 1 微互動：打勾彈跳＋金色漣漪 */
+.item.pop,.top3.pop{animation:popRow .7s ease-out}
+.item.pop input[type=checkbox],.top3.pop input[type=checkbox]{animation:popBox .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes popBox{0%{transform:scale(.55)}100%{transform:scale(1)}}
+@keyframes popRow{0%{box-shadow:inset 0 0 0 0 rgba(201,162,74,.0);background-color:rgba(201,162,74,.28)}100%{background-color:transparent}}
+.cnt{display:inline-block;font-variant-numeric:tabular-nums}
+.cnt.bump{animation:bump .5s ease-out}
+@keyframes bump{40%{transform:scale(1.18);color:var(--accent)}100%{transform:none}}
+/* 2 進度動畫：進入頁面時進度條長出來，最後一道光掃過 */
+#view.enter .bar>i{animation:grow 1s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*40ms + 150ms);position:relative;overflow:hidden}
+#view.enter .bar>i::after{content:"";position:absolute;top:0;bottom:0;left:-40px;width:34px;background:rgba(255,255,255,.55);transform:skewX(-20deg);animation:shine .9s 1.05s ease-in-out}
+#view.enter .tl .pb span i{animation:grow 1s .3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{width:0}}
+@keyframes shine{0%{left:-40px}100%{left:110%}}
+/* 3 進場動畫：卡片依序淡入上浮 */
+#view.enter .card,#view.enter .ptitle,#view.enter .banner{animation:rise .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*45ms)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* 5 氛圍動畫：側欄星點、標題金光流動 */
+.side{isolation:isolate}
+.stars{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#e8d9b0;opacity:.15;animation:twinkle var(--d,4s) var(--dl,0s) infinite ease-in-out}
+@keyframes twinkle{0%,100%{opacity:.12}50%{opacity:.85}}
+.brand h1{background:linear-gradient(100deg,#c9a24a 0%,#c9a24a 35%,#fff3c9 50%,#c9a24a 65%,#c9a24a 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 6s linear infinite}
+@keyframes flow{0%{background-position:150% 0}100%{background-position:-100% 0}}
+/* 4 儀式動畫：光芒、光點、閃光 */
+.sealmark::before{content:"";position:absolute;inset:-46px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 8%,rgba(201,162,74,.35) 10%,transparent 12% 33%,rgba(201,162,74,.35) 35%,transparent 37% 58%,rgba(201,162,74,.35) 60%,transparent 62% 83%,rgba(201,162,74,.35) 85%,transparent 87%);animation:rays 6s linear infinite, raysIn 1s .9s both}
+@keyframes rays{to{transform:rotate(360deg)}}
+@keyframes raysIn{from{opacity:0;transform:scale(.3)}}
+.spark{position:absolute;left:50%;top:50%;width:6px;height:6px;border-radius:50%;background:#f5e6b8;box-shadow:0 0 8px #c9a24a;opacity:0;animation:burst 1.1s var(--dl,1s) cubic-bezier(.1,.7,.3,1) forwards}
+@keyframes burst{0%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(.4)}}
+.sealflash{position:fixed;inset:0;z-index:55;pointer-events:none;background:radial-gradient(circle at 50% 35%,rgba(255,236,170,.85),rgba(201,162,74,.25) 35%,transparent 70%);animation:flash 1.4s .8s ease-out both}
+@keyframes flash{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+/* 6 成就回饋：徽章彈出 */
+.badgepop{position:fixed;left:50%;top:22px;z-index:70;display:flex;align-items:center;gap:12px;padding:10px 20px 10px 12px;border-radius:999px;background:linear-gradient(135deg,#c9a24a,#e8cf86);color:#1c1f3b;box-shadow:0 10px 30px rgba(28,31,59,.3);transform:translateX(-50%);animation:badgeIn .6s cubic-bezier(.3,1.6,.5,1) both}
+.badgepop .bi{width:40px;height:40px;border-radius:50%;background:#1c1f3b;color:#e8cf86;display:flex;align-items:center;justify-content:center;font-size:21px;animation:spinIn .7s .15s cubic-bezier(.3,1.6,.5,1) both}
+.badgepop b{display:block;font-size:15px}.badgepop div div{font-size:12.5px;opacity:.8}
+.badgepop.out{animation:badgeOut .45s ease-in forwards}
+@keyframes badgeIn{0%{opacity:0;transform:translate(-50%,-30px) scale(.6)}100%{opacity:1;transform:translate(-50%,0)}}
+@keyframes badgeOut{to{opacity:0;transform:translate(-50%,-24px) scale(.9)}}
+@keyframes spinIn{0%{transform:rotate(-200deg) scale(.2)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;animation-delay:0s!important}}
+/* ===== 2.1 版面與字體 ===== */
+body{font-size:15px;line-height:1.65;letter-spacing:.01em}
+.card h3{font-family:var(--serif);font-weight:600;font-size:16.5px;letter-spacing:.03em}
+.ptitle h2{display:flex;align-items:center;gap:10px;letter-spacing:.06em}
+.ptitle h2 .ico{width:24px;height:24px;color:var(--gold)}
+.stat .v,.hv,.qnum,.sealno,.lvn{font-family:var(--display)}
+.ico{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.brand{display:flex;align-items:center;gap:12px;margin:0 6px 14px}
+.brand h1{margin:0;font-size:21px;letter-spacing:.12em}
+.brand .sub{margin:0;color:var(--side-muted);font-size:12px}
+.sigil{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;position:relative;flex:0 0 auto}
+.sigil::before{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px dashed rgba(201,162,74,.55);animation:rays 24s linear infinite}
+.sigil span{font-family:var(--serif);font-size:21px;color:#e8d9b0}
+.lvbox{margin:0 6px 14px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(201,162,74,.25)}
+.lvtop{display:flex;justify-content:space-between;align-items:baseline}
+.lvn{font-size:13px;color:var(--side-muted)}.lvn b{font-size:20px;color:#e8cf86;margin-left:2px}
+#lvT{font-size:13px;color:#e8d9b0;letter-spacing:.1em}
+.lvbar{height:6px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden;margin:6px 0 4px}
+.lvbar i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,#c9a24a,#f5e6b8);transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.lvx{font-size:11px;color:var(--side-muted)}
+.lvbox.up{animation:lvUp 1.2s ease-out}
+@keyframes lvUp{0%,100%{box-shadow:0 0 0 0 rgba(232,207,134,0)}30%{box-shadow:0 0 0 6px rgba(232,207,134,.45),0 0 24px rgba(232,207,134,.6)}}
+.navg{font-size:11px;letter-spacing:.2em;color:var(--side-muted);margin:12px 12px 4px;opacity:.8}
+.nav .ico{opacity:.75}.nav.on .ico{opacity:1;color:#e8cf86}
+/* 總覽主視覺 */
+.hero{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;align-items:center;margin-bottom:16px;padding:22px 24px;background:linear-gradient(135deg,var(--card) 0%,var(--card) 55%,var(--accent-soft) 100%);position:relative;overflow:hidden}
+.hero::after{content:"封";position:absolute;right:-18px;bottom:-46px;font-family:var(--serif);font-size:170px;color:var(--gold);opacity:.07;pointer-events:none}
+.hello{font-family:var(--serif);font-size:28px;font-weight:600;letter-spacing:.06em}
+.hseal{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:12px}
+.hseal b{font-family:var(--serif);font-size:18px}
+.sealno{font-size:12px;letter-spacing:.2em;color:var(--accent);border:1px solid var(--gold);border-radius:99px;padding:0 9px}
+.hstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;position:relative;z-index:1}
+.hs{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.hv{font-size:28px;font-weight:700;line-height:1.1}.hv small{font-size:13px;color:var(--muted);margin-left:2px;font-family:var(--serif)}
+.hk{font-size:12px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hs.hot .hv{color:var(--warn)}
+/* 封印之路 */
+.quest{display:flex;align-items:flex-start;gap:0;padding:6px 0 2px}
+.qline{flex:1;height:2px;margin-top:30px;background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 11px);min-width:10px}
+.qn{display:flex;flex-direction:column;align-items:center;gap:2px;border:0;background:none;cursor:pointer;padding:0 4px;width:120px;color:var(--ink);transition:transform .2s}
+.qn:hover{transform:translateY(-3px)}
+.qorb{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--line);background:var(--bg);position:relative;margin-bottom:4px}
+.qnum{font-size:20px;color:var(--muted)}
+.qname{font-family:var(--serif);font-weight:600;font-size:14px}.qtitle{font-size:12px;color:var(--muted)}.qmeta{font-size:11.5px;color:var(--muted)}
+.qn.now .qorb{border-color:var(--gold);background:var(--accent-soft);animation:orb 2.4s ease-in-out infinite}
+.qn.now .qnum{color:var(--accent)}
+.qn.now .qorb::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1.5px dashed var(--gold);animation:rays 14s linear infinite}
+@keyframes orb{0%,100%{box-shadow:0 0 0 0 rgba(201,162,74,.0)}50%{box-shadow:0 0 0 7px rgba(201,162,74,.18),0 0 22px rgba(201,162,74,.35)}}
+.qn.clear .qorb{background:linear-gradient(135deg,#c9a24a,#f0dc9c);border-color:#c9a24a}
+.qn.clear .qnum{color:#1c1f3b}
+.qn.lock{opacity:.6}
+#view.enter .qn{animation:qIn .5s cubic-bezier(.3,1.5,.5,1) both;animation-delay:calc(var(--i)*90ms + 200ms)}
+@keyframes qIn{from{opacity:0;transform:scale(.6) translateY(10px)}}
+.mission{border-left:4px solid var(--gold)}
+.rec{transition:background .15s,transform .15s}.rec:hover{transform:translateX(3px)}
+/* +修為 飄字 */
+.fxp{position:fixed;z-index:80;transform:translate(-50%,-50%);font-family:var(--display);font-weight:700;font-size:15px;color:var(--accent);text-shadow:0 1px 0 var(--card);pointer-events:none;animation:fxp 1.25s ease-out forwards}
+@keyframes fxp{0%{opacity:0;transform:translate(-50%,-30%) scale(.7)}20%{opacity:1;transform:translate(-50%,-90%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-260%) scale(1)}}
+.msp{position:fixed;z-index:79;width:5px;height:5px;border-radius:50%;background:#e8cf86;box-shadow:0 0 6px #c9a24a;pointer-events:none;transform:translate(-50%,-50%);animation:msp .7s ease-out forwards}
+@keyframes msp{to{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(.3)}}
+@media (max-width:1150px){.hero{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:820px){.quest{flex-direction:column;align-items:stretch}.qline{width:2px;height:16px;margin:0 0 0 33px;flex:none;background:repeating-linear-gradient(180deg,var(--line) 0 5px,transparent 5px 9px)}
+  .qn{flex-direction:row;width:auto;gap:12px;text-align:left}.qorb{width:48px;height:48px;margin:0}.qn .qtitle,.qn .qmeta{margin-left:4px}
+  .brand,.lvbox{width:100%}
+  #nav{display:flex;flex-wrap:wrap;gap:4px;width:100%}
+  .lvbox{padding:6px 10px;margin-bottom:6px}.lvx{display:none}.navg{display:none}.hello{font-size:23px}}
+/* ===== 2.2 統一風格 ===== */
+:root{--r:14px}
+body{color:var(--ink)}
+.ptitle h2{font-size:28px}
+.card{border-radius:var(--r);transition:box-shadow .25s,border-color .25s}
+.card h3{justify-content:flex-start}
+.card h3::before{content:"◆";color:var(--gold);font-size:10px;margin-right:-2px}
+.card h3>span:last-child:not(:first-child),.card h3>button:last-child,.card h3>.row:last-child{margin-left:auto}
+.risk{align-items:flex-start}.risk .lv{margin-top:2px}
+.hero h3::before,.seal h2::before{content:none}
+.g3dash{display:grid;gap:16px;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,.95fr);align-items:start}
+@media (max-width:1320px){.g3dash{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}.g3dash>.col:nth-child(3){grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
+@media (max-width:1150px){.g3dash,.g3dash>.col:nth-child(3){grid-template-columns:minmax(0,1fr)}}
+/* 自訂勾選框：金框、勾勾畫出來 */
+input[type=checkbox]{appearance:none;-webkit-appearance:none;width:19px!important;height:19px!important;border:1.8px solid var(--gold);border-radius:6px;background:var(--card);display:inline-grid;place-content:center;cursor:pointer;transition:background .2s,border-color .2s,transform .15s;flex:0 0 auto;margin:2px 0 0}
+input[type=checkbox]::before{content:"";width:10px;height:5px;border-left:2.4px solid var(--btn-ink);border-bottom:2.4px solid var(--btn-ink);transform:rotate(-45deg) scale(0);transform-origin:center;margin-top:-3px;transition:transform .22s cubic-bezier(.3,1.6,.5,1)}
+input[type=checkbox]:checked{background:var(--accent);border-color:var(--accent)}
+input[type=checkbox]:checked::before{transform:rotate(-45deg) scale(1)}
+input[type=checkbox]:hover:not(:disabled){transform:scale(1.08);box-shadow:0 0 0 4px var(--accent-soft)}
+input[type=checkbox]:disabled{opacity:.35;cursor:default}
+input[type=radio]{accent-color:var(--accent)}
+/* 按鈕手感 */
+.btn,.seg button,.nav,.qn{transition:transform .12s,background .2s,box-shadow .2s,color .2s}
+.btn:active,.seg button:active{transform:scale(.95)}
+.btn.ghost:hover{background:var(--accent-soft)}
+.btn:not(.ghost):not(.plain):hover{box-shadow:0 4px 14px rgba(158,116,36,.3)}
+/* 側欄滑動指示 */
+#nav{position:relative}
+.navpill{position:absolute;left:0;right:0;top:0;border-radius:9px;background:rgba(255,255,255,.13);box-shadow:inset 3px 0 0 var(--gold);transition:transform .45s cubic-bezier(.3,1.25,.5,1);pointer-events:none;z-index:0}
+.nav{position:relative;z-index:1}
+.nav.on{background:transparent!important;box-shadow:none!important}
+/* 封印之路：目前封印有光點繞行、已解除的有光澤掃過 */
+.qn.now .qorb::before{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:#f5e6b8;box-shadow:0 0 10px #c9a24a;top:50%;left:50%;margin:-4px;animation:orbit 3.2s linear infinite}
+@keyframes orbit{from{transform:rotate(0) translateX(38px)}to{transform:rotate(360deg) translateX(38px)}}
+.qn.clear .qorb{overflow:hidden}
+.qn.clear .qorb::before{content:"";position:absolute;top:0;bottom:0;width:20px;left:-30px;background:rgba(255,255,255,.6);transform:skewX(-20deg);animation:gleam 3.5s ease-in-out infinite}
+@keyframes gleam{0%,70%{left:-30px}100%{left:90px}}
+.qn:hover .qorb{box-shadow:0 0 0 6px var(--accent-soft)}
+.qn.mini{width:auto;padding:0;pointer-events:none}.qn.mini .qorb{width:46px;height:46px;margin:0}.qn.mini .qnum{font-size:16px}
+.qn.mini.now .qorb::before{animation-name:orbitS}
+@keyframes orbitS{from{transform:rotate(0) translateX(29px)}to{transform:rotate(360deg) translateX(29px)}}
+.phasecard.now{border-color:var(--gold);box-shadow:0 0 0 3px var(--accent-soft),var(--shadow)}
+.phasecard.lock{opacity:.8}
+.phasecard summary .sealno{font-size:10.5px}
+/* 能力等級格 */
+.segs{display:inline-flex;gap:3px}
+.segs i{width:16px;height:8px;border-radius:3px;background:var(--line)}
+.segs i.f{background:linear-gradient(90deg,var(--gold),#e8cf86)}
+.segs i.t{background:transparent;box-shadow:inset 0 0 0 1.5px var(--gold)}
+#view.enter .segs i.f{animation:segIn .4s both;animation-delay:calc(var(--i)*70ms + 300ms)}
+@keyframes segIn{from{transform:scaleX(0);transform-origin:left}}
+/* 主視覺進度條：慢慢流動的光 */
+.hero .bar>i{background:linear-gradient(90deg,var(--P) 0%,#8f94e8 50%,var(--P) 100%);background-size:200% 100%;animation:barflow 3s linear infinite}
+@keyframes barflow{to{background-position:-200% 0}}
+/* 換頁：整頁淡入 */
+#view.enter{animation:viewIn .35s ease-out}
+@keyframes viewIn{from{opacity:.0;filter:blur(3px)}to{opacity:1;filter:none}}
+.toast{position:fixed;right:18px;bottom:18px;background:var(--ink);color:var(--bg);border-radius:10px;padding:8px 14px;font-size:13.5px;z-index:60;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+.weeks{display:flex;gap:6px;align-items:flex-end;height:60px}
+.weeks div{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;justify-content:flex-end;height:100%}
+.weeks span{display:block;width:100%;background:var(--gold);border-radius:4px 4px 0 0;min-height:3px}
+.weeks small{font-size:10.5px;color:var(--muted)}
+@media (max-width:1150px){.g5{grid-template-columns:repeat(3,minmax(0,1fr))}.gdash{grid-template-columns:minmax(0,1fr)}.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:820px){
+  .shell{grid-template-columns:1fr}
+  .side{position:relative}
+  .side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;gap:3px;padding:12px}
+  .side h1,.side .sub{width:100%}.side .sub{margin-bottom:6px}
+  .nav{width:auto;padding:5px 9px;font-size:13.5px}.nav .tg{display:none}
+  .side .foot{width:100%;padding-top:6px}
+  .main{padding:14px}
+  .opttable{display:none}.optcards{display:grid;gap:10px}
+  .g5{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g2,.g3,.g4,.fgrid{grid-template-columns:1fr}
+  .timeline{grid-template-columns:1fr}
+  .tool input[type=search]{max-width:none}
+}
+
+/* ===== 2.3 運動風格 ===== */
+:root{--sport:"Barlow Condensed","Noto Sans TC",sans-serif}
+.hv,.stat .v,.lvn b,.fxp,.cnt{font-family:var(--sport);font-style:italic;letter-spacing:.01em}
+.hv{font-size:38px;font-weight:800;line-height:1}
+.hv small{font-family:var(--sport);font-style:italic;font-size:15px;font-weight:600}
+.stat .v{font-size:28px;font-weight:700}
+.lvn b{font-size:24px;font-weight:800}
+.fxp{font-size:20px;font-weight:800}
+.eyebrow{font-family:var(--sport);font-style:italic;font-weight:700;font-size:13px;letter-spacing:.22em;color:var(--accent);display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.eyebrow::before{content:"";width:22px;height:8px;background:linear-gradient(90deg,var(--gold) 0 5px,transparent 5px 8px,var(--gold) 8px 13px,transparent 13px 16px,var(--gold) 16px 22px);transform:skewX(-24deg)}
+#view.enter .eyebrow::before{animation:dash .6s .1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes dash{from{transform:skewX(-24deg) translateX(-30px);opacity:0}}
+/* 卡片標題：賽車雙條紋 */
+.card h3::before{content:"";width:9px;height:14px;font-size:0;margin-right:2px;background:linear-gradient(90deg,var(--gold) 0 3px,transparent 3px 5px,var(--gold) 5px 9px);transform:skewX(-18deg);flex:0 0 auto}
+/* 主視覺：記分板、速度線、心電圖 */
+.hero{padding-bottom:30px}
+.hero::before{content:"";position:absolute;top:0;bottom:0;right:22%;width:46%;background:repeating-linear-gradient(-62deg,transparent 0 22px,rgba(201,162,74,.09) 22px 26px);pointer-events:none;-webkit-mask:linear-gradient(90deg,transparent,#000 40%,#000 70%,transparent);mask:linear-gradient(90deg,transparent,#000 40%,#000 70%,transparent)}
+.hero .hl{position:relative;z-index:1}
+.hs{background:var(--side);border:0;border-radius:6px;transform:skewX(-8deg);padding:9px 10px 8px;box-shadow:0 6px 16px rgba(28,31,59,.22);position:relative;overflow:hidden}
+.hs>*{transform:skewX(8deg)}
+.hs::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--gold)}
+.hs .hv{color:#f2dfa6}.hs .hv small{color:#b9b4a0}.hs .hk{color:#c9c5b4}
+.htag{font-family:var(--sport);font-style:italic;font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--gold);text-align:left}
+.hs.hot::after{background:var(--warn)}.hs.hot .hv{color:#ffb07a}
+.flame{display:inline-block;font-style:normal;animation:flick 1.1s ease-in-out infinite alternate;transform-origin:50% 90%}
+@keyframes flick{to{transform:scale(1.18) rotate(-6deg)}}
+.hs.fire::after{background:linear-gradient(90deg,#e3a066,#f5d36b,#e3a066);background-size:200% 100%;animation:barflow 1.6s linear infinite}
+.ecg{position:absolute;left:0;right:0;bottom:4px;width:100%;height:26px;pointer-events:none;z-index:0}
+.ecg path{fill:none;stroke:var(--gold);stroke-width:1.6;opacity:.55;stroke-dasharray:14 86;stroke-linejoin:round;animation:ecg 3.2s linear infinite;vector-effect:non-scaling-stroke}
+@keyframes ecg{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+/* 主進度條＝跑道，終點方格旗 */
+.hero .bar{height:12px;border-radius:4px;position:relative;background:repeating-linear-gradient(90deg,var(--line) 0 calc(16.66% - 2px),var(--card) calc(16.66% - 2px) 16.66%)}
+.hero .bar>i{border-radius:4px}
+.hero .bar::after{content:"";position:absolute;right:0;top:0;bottom:0;width:12px;background:conic-gradient(var(--ink) 25%,var(--card) 0 50%,var(--ink) 0 75%,var(--card) 0) 0 0/6px 6px;opacity:.7}
+/* 所有進度條：訓練斜紋滾動 */
+.bar>i{position:relative;overflow:hidden}
+.bar>i::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.22) 0 5px,transparent 5px 10px);background-size:14.14px 14.14px;animation:stripe 1s linear infinite}
+@keyframes stripe{to{background-position:14.14px 0}}
+/* 封印之路＝跑道 */
+.qline{height:6px;margin-top:27px;border-radius:3px;background:var(--line);position:relative;overflow:hidden}
+.qline::before{content:"";position:absolute;left:0;right:0;top:2.5px;height:1px;background:repeating-linear-gradient(90deg,var(--card) 0 8px,transparent 8px 16px)}
+.qline.done{background:linear-gradient(90deg,#c9a24a,#e8cf86)}
+.qline.next::after{content:"";position:absolute;top:0;bottom:0;width:30%;left:-30%;background:linear-gradient(90deg,transparent,rgba(201,162,74,.75));animation:sprint 1.8s ease-in infinite}
+@keyframes sprint{to{left:100%}}
+/* 能力格斜切 */
+.segs i{transform:skewX(-18deg);border-radius:2px}
+/* 今日任務：左側斜紋 */
+.mission{border-left:0;position:relative;overflow:hidden}
+.mission::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:repeating-linear-gradient(-45deg,var(--gold) 0 4px,#e8cf86 4px 8px)}
+/* 側欄 Lv 斜切 */
+.lvbox{border-radius:6px;position:relative;overflow:hidden}
+.lvbar{border-radius:2px;transform:skewX(-20deg)}.lvbar i{border-radius:2px}
+/* 期限天數 */
+.risk>b{font-family:var(--sport);font-style:italic;font-size:17px}
+@media (max-width:820px){.htag{font-size:10px;letter-spacing:.08em}.hv{font-size:30px}.hero::before{display:none}.qline{width:6px;height:18px;margin:0 0 0 30px}.qline::before{display:none}}
+@media (prefers-color-scheme:dark){.hs{background:#0d0f24;box-shadow:inset 0 0 0 1px rgba(217,178,94,.28),0 6px 16px rgba(0,0,0,.35)}}
+@media print{.ecg,.hero::before,.bar>i::after{display:none}}
+
+/* ===== 2.5 ===== */
+.weeks{height:78px}
+.weeks em{font-style:italic;font-family:var(--sport);font-size:11px;color:var(--muted);line-height:1}
+.weeks .ok span{background:linear-gradient(180deg,#e8cf86,var(--gold))}
+.weeks .ok em{color:var(--accent);font-weight:700}
+.weeks div:not(.ok):not(.pre) span{background:var(--gold);opacity:.45}
+.weeks .pre span{height:20px!important;background:none!important;border:1.5px dashed var(--line);border-bottom:0;opacity:1}
+.weeks .cur small{color:var(--accent);font-weight:700}
+#view.enter .weeks span{animation:grow .6s cubic-bezier(.2,.8,.2,1) both;transform-origin:bottom}
+@keyframes grow{from{transform:scaleY(0)}}
+.filebtn{cursor:pointer;display:inline-flex}
+/* 熱力圖 */
+.heat{margin-top:8px}
+.hmon{display:grid;white-space:nowrap;font-size:10.5px;color:var(--muted);margin-bottom:3px;padding-left:1px}
+.hgrid{display:flex;gap:3px}
+.hcol{display:flex;flex-direction:column;gap:3px;flex:1}
+.heat i,.hleg i{display:block;aspect-ratio:1;border-radius:3px;background:var(--line);max-width:16px}
+.hleg i{width:11px;height:11px}
+.heat .h1,.hleg .h1{background:rgba(201,162,74,.35)}.heat .h2,.hleg .h2{background:rgba(201,162,74,.6)}.heat .h3,.hleg .h3{background:var(--gold)}.heat .h4,.hleg .h4{background:#a9781d}
+.heat .pre{background:transparent;box-shadow:inset 0 0 0 1px var(--line);opacity:.5}
+.heat .fut{background:transparent;box-shadow:inset 0 0 0 1px var(--line);opacity:.6}
+.heat .td{box-shadow:0 0 0 1.5px var(--accent)}
+.hleg{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--muted);margin-top:6px}
+#view.enter .hgrid i{animation:hpop .35s both;animation-delay:calc(var(--d)*18ms + 200ms)}
+@keyframes hpop{from{transform:scale(.3);opacity:0}}
+/* 作品牆 */
+.pfhead{display:flex;align-items:center;gap:22px;margin-bottom:14px;flex-wrap:wrap}
+.pfstat{display:flex;align-items:baseline;gap:6px}.pfstat b{font-family:var(--sport);font-style:italic;font-size:34px;color:var(--accent);line-height:1}.pfstat span{color:var(--muted);font-size:13px}
+.pfwall{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.pfcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:4px;text-align:left;min-height:170px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.pfcard::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),#e8cf86)}
+.pfcard:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(28,31,59,.14);border-color:var(--gold)}
+.pfic{font-size:26px;line-height:1}
+.pfcat{font-family:var(--sport);font-style:italic;font-weight:700;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.pfname{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.35}
+.pfdesc{font-size:13px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pfft{margin-top:auto;padding-top:8px;display:flex;justify-content:space-between;align-items:center}
+.pfdate{font-family:var(--sport);font-style:italic;font-size:15px;color:var(--muted)}
+.pfadd{border:2px dashed var(--line);background:transparent;box-shadow:none;align-items:center;justify-content:center;color:var(--muted);font:inherit;font-size:14px}
+.pfadd::before{content:none}.pfadd span{font-size:30px;color:var(--gold);line-height:1}.pfadd small{font-size:12px}
+.pfadd:hover{border-color:var(--gold);color:var(--accent)}
+#view.enter .pfcard{animation:rise .5s cubic-bezier(.2,.8,.2,1) both}
+/* 想法看板 */
+.kanban{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+.kcol{background:var(--sunk);border-radius:var(--r);padding:12px;min-height:220px;transition:background .2s,box-shadow .2s;display:flex;flex-direction:column;gap:8px}
+.kcol.hover{background:var(--accent-soft);box-shadow:inset 0 0 0 2px var(--gold)}
+.kcol.over .kn{color:var(--warn);font-weight:700}
+.khead{display:flex;justify-content:space-between;align-items:center;font-family:var(--serif);font-weight:600;font-size:15px;padding:0 2px 4px}
+.kn{font-family:var(--sport);font-style:italic;font-size:16px;color:var(--muted)}
+.kadd{font-size:13.5px!important;background:var(--card)!important}
+.kwarn{font-size:12px;color:var(--warn);background:var(--warn-soft);border-radius:8px;padding:4px 8px}
+.kcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;box-shadow:var(--shadow);cursor:grab;transition:transform .15s,box-shadow .15s,opacity .15s}
+.kcard:hover{transform:translateY(-2px);border-color:var(--gold)}
+.kcard.dragging{opacity:.4;transform:rotate(2deg)}
+.kt{font-weight:500;cursor:pointer}.kt:hover{color:var(--accent)}
+.kmeta{display:flex;align-items:center;gap:6px;margin-top:6px}
+.kmv{margin-left:auto;display:flex;gap:2px;opacity:.35;transition:opacity .2s}.kcard:hover .kmv{opacity:1}
+.kmv button{border:0;background:none;cursor:pointer;font-size:14px;padding:1px 3px;border-radius:6px}.kmv button:hover{background:var(--accent-soft);transform:scale(1.15)}
+.kempty{color:var(--muted);text-align:center;font-size:13px;opacity:.5;padding:12px 0}
+#view.enter .kcard{animation:rise .45s cubic-bezier(.2,.8,.2,1) both}
+@media (max-width:1150px){.kanban{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* 月檢核 */
+.rvstats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.rvstats .v small{font-family:var(--sport);font-size:14px;color:var(--muted)}
+.rvstats .bar{margin-top:6px}
+.rvd{display:grid;gap:10px;font-size:13.5px}.rvd b{font-size:12.5px;color:var(--muted);display:block;margin-bottom:2px}.warnt{color:var(--warn)}
+/* 能力點格 */
+.segs.rate i{cursor:pointer;transition:transform .12s,box-shadow .12s}
+.segs.rate i:hover{transform:skewX(-18deg) scaleY(1.5);box-shadow:0 0 0 1.5px var(--accent)}
+.segs.rate:hover i{opacity:.9}
+.segs{transform:none}
+/* CSCS 速度 */
+.pace{font-size:13px;border-radius:10px;padding:7px 12px;margin:0 0 8px;background:var(--sunk);color:var(--muted)}
+.pace.ok{background:var(--ok-soft);color:var(--ok)}.pace.mid{background:var(--accent-soft);color:var(--accent)}.pace.warn{background:var(--warn-soft);color:var(--warn)}
+.hstats.n4{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.hstats.n4 .hv{font-size:32px}.hstats.n4 .htag{letter-spacing:.06em;font-size:10px}.hstats.n4 .hs{padding:9px 8px 8px}
+/* 週日提醒 */
+.banner.sun{background:var(--accent-soft)}
+/* 快捷鍵 */
+kbd{font-family:var(--sport);font-size:11px;border:1px solid rgba(255,255,255,.25);border-bottom-width:2px;border-radius:4px;padding:0 4px;line-height:15px;display:inline-block}
+.keys{opacity:.85}
+.nk{opacity:0;transition:opacity .2s;color:var(--side-muted)}
+.side:hover .nk{opacity:.7}
+@media (max-width:820px){.nk,.keys{display:none}.kanban{grid-template-columns:minmax(0,1fr)}}
+@media print{.heat i{animation:none}}
+
+/* ===== 2.6 ===== */
+/* 1 迷你日誌 */
+.heatmini .hmon{display:none}.hleg .row{flex-wrap:nowrap;white-space:nowrap}.heatmini .heat i{max-width:18px;width:100%}.heatmini .hgrid{gap:4px;justify-content:space-between}.heatmini .hcol{gap:4px;flex:0 0 18px}
+/* 2 心電圖：底線＋發光脈衝 */
+.ecg path{fill:none;stroke:var(--gold);stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.ecg path.base{opacity:.16;stroke-width:1.2;stroke-dasharray:none;animation:none}
+.ecg path.pulse{opacity:.9;stroke-width:2;stroke-dasharray:9 91;filter:drop-shadow(0 0 3px #e8cf86) drop-shadow(0 0 6px rgba(201,162,74,.8));animation:ecg 3.2s linear infinite}
+/* 3 編輯視窗 */
+.modal .box{position:relative;overflow:hidden;border:1px solid var(--line);padding:22px 24px 18px}
+.modal .box::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--gold),#e8cf86,var(--gold))}
+.modal .box>h3{font-family:var(--serif);font-weight:600;font-size:19px;margin:0 0 14px;display:flex;align-items:center;gap:8px;letter-spacing:.03em}
+.modal .box>h3::before{content:"";width:9px;height:15px;background:linear-gradient(90deg,var(--gold) 0 3px,transparent 3px 5px,var(--gold) 5px 9px);transform:skewX(-18deg);flex:0 0 auto}
+.mfoot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.dquick{display:flex;gap:4px;margin-top:4px}
+.dquick button{font-size:12px;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:6px;padding:0 8px;cursor:pointer;line-height:20px}
+.dquick button:hover{border-color:var(--gold);color:var(--accent)}
+/* 8 視窗進出 */
+.modal{animation:mBg .22s ease-out both;backdrop-filter:blur(2px)}
+.modal .box{animation:mIn .32s cubic-bezier(.2,.9,.3,1.15) both}
+.modal.closing{animation:mBgOut .17s ease-in forwards;pointer-events:none}
+.modal.closing .box{animation:mOut .17s ease-in forwards}
+@keyframes mBg{from{background:rgba(10,10,25,0);backdrop-filter:blur(0)}}
+@keyframes mBgOut{to{background:rgba(10,10,25,0);backdrop-filter:blur(0)}}
+@keyframes mIn{from{opacity:0;transform:translateY(24px) scale(.96)}}
+@keyframes mOut{to{opacity:0;transform:translateY(12px) scale(.97)}}
+/* 4 未開始封印精簡 */
+.phasecard.lock:not([open]){padding-top:10px;padding-bottom:10px}
+.phasecard.lock:not([open]) summary .grid{display:none}
+.phasecard.lock:not([open]) .qn.mini .qorb{width:38px;height:38px}
+.phasecard.lock:not([open]) summary b{font-size:16px!important}
+.phasecard.lock:not([open]) summary .sealno{display:none}
+.phasecard.lock:not([open]) summary br{display:none}
+.phasecard.lock:not([open]):hover{border-color:var(--gold)}
+.chip.lockc{background:var(--sunk)}
+/* 5 側欄分隔 */
+.side{box-shadow:inset -1px 0 0 rgba(201,162,74,.22)}
+/* 6 快捷鍵只在按住 ? 時出現 */
+.side:hover .nk{opacity:0}
+body.showkeys .nk{opacity:1!important;color:#e8cf86;border-color:#e8cf86}
+/* 7 解封儀式：封碎裂後蓋上「解」 */
+.sealmark .glyph2{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:64px;font-weight:700;color:var(--accent);animation:stampIn .5s 1.1s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes stampIn{from{opacity:0;transform:scale(2.4) rotate(-14deg)}to{opacity:1;transform:scale(1) rotate(-6deg)}}
+.seal h2{animation-delay:.9s}.seal .sealsub{animation-delay:1.05s}
+/* 9 提示訊息 */
+.toast{transform:translateX(30px);transition:opacity .25s,transform .35s cubic-bezier(.2,.9,.3,1.2);overflow:hidden;padding-bottom:10px;border-left:3px solid var(--gold)}
+.toast.on{transform:none}
+.toast::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold);transform-origin:left;transform:scaleX(0)}
+.toast.on::after{animation:tbar 2.2s linear forwards}
+@keyframes tbar{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+/* 10 解封印章 */
+.stamp{position:fixed;z-index:81;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;border:2.5px solid #b3402f;color:#b3402f;font-family:var(--serif);font-weight:700;font-size:24px;display:flex;align-items:center;justify-content:center;background:rgba(255,248,235,.85);box-shadow:inset 0 0 0 3px rgba(179,64,47,.18);pointer-events:none;animation:stamp 1.5s cubic-bezier(.3,1.5,.5,1) forwards}
+@keyframes stamp{0%{opacity:0;transform:scale(2.6) rotate(-25deg)}18%{opacity:1;transform:scale(.92) rotate(-8deg)}26%{transform:scale(1) rotate(-8deg)}80%{opacity:1;transform:scale(1) rotate(-8deg)}100%{opacity:0;transform:scale(1.1) rotate(-8deg) translateY(-8px)}}
+.msp.big{width:8px;height:8px}
+/* 11 彩帶 */
+.cf{position:fixed;z-index:82;width:7px;height:11px;border-radius:2px;pointer-events:none;animation:cf 1.6s var(--dl) cubic-bezier(.2,.7,.4,1) forwards;opacity:0}
+@keyframes cf{0%{opacity:1;transform:translate(0,0) rotate(0)}45%{opacity:1;transform:translate(calc(var(--x)*.8),var(--y)) rotate(calc(var(--r)*.5))}100%{opacity:0;transform:translate(var(--x),calc(var(--y) + 220px)) rotate(var(--r))}}
+/* 12 捲動出現 */
+.card.rv,.pfcard.rv{opacity:0;transform:translateY(22px);transition:opacity .55s ease-out,transform .6s cubic-bezier(.2,.8,.2,1)}
+#view.enter .card.rv,#view.enter .pfcard.rv{animation:none}
+.card.rv.in,.pfcard.rv.in{opacity:1;transform:none}
+@media print{.card.rv,.pfcard.rv{opacity:1;transform:none}}
+/* 13 記分板互動 */
+.hs{transition:transform .25s cubic-bezier(.3,1.4,.5,1),box-shadow .25s}
+.hs:hover{transform:skewX(-8deg) translateY(-5px);box-shadow:0 12px 24px rgba(28,31,59,.3)}
+.hs::after{transition:height .25s,filter .25s}.hs:hover::after{height:5px;filter:brightness(1.25)}
+.hs:hover .hv{text-shadow:0 0 14px rgba(242,223,166,.45)}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side"><div class="stars" id="stars" aria-hidden="true"></div>
+    <div class="brand"><div class="sigil" aria-hidden="true"><span>封</span></div><div><h1>封印解除</h1><p class="sub">五年篇・謝卉榆</p></div></div>
+    <div class="lvbox" id="lv" title="修為：每週例行、完成條件、目標、作品、證照、月檢核都會累積"></div>
+    <nav id="nav"></nav>
+    <div class="foot" id="foot"></div>
+  </aside>
+  <main class="main"><div class="page" id="view"></div></main>
+</div>
+<div id="modal"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+/* =====================================================================
+   封印解除 2.0
+   資料分成兩個獨立空間：P = PERSONAL（個人職涯）、C = CLINIC（診所事業）。
+   每一筆資料都有 id 與 updatedAt；刪除會留下「刪除標記」，同步時逐筆合併（較新的勝出）。
+   儲存層：瀏覽器暫存（localStorage）＋ 各自連結的電腦資料夾（JSON 檔，Chrome／Edge）＋ JSON／CSV 匯出。
+   ===================================================================== */
+const SCHEMA = 2;
+const START = '2026-12-01';   /* 正式開始使用的日期：在這之前的月份與週次不提醒、不統計 */
+const SPACE_NAME = {P:'PERSONAL 個人職涯', C:'CLINIC 診所事業'};
+const FILE_NAME = {P:'封印解除_個人資料.json', C:'封印解除_診所資料.json'};
+const LS_KEY = {P:'seal2-personal', C:'seal2-clinic'};
+const TRACK = {PERSONAL:'P', CLINIC:'C'};
+
+/* ---------- 五年規劃（計畫內容，不是進度） ---------- */
+const PHASES = [
+ {id:'ph1', name:'第一封印', title:'建立基礎', start:'2026-12-01', end:'2027-02-28',
+  goal:'建立專業基礎與個人管理系統。', items:[
+  ['ph1p1','P','通過運科數據分析師檢定（12/12），建立運動科學數據分析基礎'],
+  ['ph1p2','P','能獨立判讀 Force Plate CMJ／IMTP 主要指標'],
+  ['ph1p3','P','CSCS 第一輪學習（讀完 1–8 章）'],
+  ['ph1p4','P','建立文獻閱讀習慣（每月至少 2 篇）'],
+  ['ph1p5','P','建立個人學習資料庫',1],
+  ['ph1p6','P','完成第一次能力盤點（能力地圖全部評分）'],
+  ['ph1c1','C','完成檢測 SOP',1],
+  ['ph1c2','C','建立醫師轉介紅旗清單'],
+  ['ph1c3','C','建立客戶檢測流程（預約 → 檢測 → 報告 → 計畫）'],
+  ['ph1c4','C','建立前測與後測紀錄方式'],
+  ['ph1c5','C','客戶版報告模板定稿',1],
+  ['ph1c6','C','專業版報告模板定稿',1],
+  ['ph1c7','C','診所與個人資產權責表（和老闆確認）',1],
+  ['ph1c8','C','資料管理、備份及權限規範',1]]},
+ {id:'ph2', name:'第二封印', title:'驗證成效', start:'2027-03-01', end:'2027-05-31',
+  goal:'用實際案例驗證自己的檢測判讀與訓練能力，學會看懂數據的誤差。', items:[
+  ['ph2p1','P','學會基礎統計分析（平均、標準差、效果量）'],
+  ['ph2p2','P','理解信度、效度與 MDC，算出自己設備的測量誤差'],
+  ['ph2p3','P','完成 3 份完整的案例分析',1],
+  ['ph2p4','P','專業報告寫作能力（能寫給醫師看的版本）'],
+  ['ph2p5','P','累積去識別化案例'],
+  ['ph2c1','C','檢測資料庫可做前後測比較'],
+  ['ph2c2','C','設計 8 週訓練與再測流程',1],
+  ['ph2c3','C','分析客戶訓練成效（約 20 位完整個案）',1],
+  ['ph2c4','C','評估合作場館的需求']]},
+ {id:'ph3', name:'第三封印', title:'建立商業模式', start:'2027-06-01', end:'2027-11-30',
+  goal:'考取 CSCS，把專業能力轉化成可以對外提案的服務。', items:[
+  ['ph3p1','P','考取 NSCA-CSCS',1],
+  ['ph3p2','P','具備團體檢測執行能力'],
+  ['ph3p3','P','學習專案管理基礎'],
+  ['ph3p4','P','提升簡報與提案能力（完成一份正式提案）',1],
+  ['ph3p5','P','累積合作案例'],
+  ['ph3c1','C','完成第一個收費 B2B 合作案例',1],
+  ['ph3c2','C','建立團體檢測流程'],
+  ['ph3c3','C','建立服務定價'],
+  ['ph3c4','C','計算服務成本與毛利'],
+  ['ph3c5','C','建立醫師轉介流程'],
+  ['ph3c6','C','建立再測與追蹤機制']]},
+ {id:'ph4', name:'第四封印', title:'系統化與擴大影響', start:'2027-12-01', end:'2029-11-30',
+  goal:'建立自己的方法論與作品集，讓能力不只綁在單一職位。', items:[
+  ['ph4p1','P','建立個人專業方法論',1],
+  ['ph4p2','P','發展研究能力（完成一份研究或研討會發表）',1],
+  ['ph4p3','P','建立教學能力'],
+  ['ph4p4','P','學習管理與領導'],
+  ['ph4p5','P','建立個人作品集',1],
+  ['ph4p6','P','擴大專業合作網絡'],
+  ['ph4c1','C','完成教練培訓手冊',1],
+  ['ph4c2','C','建立多人使用的評估系統'],
+  ['ph4c3','C','發展跨場館合作'],
+  ['ph4c4','C','建立服務品質監控'],
+  ['ph4c5','C','導入資料分析與 AI 輔助'],
+  ['ph4c6','C','建立可複製的營運流程',1]]},
+ {id:'ph5', name:'最終封印', title:'建立職涯選擇權', start:'2029-12-01', end:'2031-11-30',
+  goal:'累積足夠能力、資產及資源，讓自己擁有多種職涯選擇。不需要在開始前決定答案。', items:[
+  ['ph5p1','P','每季更新一次「五年末選擇評估」'],
+  ['ph5p2','P','完成五年末職涯選擇評估並做出決定',1]]}
+];
+const OPTIONS_DEFAULT = [
+  ['o1','運動科學與醫療整合管理'],['o2','個人品牌與專業服務'],['o3','數據與系統顧問'],['o4','研究與教學'],['o5','創業或跨領域發展']];
+const CRITERIA = [['income','收入'],['stable','穩定性'],['auto','自主權'],['growth','專業成長'],['life','生活品質'],['risk','風險（5 = 風險最低）']];
+
+const ROUTINE = [
+  ['r1','週一','CSCS 讀一章＋自己出 5 題','1.5h',[1]],
+  ['r2','週二–四','每次檢測時，心裡多想一句「我的判讀」','工作中',[2,3,4],1],
+  ['r3','週五','評估系統做一個小改進（一次只改一件事）','1.5h',[5]],
+  ['r5','週六','記下這週學到或做出來的一件事（作品集或本週回顧）','30m',[6]],
+  ['r6','彈性','Force Plate／數據判讀進修','1h',[],1],
+  ['r7','週日','週回顧：做到什麼、卡在哪、下週 3 件事','30m',[0]],
+];
+const FIXED_DL = [
+  ['f1','運科數據分析師：最後兩天課（11/28–29，出席率需 80%）','2026-11-29','PERSONAL'],
+  ['f2','運科數據分析師檢定（70 分及格）','2026-12-12','PERSONAL'],
+];
+const SKILL_MAP = [
+  ['A 運動科學',[['a1','人體評估'],['a2','肌力與體能訓練'],['a3','運動生理學'],['a4','運動生物力學'],['a5','運動測量與評估'],['a6','數據分析'],['a7','研究方法']]],
+  ['B 商業與管理',[['b1','專案管理'],['b2','服務設計'],['b3','商業模式'],['b4','成本與財務分析'],['b5','團隊管理'],['b6','溝通與提案']]],
+  ['C AI 與資訊技術',[['c1','LLM'],['c2','Prompt Engineering'],['c3','RAG'],['c4','MCP'],['c5','Skills'],['c6','AI Agent'],['c7','SQL／資料庫'],['c8','API 與自動化']]],
+];
+const LEVELS = ['未評','入門','基礎','能應用','熟練','能教別人'];
+const KPIS = [
+  {id:'k1',n:'初測完成率',f:'完成初測人數 ÷ 預約初測人數',src:'預約紀錄、評估系統',auto:0,unit:'%'},
+  {id:'k2',n:'8–12 週再測率',f:'初測已滿 12 週的個案中，在第 8–12 週內完成再測的人數 ÷ 初測已滿 12 週的個案數（只算已到期的人，避免剛收案的人拉低數字）',src:'本系統「診所個案索引」（自動計算）',auto:1,unit:'%'},
+  {id:'k3',n:'客戶出席率',f:'實際出席堂數 ÷ 預定堂數',src:'課程排程',auto:0,unit:'%'},
+  {id:'k4',n:'訓練持續率',f:'初測已滿 12 週的個案中，狀態不是「流失」的人數 ÷ 初測已滿 12 週的個案數',src:'本系統「診所個案索引」（自動計算）',auto:1,unit:'%'},
+  {id:'k5',n:'目標達成率',f:'再測時「達成」目標的人數 ÷ 已完成再測且有評估目標的人數',src:'本系統「診所個案索引」（自動計算）',auto:1,unit:'%'},
+  {id:'k6',n:'客戶滿意度',f:'問卷總分 ÷ 問卷份數（1–5 分）',src:'滿意度問卷',auto:0,unit:'分'},
+  {id:'k7',n:'服務轉換率',f:'檢測後購買訓練或方案的人數 ÷ 完成初測人數',src:'銷售紀錄',auto:0,unit:'%'},
+  {id:'k8',n:'合作案毛利率',f:'（合作收入 − 同一專案的成本）÷ 合作收入，近 12 個月',src:'本系統「財務・診所專案」（自動計算）',auto:1,unit:'%'},
+];
+
+/* ---------- 各資料表的欄位定義 ---------- */
+const TRK = {k:'track',l:'所屬軌道',t:'select',o:['PERSONAL','CLINIC']};
+const COLS = {
+ projects:{title:'專案',space:'track',fields:[
+  {k:'name',l:'專案名稱',t:'text',req:1,full:1},TRK,
+  {k:'status',l:'目前狀態',t:'select',o:['待開始','進行中','待確認','暫停','已完成']},
+  {k:'purpose',l:'專案目的',t:'textarea',full:1},
+  {k:'start',l:'開始日期',t:'date'},{k:'due',l:'預計完成日期',t:'date'},
+  {k:'priority',l:'優先程度',t:'select',o:['高','中','低']},{k:'owner',l:'負責人',t:'text'},
+  {k:'next',l:'下一步行動',t:'text',full:1},
+  {k:'deliver',l:'交付成果',t:'textarea',full:1},{k:'evidence',l:'成果證據（完成時填，例如文件位置）',t:'text',full:1},
+  {k:'docs',l:'相關文件',t:'text',full:1},
+  {k:'riskLevel',l:'風險程度',t:'select',o:['無','低','中','高']},{k:'budget',l:'預算（元）',t:'number'},
+  {k:'risk',l:'風險與可能延遲',t:'textarea',full:1},{k:'deps',l:'依賴事項',t:'text',full:1}],
+  def:()=>({track:'PERSONAL',status:'待開始',priority:'中',owner:'謝卉榆',riskLevel:'無'}), label:r=>r.name},
+ goals:{title:'本月目標',space:'track',fields:[
+  {k:'title',l:'目標',t:'text',req:1,full:1},{k:'period',l:'月份（2026-12）',t:'text',req:1},
+  {k:'status',l:'狀態',t:'select',o:['未開始','進行中','完成','調整']},{k:'evidence',l:'完成證據（選填）',t:'text',full:1}],
+  def:()=>({track:'PERSONAL',level:'月',period:monthKey(new Date()),status:'未開始'}), label:r=>r.title},
+ certs:{title:'證照與課程',space:'P',fields:[
+  {k:'name',l:'名稱',t:'text',req:1,full:1},{k:'kind',l:'類型',t:'select',o:['證照','課程','研討會','工作坊']},
+  {k:'status',l:'狀態',t:'select',o:['規劃中','準備中','已取得','已完成','放棄']},{k:'date',l:'考試／完成日期',t:'date'},
+  {k:'note',l:'備註',t:'text',full:1}],
+  def:()=>({kind:'證照',status:'規劃中'}), label:r=>r.name},
+ skills:{title:'能力',space:'P',fields:[
+  {k:'current',l:'目前程度',t:'select',o:LEVELS.map((x,i)=>i+'｜'+x)},{k:'target',l:'目標程度',t:'select',o:LEVELS.map((x,i)=>i+'｜'+x)},
+  {k:'evidence',l:'用過的例子或證據（自評「能應用」以上請填）',t:'textarea',full:1}],
+  def:()=>({current:'0｜未評',target:'0｜未評'}), label:r=>skillName(r.id)},
+ pcases:{title:'個人學習案例',space:'P',pii:1,fields:[
+  {k:'code',l:'案例代號（不可填姓名）',t:'text',req:1},{k:'date',l:'日期',t:'date'},
+  {k:'source',l:'來源',t:'select',o:['自己的訓練客戶','診所個案（去識別化）','文獻或課程案例']},
+  {k:'auth',l:'授權狀態',t:'select',o:['僅個人學習','待授權','已授權可公開','不可公開']},
+  {k:'population',l:'族群／項目',t:'text'},{k:'method',l:'評估方法',t:'text'},
+  {k:'intervention',l:'訓練介入',t:'textarea',full:1},{k:'change',l:'數據變化',t:'textarea',full:1},
+  {k:'reflection',l:'個人反思',t:'textarea',full:1},{k:'authNote',l:'授權紀錄（誰、何時、範圍）',t:'text',full:1}],
+  def:()=>({auth:'僅個人學習',source:'自己的訓練客戶',date:isoDate(new Date())}), label:r=>r.code},
+ lit:{title:'研究文獻',space:'P',fields:[
+  {k:'title',l:'標題',t:'text',req:1,full:1},{k:'authors',l:'作者',t:'text'},{k:'year',l:'年份',t:'number'},
+  {k:'topic',l:'主題',t:'text'},{k:'link',l:'連結或 DOI',t:'text'},
+  {k:'takeaway',l:'重點',t:'textarea',full:1},{k:'apply',l:'可以怎麼用在工作上',t:'textarea',full:1}],
+  def:()=>({}), label:r=>r.title},
+ ccases:{title:'診所個案索引',space:'C',pii:1,fields:[
+  {k:'code',l:'個案代碼（對應評估系統，不填姓名）',t:'text',req:1},{k:'group',l:'族群',t:'select',o:['中高齡','一般成人','青少年','運動員','其他']},
+  {k:'firstDate',l:'初測日',t:'date',req:1},{k:'retestDate',l:'再測日',t:'date'},
+  {k:'status',l:'狀態',t:'select',o:['追蹤中','已再測','暫停','流失']},
+  {k:'goalMet',l:'再測時目標',t:'select',o:['未評估','達成','部分達成','未達成']},
+  {k:'note',l:'備註（不寫可識別的資訊）',t:'textarea',full:1}],
+  def:()=>({group:'中高齡',status:'追蹤中',goalMet:'未評估',firstDate:isoDate(new Date())}), label:r=>r.code},
+ services:{title:'服務方案',space:'C',fields:[
+  {k:'name',l:'方案名稱',t:'text',req:1,full:1},{k:'status',l:'狀態',t:'select',o:['構想','試行','正式','停用']},
+  {k:'target',l:'對象',t:'text'},{k:'price',l:'售價（元）',t:'number'},{k:'cost',l:'成本（元）',t:'number'},
+  {k:'duration',l:'期間／堂數',t:'text'},{k:'content',l:'內容',t:'textarea',full:1},{k:'note',l:'備註',t:'textarea',full:1}],
+  def:()=>({status:'構想'}), label:r=>r.name},
+ partners:{title:'合作場館',space:'C',fields:[
+  {k:'name',l:'場館名稱',t:'text',req:1,full:1},{k:'type',l:'類型',t:'select',o:['健身房','學校','運動隊','擊劍館','拳擊館','其他']},
+  {k:'status',l:'狀態',t:'select',o:['接洽中','洽談中','試行','合作中','暫停','結束']},
+  {k:'start',l:'開始日期',t:'date'},{k:'contact',l:'窗口（職稱即可）',t:'text'},
+  {k:'value',l:'合作內容與成效',t:'textarea',full:1},{k:'next',l:'下一步',t:'text',full:1},{k:'note',l:'備註',t:'textarea',full:1}],
+  def:()=>({type:'健身房',status:'接洽中'}), label:r=>r.name},
+ sops:{title:'SOP',space:'C',fields:[
+  {k:'name',l:'SOP 名稱',t:'text',req:1,full:1},{k:'version',l:'版本',t:'text'},
+  {k:'status',l:'狀態',t:'select',o:['草稿','試行','正式','停用']},{k:'updated',l:'更新日期',t:'date'},{k:'owner',l:'負責人',t:'text'},
+  {k:'location',l:'文件位置',t:'text',full:1},{k:'note',l:'備註',t:'textarea',full:1}],
+  def:()=>({version:'v0.1',status:'草稿',owner:'謝卉榆',updated:isoDate(new Date())}), label:r=>r.name},
+ kpiv:{title:'營運指標紀錄',space:'C',fields:[
+  {k:'month',l:'月份',t:'month',req:1},{k:'kpi',l:'指標',t:'select',o:KPIS.filter(k=>!k.auto).map(k=>k.id+'｜'+k.n)},
+  {k:'num',l:'分子',t:'number',req:1},{k:'den',l:'分母',t:'number',req:1},
+  {k:'source',l:'資料來源',t:'text',full:1},{k:'note',l:'備註',t:'text',full:1}],
+  def:()=>({month:monthKey(new Date()),kpi:'k1｜初測完成率'}), label:r=>r.month+' '+(r.kpi||'')},
+ portfolio:{title:'作品',space:'P',fields:[
+  {k:'name',l:'名稱',t:'text',req:1,full:1},{k:'date',l:'完成日期',t:'date'},
+  {k:'cat',l:'分類',t:'select',o:['專業證照','專業報告','案例研究','研究成果','專案成果','簡報與提案','教學內容','AI／系統開發成果']},
+  {k:'desc',l:'做了什麼、我的貢獻',t:'textarea',full:1},{k:'evidence',l:'檔案位置或連結',t:'text',full:1}],
+  def:()=>({cat:'專業報告',date:isoDate(new Date())}), label:r=>r.name},
+ pfin:{title:'個人財務',space:'P',fields:[
+  {k:'month',l:'月份',t:'month',req:1},{k:'type',l:'類型',t:'select',o:['月收入','儲蓄','進修支出','證照支出','個人投資','緊急預備金（目前總額）']},
+  {k:'amount',l:'金額（元）',t:'number',req:1},{k:'note',l:'備註',t:'text',full:1}],
+  def:()=>({month:monthKey(new Date()),type:'月收入'}), label:r=>r.month+' '+r.type},
+ cfin:{title:'診所專案財務',space:'C',fields:[
+  {k:'date',l:'日期',t:'date',req:1},{k:'project',l:'專案或合作案名稱',t:'text',req:1},
+  {k:'type',l:'類型',t:'select',o:['專案成本','設備投入','人力成本','合作收入','服務收入']},
+  {k:'amount',l:'金額（元）',t:'number',req:1},{k:'note',l:'備註',t:'text',full:1}],
+  def:()=>({date:isoDate(new Date()),type:'專案成本'}), label:r=>r.project+' '+r.type},
+ ideas:{title:'想法',space:'track',fields:[
+  {k:'t',l:'想法是什麼？',t:'text',req:1,full:1},{k:'p',l:'想解決什麼問題？',t:'text',full:1},
+  {k:'who',l:'誰提的',t:'select',o:['老闆','自己','客戶','其他']},
+  {k:'status',l:'狀態',t:'select',o:['待評估','本月做','擱置','完成']}],
+  def:()=>({who:'老闆',track:'PERSONAL',status:'待評估',d:isoDate(new Date())}), label:r=>r.t},
+ deadlines:{title:'期限',space:'track',fields:[{k:'title',l:'事項',t:'text',req:1,full:1},{k:'date',l:'日期',t:'date',req:1}],
+  def:()=>({track:'PERSONAL'}), label:r=>r.title},
+ cms:{title:'自訂解封條件',space:'track',fields:[{k:'t',l:'條件',t:'text',req:1,full:1},{k:'phase',l:'階段',t:'select',o:PHASES.map(p=>p.id+'｜'+p.name)}],
+  def:()=>({track:'PERSONAL',phase:'ph1｜第一封印'}), label:r=>r.t},
+};
+const CSV_COLS = ['goals','certs','skills','portfolio','ideas','deadlines'];
+
+/* ---------- 工具 ---------- */
+const $ = id => document.getElementById(id);
+function esc(s){ return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
+function pad(n){ return String(n).padStart(2,'0'); }
+function isoDate(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+function monthKey(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1); }
+function quarterKey(d){ return d.getFullYear()+'-Q'+(Math.floor(d.getMonth()/3)+1); }
+function parseD(s){ if(!s) return null; const [y,m,d]=s.split('-').map(Number); return new Date(y,(m||1)-1,d||1); }
+function today(){ const d=new Date(); d.setHours(0,0,0,0); return d; }
+function days(a,b){ return Math.round((b-a)/864e5); }
+function fmtD(s){ return s? s.replace(/-/g,'/') : ''; }
+function money(n){ return (Math.round(+n||0)).toLocaleString('zh-TW'); }
+function isoWeek(d){ const t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())); const day=t.getUTCDay()||7; t.setUTCDate(t.getUTCDate()+4-day); const y=t.getUTCFullYear(); return y+'-W'+pad(Math.ceil(((t-Date.UTC(y,0,1))/864e5+1)/7)); }
+function monday(d){ const m=new Date(d); const day=m.getDay()||7; m.setDate(m.getDate()-day+1); m.setHours(0,0,0,0); return m; }
+function addDays(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
+function fmtDT(ts){ if(!ts) return '—'; const d=new Date(ts); return (d.getFullYear()!==new Date().getFullYear()?d.getFullYear()+'/':'')+(d.getMonth()+1)+'/'+d.getDate()+' '+pad(d.getHours())+':'+pad(d.getMinutes()); }
+function md(d){ return (d.getMonth()+1)+'/'+d.getDate(); }
+function lvl(v){ return v==null||v===''? 0 : parseInt(String(v),10)||0; }
+function skillName(id){ for(const g of SKILL_MAP) for(const s of g[1]) if(s[0]===id) return s[1]; return id; }
+function trackChip(t){ if(t!=='CLINIC'&&t!=='SHARED') return ''; return t==='CLINIC'?'<span class="chip C">CLINIC</span>':t==='SHARED'?'<span class="chip S">SHARED</span>':'<span class="chip P">PERSONAL</span>'; }
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.remove('on'); void e.offsetWidth; e.classList.add('on'); clearTimeout(toast.t); toast.t=setTimeout(()=>e.classList.remove('on'),2200); }
+const WD=['日','一','二','三','四','五','六'];
+
+/* =====================================================================
+   資料層
+   ===================================================================== */
+function emptySpace(s){ return {app:'seal', schema:SCHEMA, space:s, updatedAt:0, cols:{}}; }
+const DB = {P:emptySpace('P'), C:emptySpace('C')};
+function col(s,name){ return DB[s].cols[name] || (DB[s].cols[name]=[]); }
+function peek(s,name){ return DB[s].cols[name]||[]; }
+function live(s,name){ return peek(s,name).filter(r=>!r.deleted); }
+function spaceOf(colKey, rec){ const d=COLS[colKey]; if(!d||d.space!=='track') return d?d.space:'P'; return rec.track==='CLINIC'?'C':'P'; }
+function all(colKey){ const d=COLS[colKey]||{space:'P'}; const ss=d.space==='track'?['P','C']:[d.space]; return ss.flatMap(s=>live(s,colKey).map(r=>Object.assign({_s:s},r))); }
+function getRec(s,name,id){ return peek(s,name).find(r=>r.id===id&&!r.deleted); }
+function putRaw(s,name,rec){ rec.updatedAt=Date.now(); const a=col(s,name), i=a.findIndex(r=>r.id===rec.id); if(i>=0) a[i]=rec; else a.push(rec); touch(s); }
+function tomb(s,name,id){ const a=col(s,name), i=a.findIndex(r=>r.id===id); const t={id, deleted:true, updatedAt:Date.now()}; if(i>=0) a[i]=t; else a.push(t); touch(s); }
+function upsert(colKey, rec){
+  const s=spaceOf(colKey,rec), old=rec._s; const clean=Object.assign({},rec); delete clean._s;
+  if(!clean.id) clean.id=uid();
+  if(!clean.createdAt) clean.createdAt=Date.now();
+  if(old && old!==s) tomb(old,colKey,clean.id);
+  const isNew=!getRec(s,colKey,clean.id);
+  putRaw(s,colKey,clean); addLog(s, isNew?'新增':'修改', COLS[colKey]?COLS[colKey].title:colKey, COLS[colKey]&&COLS[colKey].label?COLS[colKey].label(clean):'');
+  return clean;
+}
+function removeRec(colKey, rec){ const s=rec._s||spaceOf(colKey,rec); tomb(s,colKey,rec.id); addLog(s,'刪除',COLS[colKey].title,COLS[colKey].label(rec)); }
+function addLog(s, action, what, name){
+  const a=col(s,'log'); a.push({id:uid(), at:Date.now(), updatedAt:Date.now(), action, what, name:String(name||'').slice(0,60)});
+  if(a.length>500) a.splice(0,a.length-500);
+}
+/* 合併兩份同一空間的資料：逐筆比較 updatedAt，較新的勝出；刪除標記也一起比較 */
+function mergeSpace(a, b){
+  const out=emptySpace(a.space||b.space); let conflicts=0;
+  const names=new Set([...Object.keys(a.cols||{}),...Object.keys(b.cols||{})]);
+  names.forEach(n=>{
+    const m=new Map();
+    (a.cols[n]||[]).forEach(r=>m.set(r.id,r));
+    (b.cols[n]||[]).forEach(r=>{ const x=m.get(r.id); if(!x){ m.set(r.id,r); return; }
+      if((r.updatedAt||0)!==(x.updatedAt||0) && JSON.stringify(r)!==JSON.stringify(x)) conflicts++;
+      if((r.updatedAt||0)>(x.updatedAt||0)) m.set(r.id,r); });
+    out.cols[n]=[...m.values()];
+  });
+  if(out.cols.log && out.cols.log.length>500){ out.cols.log.sort((x,y)=>x.at-y.at); out.cols.log=out.cols.log.slice(-500); }
+  out.updatedAt=Math.max(a.updatedAt||0,b.updatedAt||0);
+  return {space:out, conflicts};
+}
+function validSpace(x){ return x && x.app==='seal' && (x.space==='P'||x.space==='C') && x.cols && typeof x.cols==='object'; }
+function migrate(x){ if(!x.schema) x.schema=SCHEMA; /* 未來改版的資料格式轉換寫在這裡 */ return x; }
+
+/* ---------- 儲存：瀏覽器暫存 ---------- */
+const dirty={P:false,C:false};
+let saveTimer=null;
+const META_KEY='seal2-meta';
+let META={}; try{ META=JSON.parse(localStorage.getItem(META_KEY)||'{}')||{}; }catch(e){ META={}; }
+function saveMeta(){ try{ localStorage.setItem(META_KEY, JSON.stringify(META)); }catch(e){} }
+function touch(s){ DB[s].updatedAt=Date.now(); dirty[s]=true; clearTimeout(saveTimer); saveTimer=setTimeout(persist,500); }
+function persist(){
+  ['P','C'].forEach(s=>{ if(!dirty[s]) return; dirty[s]=false;
+    try{ localStorage.setItem(LS_KEY[s], JSON.stringify(DB[s])); }catch(e){ toast('瀏覽器空間不足，請連結資料夾或匯出備份'); }
+    writeFolder(s); });
+  renderFoot();
+}
+function loadLocal(){
+  ['P','C'].forEach(s=>{ try{ const x=JSON.parse(localStorage.getItem(LS_KEY[s])||'null'); if(validSpace(x)&&x.space===s) DB[s]=migrate(x); }catch(e){} });
+}
+
+/* ---------- 儲存：電腦資料夾（Chrome／Edge，File System Access API） ---------- */
+const FS_OK = typeof window.showDirectoryPicker==='function';
+const dirH={P:null,C:null}, pendH={P:null,C:null}, fileState={P:'',C:''};
+function idb(){ return new Promise((res,rej)=>{ if(!window.indexedDB) return rej(); const r=indexedDB.open('seal2',1); r.onupgradeneeded=()=>r.result.createObjectStore('kv'); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }); }
+function idbSet(k,v){ return idb().then(d=>new Promise(res=>{ const t=d.transaction('kv','readwrite'); t.objectStore('kv').put(v,k); t.oncomplete=res; t.onerror=res; })).catch(()=>{}); }
+function idbGet(k){ return idb().then(d=>new Promise(res=>{ const r=d.transaction('kv').objectStore('kv').get(k); r.onsuccess=()=>res(r.result); r.onerror=()=>res(null); })).catch(()=>null); }
+function idbDel(k){ return idb().then(d=>new Promise(res=>{ const t=d.transaction('kv','readwrite'); t.objectStore('kv').delete(k); t.oncomplete=res; t.onerror=res; })).catch(()=>{}); }
+async function perm(h, ask){ if(!h.queryPermission) return true; const o={mode:'readwrite'}; if(await h.queryPermission(o)==='granted') return true; if(!ask) return false; return (await h.requestPermission(o))==='granted'; }
+async function attachFolder(s, h){
+  const fh=await h.getFileHandle(FILE_NAME[s],{create:true}); const txt=await (await fh.getFile()).text();
+  let conflicts=0;
+  if(txt.trim()){
+    let x; try{ x=JSON.parse(txt); }catch(e){ throw new Error('資料夾裡的「'+FILE_NAME[s]+'」無法讀取，請確認檔案沒有損毀。'); }
+    if(!validSpace(x)||x.space!==s) throw new Error('「'+FILE_NAME[s]+'」不是這個空間的資料檔，請換一個資料夾。');
+    const m=mergeSpace(DB[s], migrate(x)); DB[s]=m.space; conflicts=m.conflicts;
+  }
+  dirH[s]=h; pendH[s]=null; idbSet('dir-'+s,h);
+  try{ localStorage.setItem(LS_KEY[s], JSON.stringify(DB[s])); }catch(e){}
+  await writeFolder(s, true);
+  fileState[s]='已連結資料夾「'+h.name+'」';
+  if(conflicts) toast(SPACE_NAME[s]+'：合併了 '+conflicts+' 筆兩邊都改過的資料（保留較新的）');
+  render();
+}
+const writing={P:false,C:false}, again={P:false,C:false};
+async function writeFolder(s, force){
+  const h=dirH[s]; if(!h) return;
+  if(writing[s]){ again[s]=true; return; }
+  writing[s]=true;
+  try{
+    const fh=await h.getFileHandle(FILE_NAME[s],{create:true});
+    /* 寫入前先讀一次檔案再合併，避免另一台電腦剛改過的內容被整份覆蓋 */
+    const txt=await (await fh.getFile()).text();
+    if(txt.trim()){ try{ const x=JSON.parse(txt); if(validSpace(x)&&x.space===s&&(x.updatedAt||0)>0){ const m=mergeSpace(DB[s],migrate(x)); if(m.conflicts||JSON.stringify(m.space.cols)!==JSON.stringify(DB[s].cols)){ DB[s]=m.space; try{ localStorage.setItem(LS_KEY[s], JSON.stringify(DB[s])); }catch(e){} setTimeout(render,0); } } }catch(e){} }
+    const w=await fh.createWritable(); await w.write(JSON.stringify(DB[s],null,1)); await w.close();
+    META['saved'+s]=Date.now(); saveMeta();
+    await dailyBackup(s,h);
+    fileState[s]='已存到資料夾「'+h.name+'」';
+  }catch(e){ pendH[s]=dirH[s]; dirH[s]=null; fileState[s]='寫入資料夾失敗，請到「資料與設定」重新連線'; }
+  writing[s]=false; renderFoot();
+  if(again[s]){ again[s]=false; writeFolder(s); }
+}
+async function dailyBackup(s,h){
+  const tag=isoDate(new Date()); if(META['bk'+s]===tag) return;
+  const bd=await h.getDirectoryHandle('備份',{create:true});
+  const name=(s==='P'?'個人':'診所')+'_'+tag+'.json';
+  const w=await (await bd.getFileHandle(name,{create:true})).createWritable(); await w.write(JSON.stringify(DB[s])); await w.close();
+  META['bk'+s]=tag; saveMeta();
+  /* 只保留最近 14 份 */
+  const list=[]; for await (const e of bd.values()){ if(e.kind==='file'&&e.name.startsWith(s==='P'?'個人_':'診所_')) list.push(e.name); }
+  list.sort(); while(list.length>14){ await bd.removeEntry(list.shift()).catch(()=>{}); }
+}
+async function initFolders(){
+  if(!FS_OK) return;
+  for(const s of ['P','C']){
+    const h=await idbGet('dir-'+s); if(!h) continue;
+    try{ if(await perm(h,false)) await attachFolder(s,h); else { pendH[s]=h; fileState[s]='上次的資料夾「'+h.name+'」需要重新允許存取'; } }catch(e){ pendH[s]=h; fileState[s]=e.message||'資料夾無法使用'; }
+  }
+  render();
+}
+
+/* ---------- 儲存：claude.ai 雲端（在 claude.ai 打開時才有） ---------- */
+let cloud=null;
+async function initCloud(){
+  if(!window.claude||!window.claude.use) return;
+  let db=null; try{ db=await window.claude.use('db'); }catch(e){}
+  if(!db) return;
+  cloud=db;
+  for(const s of ['P','C']){
+    try{ const snap=await db.doc('seal2/'+s).get(); if(snap.exists){ const x=(snap.data()||{}).data; if(validSpace(x)){ const m=mergeSpace(DB[s],migrate(JSON.parse(JSON.stringify(x)))); DB[s]=m.space; } } }catch(e){}
+  }
+  render();
+}
+let cloudBusy=false;
+async function writeCloud(){
+  if(!cloud||cloudBusy) return; cloudBusy=true;
+  for(const s of ['P','C']){ try{ const ref=cloud.doc('seal2/'+s); const snap=await ref.get(); let cur=DB[s];
+      if(snap.exists){ const x=(snap.data()||{}).data; if(validSpace(x)){ const m=mergeSpace(DB[s],JSON.parse(JSON.stringify(x))); cur=DB[s]=m.space; } }
+      await ref.set({data:JSON.parse(JSON.stringify(cur))}); META['cloud'+s]=Date.now(); }catch(e){} }
+  saveMeta(); cloudBusy=false; renderFoot();
+}
+
+/* ---------- 匯出 ---------- */
+function download(name, text, mime){
+  if(window.claude&&window.claude.use){ showText(name,text); return; }
+  try{
+    const blob=new Blob([text],{type:mime||'application/octet-stream'}); const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),4000);
+  }catch(e){ showText(name,text); }
+}
+function showText(name,text){
+  openModal(`<h3>${esc(name)}</h3><p class="muted">這個環境不允許直接下載，請全選複製後存成檔案。</p><textarea style="min-height:300px" readonly>${esc(text)}</textarea><div class="row" style="margin-top:10px"><button class="btn plain" data-act="close">關閉</button></div>`);
+}
+function exportJSON(s){
+  const name=(s==='P'?'封印解除_個人資料_':'封印解除_診所資料_')+isoDate(new Date())+'.json';
+  download(name, JSON.stringify(DB[s],null,1), 'application/json');
+  META['exp'+s]=Date.now(); saveMeta(); addLog(s,'匯出','JSON',name); touch(s); toast('已匯出 '+name);
+}
+function csvCell(v){ v=v==null?'':String(v); return /[",\r\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; }
+function exportCSV(colKey){
+  const d=COLS[colKey]; const recs=all(colKey);
+  const head=['空間'].concat(d.fields.map(f=>f.l)).concat(['建立時間','最後修改']);
+  const rows=recs.map(r=>[r._s==='C'?'CLINIC':'PERSONAL'].concat(d.fields.map(f=>r[f.k])).concat([r.createdAt?new Date(r.createdAt).toLocaleString('zh-TW'):'', new Date(r.updatedAt).toLocaleString('zh-TW')]));
+  if(colKey==='skills'){ rows.forEach((row,i)=>row.splice(1,0,skillName(recs[i].id))); head.splice(1,0,'能力'); }
+  const csv='﻿'+[head].concat(rows).map(r=>r.map(csvCell).join(',')).join('\r\n');
+  download(d.title+'_'+isoDate(new Date())+'.csv', csv, 'text/csv;charset=utf-8'); toast('已匯出 '+d.title+' CSV');
+}
+
+/* ---------- 匯入 ---------- */
+let importBuf=null;
+function readImport(file){
+  const fr=new FileReader();
+  fr.onload=()=>{ let x; try{ x=JSON.parse(fr.result); }catch(e){ toast('檔案不是 JSON 格式'); return; }
+    if(validSpace(x)){ importBuf={kind:'v2', data:migrate(x)}; }
+    else if(x && x.weeks && x.metrics){ importBuf={kind:'v1', data:x}; }
+    else if(x && x.state && x.state.weeks){ importBuf={kind:'v1', data:x.state}; }
+    else { toast('這不是封印解除的資料檔'); return; }
+    render(); };
+  fr.readAsText(file);
+}
+function applyImport(mode){
+  const b=importBuf; if(!b) return;
+  if(b.kind==='v2'){
+    const s=b.data.space;
+    if(mode==='replace'){ downloadSnapshot(s); DB[s]=b.data; }
+    else { const m=mergeSpace(DB[s],b.data); DB[s]=m.space; }
+    addLog(s,'匯入',mode==='replace'?'取代':'合併',''); touch(s);
+    toast('已'+(mode==='replace'?'取代':'合併')+'匯入 '+SPACE_NAME[s]);
+  } else { importV1(b.data); toast('已匯入 1.x 版資料'); }
+  importBuf=null; render();
+}
+function downloadSnapshot(s){ try{ localStorage.setItem(LS_KEY[s]+'-before-import', JSON.stringify(DB[s])); }catch(e){} }
+/* 1.x 版的資料轉進 2.0 */
+function importV1(o){
+  const MAP={p1a:'ph1c1',p1b:'ph1c2',p1h:'ph1p3',p1g:'ph1p2',p1e:'ph1c7',p1x2:'ph1p1',p2a:'ph2p1',p2c:'ph2c1',p2e:'ph3c3',p3a:'ph3p1',p3b:'ph3c1',p4a:'ph4c1',p4b:'ph4c2'};
+  Object.keys(o.ms||{}).forEach(k=>{ const nk=MAP[k]; if(o.ms[k]&&nk) setMs(nk,{state:'done',evidence:'（從 1.x 版匯入，請補上證據）'}); });
+  Object.keys(o.weeks||{}).forEach(k=>{ const w=o.weeks[k]; putRaw('P','weeks',{id:k,done:w.done||[],top3:w.top3||['','',''],top3done:w.top3done||[false,false,false],note:w.note||''}); });
+  (o.ideas||[]).forEach(i=>upsert('ideas',{id:'v1'+i.id,t:i.t,p:i.p||'',who:i.w||'老闆',track:'CLINIC',status:i.status||'待評估',d:i.d}));
+  (o.deadlines||[]).forEach(d=>upsert('deadlines',{id:'v1'+d.id,title:d.t,date:d.date,track:'PERSONAL'}));
+  Object.keys(o.reviews||{}).forEach(m=>{ const r=o.reviews[m]; putRaw('P','reviews',{id:'M-'+m,kind:'M',period:m,q4:r.win||'',q5:'',q6:'',q7:r.sys||'',q8:r.next||'',q3:r.roi||'',q1:'',q2:'',note:r.boss||''}); });
+  const m=o.metrics||{};
+  if(m.cscs) upsert('certs',{name:'NSCA-CSCS',kind:'證照',status:'準備中',note:'1.x 版紀錄：已讀 '+m.cscs+' 章'+(m.examDate?'，預計考試 '+m.examDate:'')});
+  if(m.tested) upsert('kpiv',{month:monthKey(new Date()),kpi:'k1｜初測完成率',num:m.tested,den:m.tested,source:'1.x 版指標',note:'1.x 版：累計檢測 '+m.tested+' 人、已再測 '+(m.retested||0)+' 人（請改用個案索引）'});
+  addLog('P','匯入','1.x 版資料','');
+}
+
+/* =====================================================================
+   計算
+   ===================================================================== */
+function msRec(item){ return getRec(item.s,'msx',item.id); }
+function phaseItems(p){
+  const base=p.items.map(i=>({id:i[0], s:i[1], t:i[2], deliver:!!i[3]}));
+  const cus=all('cms').filter(c=>String(c.phase||'').startsWith(p.id+'｜')).map(c=>({id:c.id, s:c._s, t:c.t, custom:1, rec:c}));
+  return base.concat(cus);
+}
+function itemState(it){ const r=msRec(it); return r? r.state : ''; }
+function setMs(id, data){
+  let it=null; PHASES.forEach(p=>phaseItems(p).forEach(x=>{ if(x.id===id) it=x; }));
+  if(!it) return; const old=msRec(it)||{id};
+  const rec=Object.assign({},old,data,{id}); if(data.state==='done'&&!old.doneAt){ rec.doneAt=isoDate(new Date()); bumpDay(1); }
+  if(data.state==='') { tomb(it.s,'msx',id); addLog(it.s,'取消完成','解封條件',it.t); return; }
+  putRaw(it.s,'msx',rec); addLog(it.s, data.state==='done'?'完成':data.state==='skip'?'調整（不計入）':'修改','解封條件',it.t);
+}
+function prog(items, s){
+  const list=items.filter(i=>!s||i.s===s); const sk=list.filter(i=>itemState(i)==='skip').length; const dn=list.filter(i=>itemState(i)==='done').length;
+  const tot=list.length-sk; return {done:dn, total:tot, pct: tot? Math.round(dn/tot*100):0, noEv:list.filter(i=>itemState(i)==='done'&&!(msRec(i).evidence||'').trim()).length};
+}
+function currentPhase(){ const t=today(); return PHASES.find(p=>parseD(p.end)>=t)||PHASES[PHASES.length-1]; }
+function phaseIndex(p){ return PHASES.indexOf(p); }
+function week(k){ let w=getRec('P','weeks',k); if(!w){ w={id:k,done:[],top3:['','',''],top3done:[false,false,false],note:''}; } else w=Object.assign({},w); if(!w.top3done) w.top3done=[false,false,false]; return w; }
+function saveWeek(w){ putRaw('P','weeks',w); }
+/* 每週例行：[id, 顯示的日子, 內容, 時間, 星期幾(0=日), 加分項, 打勾時 CSCS +1] */
+function routine(){ const st=getRec('P','settings','main'); const r=st&&st.routine; return Array.isArray(r)&&r.length? r : ROUTINE.map(x=>[x[0],x[1],x[2],x[3],x[4],x[5]?1:0,x[0]==='r1'?1:0]); }
+function reqRoutine(){ return routine().filter(r=>!r[5]); }
+function isCscsItem(id){ const r=routine().find(x=>x[0]===id); return !!(r&&r[6]); }
+function dayLabel(ds){ if(!ds||!ds.length) return '彈性'; const order=[1,2,3,4,5,6,0]; const a=order.filter(d=>ds.includes(d)); return '週'+a.map(d=>WD[d]).join('、'); }
+function weekPct(k){ const w=getRec('P','weeks',k); const req=reqRoutine(); if(!w||!req.length) return 0; return Math.round(req.filter(r=>w.done.includes(r[0])).length/req.length*100); }
+function allDeadlines(){
+  const list=FIXED_DL.map(d=>({id:d[0],title:d[1],date:d[2],track:d[3],fixed:1}));
+  all('deadlines').forEach(d=>list.push(d));
+  all('projects').filter(p=>p.due&&p.status!=='已完成').forEach(p=>list.push({id:'pj'+p.id,title:'專案到期：'+p.name,date:p.due,track:p.track,fixed:1}));
+  const st=settings(); if(st.cscsExam) list.push({id:'cscsx',title:'NSCA-CSCS 考試',date:st.cscsExam,track:'PERSONAL',fixed:1});
+  all('certs').filter(c=>c.date&&!['已取得','已完成','放棄'].includes(c.status)).forEach(c=>{ if(/CSCS/i.test(c.name)&&st.cscsExam) return; if(list.some(x=>x.date===c.date)) return; list.push({id:'ce'+c.id,title:c.kind+'：'+c.name,date:c.date,track:'PERSONAL',fixed:1}); });
+  const t=today(); return list.map(d=>Object.assign({left:days(t,parseD(d.date))},d)).filter(d=>d.left>=0||(!d.fixed&&d.left>=-7)).sort((a,b)=>a.left-b.left);
+}
+function periodPast(level, period){
+  const t=new Date();
+  if(level==='年度') return +period < t.getFullYear();
+  if(level==='季度') return String(period) < quarterKey(t);
+  return String(period) < monthKey(t);
+}
+function sunNote(){ const d=new Date(); if(d.getDay()!==0||page!=='dash') return ''; const w=getRec('P','weeks',isoWeek(d)); if(w&&(w.note||'').trim()) return ''; return `<div class="banner sun"><span>📝 今天週日，花 10 分鐘寫一下<b>這週的回顧</b>：做到什麼、卡在哪、下週 3 件事。</span><button class="btn sm" data-page="goals">去寫</button></div>`; }
+function reviewDue(){
+  const d=new Date(), last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
+  if(monthKey(d)<START.slice(0,7)) return null;
+  if(d.getDate()>=last-2 && !getRec('P','reviews','M-'+monthKey(d))) return monthKey(d);
+  if(d.getDate()<=5){ const pm=monthKey(new Date(d.getFullYear(),d.getMonth()-1,1)); if(pm>=START.slice(0,7)&&!getRec('P','reviews','M-'+pm)) return pm; }
+  return null;
+}
+/* 診所 KPI（自動計算的部分） */
+function kpiAuto(){
+  const cs=all('ccases'), t=today();
+  const elig=cs.filter(c=>c.firstDate && days(parseD(c.firstDate),t)>=84);
+  const inWin=elig.filter(c=>{ if(!c.retestDate) return false; const g=days(parseD(c.firstDate),parseD(c.retestDate)); return g>=56&&g<=84; });
+  const keep=elig.filter(c=>c.status!=='流失');
+  const evald=cs.filter(c=>c.retestDate && c.goalMet && c.goalMet!=='未評估');
+  const met=evald.filter(c=>c.goalMet==='達成');
+  const since=isoDate(addDays(t,-365)), byP={};
+  all('cfin').filter(f=>f.date>=since).forEach(f=>{ const p=byP[f.project]||(byP[f.project]={inc:0,cost:0}); if(f.type==='合作收入') p.inc+=+f.amount||0; else if(f.type!=='服務收入') p.cost+=+f.amount||0; });
+  let inc=0,cost=0; Object.values(byP).forEach(p=>{ if(p.inc>0){ inc+=p.inc; cost+=p.cost; } });
+  return {k2:{num:inWin.length,den:elig.length}, k4:{num:keep.length,den:elig.length}, k5:{num:met.length,den:evald.length}, k8:{num:inc-cost,den:inc}};
+}
+function kpiFmt(k,v){ if(!v||!(+v.den)) return '—'; const x=v.num/v.den; return k.unit==='分'? x.toFixed(2) : Math.round(x*100)+'%'; }
+function kpiManual(id){ return all('kpiv').filter(r=>String(r.kpi||'').startsWith(id+'｜')).sort((a,b)=>a.month<b.month?1:-1); }
+function retestQueue(){ const t=today(); return all('ccases').filter(c=>c.firstDate&&!c.retestDate&&c.status==='追蹤中').map(c=>{ const f=parseD(c.firstDate); return Object.assign({open:addDays(f,56),close:addDays(f,84),d:days(f,t)},c); }).sort((a,b)=>a.firstDate<b.firstDate?-1:1); }
+
+function risks(){
+  const out=[];
+  if(!dirH.P&&!cloud){ const exp=META.expP; const n=exp?days(new Date(exp),new Date()):null; if(!exp||n>7) out.push(['warn','資料只存在這個瀏覽器'+(exp?'，上次匯出是 '+n+' 天前':'')+'。請連結資料夾或匯出備份','data']); }
+  let noEv=0; PHASES.forEach(p=>noEv+=prog(phaseItems(p),'P').noEv); if(noEv) out.push(['gold',noEv+' 個已完成的解封條件還沒附證據','plan']);
+  const sk=all('skills').filter(r=>lvl(r.current)>=3&&!(r.evidence||'').trim()).length; if(sk) out.push(['gold',sk+' 項能力自評「能應用」以上，但沒有填用過的例子','skills']);
+  const rd=reviewDue(); if(rd) out.push(['gold',rd+' 的月檢核還沒填','review']);
+  { const cp=currentPhase(), lf=days(today(),parseD(cp.end)), un=phaseItems(cp).filter(i=>i.s==='P'&&!itemState(i)).length; if(lf<=30&&lf>=0&&un) out.push(['warn',cp.name+'剩 '+lf+' 天，還有 '+un+' 個條件沒完成：決定衝刺、延後，或標成「調整」','plan']); }
+  const doing=all('ideas').filter(i=>i.status==='本月做').length; if(doing>2) out.push(['gold','本月要做的想法有 '+doing+' 個，建議收斂到 2 個','ideas']);
+  return out;
+}
+
+/* =====================================================================
+   畫面
+   ===================================================================== */
+const PAGES=[['dash','總覽','日常'],['goals','本週與本月','日常'],['ideas','想法池','日常'],['plan','五年藍圖','成長'],['skills','能力與證照','成長'],['portfolio','作品集','成長'],['review','月檢核','回顧'],['report','年度報告','回顧'],['data','資料與備份','設定']];
+let page=(location.hash||'').slice(1); if(!PAGES.some(p=>p[0]===page)) page='dash';
+let trackF='P', weekOff=0, reviewKind='M', reviewMonth=monthKey(new Date()), reviewQ=quarterKey(new Date()), logSpace='P';
+const ui={q:{},f:{}};
+let modalCtx=null, reportYear=0;
+const IN_ART=!!(window.claude&&window.claude.use);
+function trackOK(t){ return trackF==='ALL' || (trackF==='P' && t!=='CLINIC') || (trackF==='C' && t==='CLINIC'); }
+function spaceOK(s){ return trackF==='ALL' || trackF===s; }
+function trackSeg(){ return ''; return `<span class="seg">${[['ALL','全部'],['P','PERSONAL'],['C','CLINIC']].map(x=>`<button class="${trackF===x[0]?'on '+x[0]:''}" data-act="track" data-v="${x[0]}">${x[1]}</button>`).join('')}</span>`; }
+const EYEBROW={dash:'TRAINING DASHBOARD',goals:'WEEKLY SESSION',ideas:'IDEA BENCH',plan:'5-YEAR SEASON',skills:'PLAYER STATS',portfolio:'HIGHLIGHT REEL',review:'MONTHLY CHECK-IN',report:'SEASON REVIEW',data:'LOCKER ROOM'};
+function head(title, extra){ return `<div class="ptitle"><div><div class="eyebrow">${EYEBROW[page]||''}</div><h2>${ico(page)}${title}</h2></div><div class="row">${extra||''}</div></div>`; }
+function bar(pct,cls){ return `<div class="bar ${cls||''}"><i style="width:${Math.max(0,Math.min(100,pct))}%"></i></div>`; }
+
+const ICON={
+  dash:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  goals:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15l2.5 2.5L16 13"/>',
+  ideas:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>',
+  plan:'<path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/>',
+  skills:'<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/>',
+  portfolio:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>',
+  review:'<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/>',
+  report:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 17v-3M12 17v-6M15 17v-4"/>',
+  data:'<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>'};
+function ico(k){ return `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">${ICON[k]||''}</svg>`; }
+function renderNav(){
+  const pend=all('ideas').filter(i=>i.status==='待評估').length, rd=reviewDue(), rk=risks().filter(r=>r[0]==='warn').length;
+  let grp='';
+  $('nav').innerHTML=PAGES.map(p=>{ let b='';
+    if(p[0]==='ideas'&&pend) b=`<span class="badge">${pend}</span>`; if(p[0]==='review'&&rd) b='<span class="badge">該填了</span>'; if(p[0]==='dash'&&rk) b=`<span class="badge" title="提醒">${rk}</span>`;
+    const g=p[2]!==grp?`<div class="navg">${p[2]}</div>`:''; grp=p[2];
+    return g+`<button class="nav ${p[0]===page?'on':''}" data-page="${p[0]}" ${p[0]===page?'aria-current="page"':''}><span class="row" style="gap:10px">${ico(p[0])}${p[1]}</span><span class="row" style="gap:6px">${b}<kbd class="nk">${PAGES.indexOf(p)+1}</kbd></span></button>`; }).join('');
+  const nv=$('nav'), on=nv.querySelector('.nav.on');
+  if(on){ const pill=document.createElement('span'); pill.className='navpill'; const to=on.offsetTop, h=on.offsetHeight;
+    pill.style.height=h+'px'; pill.style.transform=`translateY(${renderNav.prev!=null?renderNav.prev:to}px)`; nv.prepend(pill);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{ pill.style.transform=`translateY(${to}px)`; })); renderNav.prev=to; }
+  renderLv();
+}
+/* ---------- 修為與等級（從紀錄自動計算，不用另外記） ---------- */
+const XP_RULE='每週例行或本週三件事完成一項 +10・解封條件 +50・月目標 +30・作品 +40・取得證照 +150・解除封印 +300・月檢核 +40・CSCS 一章 +15・想法完成 +15';
+function xpTotal(){
+  let x=0; const sw=isoWeek(parseD(START));
+  live('P','weeks').forEach(w=>{ if(w.id>=sw) x+=(w.done||[]).length*10+(w.top3done||[]).filter(Boolean).length*10; });
+  PHASES.forEach(ph=>phaseItems(ph).forEach(i=>{ if(i.s==='P'&&itemState(i)==='done') x+=50; }));
+  x+=all('goals').filter(g=>g.status==='完成').length*30+all('portfolio').length*40;
+  x+=all('certs').filter(c=>['已取得','已完成'].includes(c.status)&&c.date).length*150;
+  x+=Object.keys(settings().celebrated||{}).length*300+live('P','reviews').length*40+(settings().cscsCh||0)*15;
+  x+=all('ideas').filter(i=>i.status==='完成').length*15;
+  return x;
+}
+const need=L=>50*(L-1)*L;
+const TITLES=[[1,'見習生'],[3,'覺醒者'],[5,'封印師'],[7,'解咒者'],[9,'守護者'],[12,'賢者'],[15,'傳說']];
+function lvTitle(L){ let t=TITLES[0][1]; TITLES.forEach(x=>{ if(L>=x[0]) t=x[1]; }); return t; }
+function levelOf(x){ let L=1; while(x>=need(L+1)) L++; return L; }
+function renderLv(){
+  const el=$('lv'); if(!el) return; const x=xpTotal(), L=levelOf(x), a=need(L), b=need(L+1);
+  if(!el.firstChild) el.innerHTML='<div class="lvtop"><span class="lvn">Lv.<b id="lvL"></b></span><span id="lvT"></span></div><div class="lvbar"><i id="lvB"></i></div><div class="lvx" id="lvX"></div>';
+  $('lvL').textContent=L; $('lvT').textContent=lvTitle(L); $('lvB').style.width=((x-a)/(b-a)*100)+'%'; $('lvX').textContent='修為 '+x+'　下一級 '+b;
+  if(META.lv&&L>META.lv&&bootDone){ setTimeout(()=>showBadge('⬆','等級提升　Lv.'+L,lvTitle(L)+(lvTitle(L)!==lvTitle(L-1)?'・新稱號！':'')),900); el.classList.remove('up'); void el.offsetWidth; el.classList.add('up'); }
+  if(META.lv!==L){ META.lv=L; saveMeta(); }
+}
+function renderFoot(){
+  const f=s=>{ if(s==='C') return ''; if(dirH[s]) return `${s==='P'?'個人':'診所'}：<b>資料夾</b> ${META['saved'+s]?new Date(META['saved'+s]).toTimeString().slice(0,5):''}`; if(pendH[s]) return `${s==='P'?'個人':'診所'}：<b style="color:#e3a066">資料夾待重新連線</b>`; return `${s==='P'?'個人':'診所'}：僅瀏覽器`; };
+  $('foot').innerHTML='<span class="keys">按住 <kbd>?</kbd> 看快捷鍵・<kbd>N</kbd> 記想法</span><br>'+f('P')+(cloud?'<br>claude.ai 雲端同步中':'')+'<br>資料格式 v'+SCHEMA;
+}
+
+/* ---------- 通用清單 ---------- */
+function listBlock(colKey, o={}){
+  const d=COLS[colKey], q=(ui.q[colKey]||'').toLowerCase(), fv=ui.f[colKey]||'';
+  const sf=d.fields.find(f=>f.k===(o.statusField||'status'));
+  let recs=all(colKey); if(o.filter) recs=recs.filter(o.filter);
+  if(d.space==='track') recs=recs.filter(r=>trackOK(r.track));
+  if(q) recs=recs.filter(r=>JSON.stringify(r).toLowerCase().includes(q));
+  if(fv&&sf) recs=recs.filter(r=>r[sf.k]===fv);
+  recs.sort(o.sort||((a,b)=>(b.updatedAt||0)-(a.updatedAt||0)));
+  return `<div class="tool"><input type="search" placeholder="搜尋" data-q="${colKey}" value="${esc(ui.q[colKey]||'')}">`+
+    (sf?`<select data-f="${colKey}"><option value="">全部${esc(sf.l)}</option>${sf.o.map(x=>`<option ${x===fv?'selected':''}>${esc(x)}</option>`).join('')}</select>`:'')+
+    `<button class="btn sm" data-act="new" data-col="${colKey}"${o.preset?` data-preset="${esc(JSON.stringify(o.preset))}"`:''}>＋ 新增</button><span class="muted">${recs.length} 筆</span></div>`+
+    (recs.length? recs.slice(0,o.limit||400).map(r=>`<div class="rec" data-act="edit" data-col="${colKey}" data-id="${esc(r.id)}" data-s="${r._s}">${o.row?o.row(r):esc(d.label(r))}</div>`).join('') : `<p class="muted">${o.empty||'還沒有資料。'}</p>`);
+}
+
+/* ---------- 總覽 ---------- */
+const ROMAN=['Ⅰ','Ⅱ','Ⅲ','Ⅳ','Ⅴ'];
+function greet(){ const h=new Date().getHours(); return h<5?'夜深了':h<11?'早安':h<14?'午安':h<18?'下午好':'晚安'; }
+function questMap(p){
+  const cel=settings().celebrated||{};
+  return `<div class="quest">${PHASES.map((ph,i)=>{ const a=prog(phaseItems(ph),'P'), st=cel[ph.id]?'clear':ph===p?'now':phaseIndex(ph)<phaseIndex(p)?'past':'lock';
+    return `<button class="qn ${st}" data-page="plan" style="--i:${i}" title="${esc(ph.goal)}"><span class="qorb"><span class="qnum">${ROMAN[i]}</span></span>
+      <span class="qname">${ph.name}</span><span class="qtitle">${ph.title}</span><span class="qmeta">${st==='clear'?'已解除':st==='lock'?'🔒 '+fmtD(ph.start).slice(0,7):a.done+' / '+a.total}</span></button>`; }).map((h,i)=>i?`<span class="qline ${i<=phaseIndex(p)?'done':''} ${i===phaseIndex(p)+1?'next':''}"></span>`+h:h).join('')}</div>`;
+}
+function vDash(){
+  const p=currentPhase(), t=today(), left=Math.max(0,days(t,parseD(p.end)));
+  const pPh=prog(phaseItems(p),'P'), rd=reviewDue(), dls=allDeadlines(), next=dls[0], st=settings(), sk=streaks();
+  const x=xpTotal(), L=levelOf(x), exL=st.cscsExam?days(t,parseD(st.cscsExam)):null;
+  return (sunNote()+(rd?`<div class="banner"><span><b>${rd}</b> 的月檢核還沒填，花 1 小時回顧一下。</span><button class="btn sm" data-page="review">去填</button></div>`:''))+
+  `<section class="hero card">
+    <div class="hl"><div class="eyebrow">TRAINING DASHBOARD</div><div class="hello">${greet()}，卉榆</div>
+      <div class="muted">${new Date().toLocaleDateString('zh-TW',{month:'long',day:'numeric',weekday:'long'})}・Lv.${L} ${lvTitle(L)}</div>
+      <div class="hseal"><span class="sealno">SEAL ${ROMAN[phaseIndex(p)]}</span><b>${p.name}・${p.title}</b><span class="muted">剩 ${left} 天</span></div>
+      <div class="row" style="gap:10px;margin-top:6px"><div style="flex:1">${bar(pPh.pct,'P')}</div><span class="muted">${cnt('phdone',pPh.done)} / ${pPh.total}</span></div></div>
+    <div class="hstats ${exL!=null&&exL>=0?'n4':''}">
+      <div class="hs"><div class="htag">BOOK</div><div class="hv">${cnt('cscs',st.cscsCh||0)}<small>/24</small></div><div class="hk">CSCS 章</div></div>
+      <div class="hs ${sk.cur>=2?'fire':''}"><div class="htag">STREAK${sk.cur>=2?' <span class="flame">🔥</span>':''}</div><div class="hv">${cnt('streak',sk.cur)}<small>週</small></div><div class="hk">連續達標</div></div>
+      ${exL!=null&&exL>=0?`<div class="hs ${exL<=30?'hot':''}"><div class="htag">EXAM DAY</div><div class="hv">${cnt('exl',exL)}<small>天</small></div><div class="hk">CSCS 考試</div></div>`:''}<div class="hs ${next&&next.left<=14?'hot':''}"><div class="htag">COUNTDOWN</div><div class="hv">${next?(next.left===0?'今天':next.left):'—'}${next&&next.left?'<small>天</small>':''}</div><div class="hk" title="${next?esc(next.title):''}">${next?esc(next.title.length>12?next.title.slice(0,12)+'…':next.title):'沒有期限'}</div></div>
+    </div><svg class="ecg" viewBox="0 0 600 36" preserveAspectRatio="none" aria-hidden="true"><path class="base" pathLength="100" d="M0 24 H170 L180 24 L186 18 L192 24 L204 24 L210 30 L218 3 L226 33 L232 24 L246 24 L254 17 L264 24 H420 L430 24 L436 18 L442 24 L454 24 L460 30 L468 3 L476 33 L482 24 L496 24 L504 17 L514 24 H600"/><path class="pulse" pathLength="100" d="M0 24 H170 L180 24 L186 18 L192 24 L204 24 L210 30 L218 3 L226 33 L232 24 L246 24 L254 17 L264 24 H420 L430 24 L436 18 L442 24 L454 24 L460 30 L468 3 L476 33 L482 24 L496 24 L504 17 L514 24 H600"/></svg></section>
+  <div class="card" style="margin-bottom:16px"><h3><span>封印之路</span><span class="muted" style="font-weight:400">點任何一道封印看詳細條件</span></h3>${questMap(p)}</div>
+  <div class="grid g3dash"><div class="col">${cMission()}${cNext(p)}</div>
+  <div class="col">${cMilestones(dls)}${cGoals()}</div>
+  <div class="col">${cRisks()}${cDone()}${cMonthIdeas()}</div></div>`;
+}
+function cMission(){
+  const d=new Date().getDay(), k=isoWeek(new Date()), w=week(k);
+  const items=routine().filter(r=>r[4].includes(d));
+  return `<div class="card mission"><h3><span>今日任務 <span class="muted" style="font-weight:400">週${WD[d]}</span></span><span class="muted">本週例行 ${cnt('wkd',weekPct(k))}%</span></h3>
+    ${items.length?items.map(r=>{ const on=w.done.includes(r[0]); return `<div class="item ${on?'done':''}"><input type="checkbox" data-act="rt" data-k="${k}" data-id="${r[0]}" ${on?'checked':''}><span class="t"><span class="nm">${esc(r[2])}</span>${r[6]?' <span class="chip gold">CSCS +1</span>':''}</span><span class="muted">${esc(r[3])}</span></div>`; }).join(''):'<p class="muted" style="margin:0 0 6px">今天沒有固定事項，可以做彈性進修，或好好休息。</p>'}
+    <h4>本週三件最重要的事</h4>${top3Inputs(k,w)}</div>`;
+}
+function cNext(p){
+  const items=phaseItems(p).filter(i=>spaceOK(i.s)&&!itemState(i));
+  const pj=[];
+  return `<div class="card"><h3><span>下一步</span><button class="btn ghost sm" data-page="plan">藍圖 ›</button></h3>
+    ${items.slice(0,5).map(i=>`<div class="item"><input type="checkbox" data-act="msq" data-id="${i.id}"><span class="t"><span class="nm">${esc(i.t)}</span></span></div>`).join('')||'<p class="muted">這個階段的條件都完成了。</p>'}
+    ${pj.length?`<h4>進行中專案的下一步</h4>`+pj.map(x=>`<div class="rec" data-act="edit" data-col="projects" data-id="${esc(x.id)}" data-s="${x._s}">${trackChip(x.track)} <b>${esc(x.name)}</b>：${esc(x.next)}</div>`).join(''):''}</div>`;
+}
+function cTop3(){
+  const k=isoWeek(new Date()), w=week(k);
+  return `<div class="card"><h3><span>本週三件最重要的事</span><button class="btn ghost sm" data-page="goals">週計畫 ›</button></h3>${top3Inputs(k,w)}</div>`;
+}
+function top3Inputs(k,w){ return [0,1,2].map(i=>`<div class="top3 ${w.top3done[i]?'done':''}"><input type="checkbox" data-act="t3" data-k="${k}" data-i="${i}" ${w.top3done[i]?'checked':''} ${(w.top3[i]||'').trim()?'':'disabled'} title="完成"><input type="text" data-bind="top3" data-k="${k}" data-i="${i}" placeholder="第 ${i+1} 件" value="${esc(w.top3[i]||'')}"></div>`).join(''); }
+function goalRows(level, period){
+  const g=all('goals').filter(x=>x.level===level&&String(x.period)===period&&trackOK(x.track));
+  return g.map(x=>`<div class="rec" data-act="edit" data-col="goals" data-id="${esc(x.id)}" data-s="${x._s}">${trackChip(x.track)} ${esc(x.title)} <span class="chip ${x.status==='完成'?'ok':x.status==='進行中'?'gold':''}">${esc(x.status)}</span>${x.status==='完成'&&!(x.evidence||'').trim()?' <span class="chip warn">待補證據</span>':''}</div>`).join('')
+   +`<button class="btn ghost sm" style="margin-top:4px" data-act="new" data-col="goals" data-preset="${esc(JSON.stringify({level,period,track:trackF==='C'?'CLINIC':'PERSONAL'}))}">＋ 新增</button>`;
+}
+function cGoals(){
+  const m=monthKey(new Date())<START.slice(0,7)?START.slice(0,7):monthKey(new Date());
+  const pd=new Date(+m.slice(0,4),+m.slice(5)-2,1), pm=monthKey(pd);
+  const left=pm>=START.slice(0,7)?all('goals').filter(g=>g.period===pm&&['未開始','進行中'].includes(g.status)):[];
+  return `<div class="card"><h3><span>${m} ${m===monthKey(new Date())?'本月':''}目標</span><span class="muted" style="font-weight:400">最多 3 個</span></h3>${goalRows('月',m)}
+    ${left.length?`<div class="note" style="margin-top:10px"><b>上個月沒完成的目標（${left.length}）</b>：帶到這個月繼續，或標成「調整」放下。${left.map(g=>`<div class="row between" style="padding:4px 0"><span>${esc(g.title)}</span><span class="row"><button class="btn sm" data-act="gcarry" data-id="${esc(g.id)}" data-m="${m}">帶入本月</button><button class="btn sm plain" data-act="gdrop" data-id="${esc(g.id)}">調整</button></span></div>`).join('')}</div>`:''}</div>`;
+}
+function cMonthIdeas(){
+  const list=all('ideas').filter(i=>i.status==='本月做');
+  return `<div class="card"><h3><span>本月要做的想法</span><button class="btn ghost sm" data-page="ideas">想法池 ›</button></h3>
+    ${list.length?list.map(i=>`<div class="item"><span class="t"><span class="nm">${esc(i.t)}</span></span><button class="btn sm" data-act="istat" data-id="${esc(i.id)}" data-s="${i._s}" data-v="完成">完成</button></div>`).join(''):'<p class="muted" style="margin:0">到想法池把狀態改成「本月做」，就會出現在這裡。建議一個月最多 2 個。</p>'}</div>`;
+}
+function cToday(){
+  if(!spaceOK('P')) return '';
+  const d=new Date().getDay(), k=isoWeek(new Date()), w=week(k);
+  const items=routine().filter(r=>r[4].includes(d)), left=items.filter(r=>!w.done.includes(r[0]));
+  return `<div class="card P"><h3><span>今天（週${WD[d]}）的例行事項</span><span class="muted">本週 ${weekPct(k)}%</span></h3>
+    ${items.length?(left.length?left.map(r=>`<div class="item"><input type="checkbox" data-act="rt" data-k="${k}" data-id="${r[0]}"><span class="t">${esc(r[2])} <span class="muted">${r[3]}</span></span></div>`).join(''):'<p class="muted">今天的例行事項都做完了 ✔</p>'):'<p class="muted">今天沒有固定事項，可以做彈性進修或休息。</p>'}</div>`;
+}
+function cRisks(){
+  const r=risks().filter(x=>x[2]!=='cases'&&x[2]!=='projects'||true);
+  if(!r.length) return '';
+  return `<div class="card"><h3>提醒</h3>${r.length? r.map(x=>`<div class="risk"><span class="lv chip ${x[0]}">${x[0]==='warn'?'注意':'提醒'}</span><span style="flex:1">${esc(x[1])}</span>${x[1].startsWith('資料只存在')&&FS_OK&&!IN_ART&&!pendH.P?'<button class="btn sm" data-act="folder" data-s="P">連結資料夾</button>':`<button class="btn ghost sm" data-page="${x[2]}">前往</button>`}</div>`).join('') : '<p class="muted">目前沒有風險提醒。</p>'}</div>`;
+}
+function cHeatMini(){ return `<div class="card heatmini"><h3><span>訓練日誌</span><button class="btn ghost sm" data-page="goals">本週 ›</button></h3>${heatmap(8)}</div>`; }
+function cMilestones(dls){
+  const list=dls.filter(d=>d.left<=45&&trackOK(d.track)).slice(0,8);
+  return `<div class="card"><h3><span>近期里程碑（45 天內）</span><button class="btn ghost sm" data-act="new" data-col="deadlines">＋ 期限</button></h3>
+    ${list.length? list.map(d=>`<div class="risk"><span class="lv">${trackChip(d.track)}</span><span style="flex:1">${esc(d.title)}<br><span class="muted">${fmtD(d.date)}（週${WD[parseD(d.date).getDay()]}）</span></span><b style="white-space:nowrap;${d.left<=14?'color:var(--warn)':''}">${d.left<0?'已過':d.left===0?'今天':d.left+' 天'}</b></div>`).join(''):'<p class="muted">45 天內沒有期限。</p>'}</div>`;
+}
+function cLate(){
+  const t=today(), cp=currentPhase(), out=[];
+  all('projects').filter(p=>p.due&&p.status!=='已完成'&&parseD(p.due)<t&&trackOK(p.track)).forEach(p=>out.push([p.track,'專案「'+p.name+'」預計 '+fmtD(p.due)+' 完成']));
+  all('goals').filter(g=>!['完成','調整','取消'].includes(g.status)&&g.period&&periodPast(g.level,g.period)&&trackOK(g.track)).forEach(g=>out.push([g.track,g.level+'目標「'+g.title+'」（'+g.period+'）']));
+  PHASES.slice(0,phaseIndex(cp)).forEach(ph=>phaseItems(ph).filter(i=>!itemState(i)&&spaceOK(i.s)).forEach(i=>out.push([i.s==='P'?'PERSONAL':'CLINIC',ph.name+'：'+i.t])));
+  return `<div class="card"><h3>延遲任務</h3>${out.length? out.slice(0,10).map(x=>`<div class="risk"><span class="lv">${trackChip(x[0])}</span><span>${esc(x[1])}</span></div>`).join('')+(out.length>10?`<p class="muted">還有 ${out.length-10} 項</p>`:''):'<p class="muted">沒有延遲的任務。延遲不代表失敗，可以到檢核頁調整目標。</p>'}</div>`;
+}
+function cDone(){
+  const out=[];
+  PHASES.forEach(ph=>phaseItems(ph).forEach(i=>{ const r=msRec(i); if(r&&r.state==='done'&&spaceOK(i.s)) out.push([r.updatedAt,i.s==='P'?'PERSONAL':'CLINIC','解封條件：'+i.t]); }));
+  all('projects').filter(p=>p.status==='已完成'&&trackOK(p.track)).forEach(p=>out.push([p.updatedAt,p.track,'專案：'+p.name]));
+  all('goals').filter(g=>g.status==='完成'&&trackOK(g.track)).forEach(g=>out.push([g.updatedAt,g.track,'目標：'+g.title]));
+  if(spaceOK('P')){ all('portfolio').forEach(p=>out.push([p.updatedAt,'PERSONAL','作品：'+p.name])); all('certs').filter(c=>['已取得','已完成'].includes(c.status)&&c.date).forEach(c=>out.push([c.updatedAt,'PERSONAL',c.kind+'：'+c.name])); }
+  out.sort((a,b)=>b[0]-a[0]);
+  return `<div class="card"><h3>最近完成</h3>${out.length? out.slice(0,6).map(x=>`<div class="risk"><span class="lv">${trackChip(x[1])}</span><span style="flex:1">${esc(x[2])}</span><span class="muted">${new Date(x[0]).toLocaleDateString('zh-TW')}</span></div>`).join(''):'<p class="muted">還沒有完成紀錄。</p>'}</div>`;
+}
+function cSnapshot(){
+  const k=kpiAuto(), K=KPIS;
+  const P=spaceOK('P')?`<div class="card P"><h3>個人職涯累積</h3><div class="grid g2" style="gap:8px">
+    <div><div class="muted">證照（已取得／準備中）</div><b>${all('certs').filter(c=>c.kind==='證照'&&c.status==='已取得').length} ／ ${all('certs').filter(c=>c.kind==='證照'&&['準備中','進行中'].includes(c.status)).length}</b></div>
+    <div><div class="muted">作品集</div><b>${all('portfolio').length} 項</b></div>
+    <div><div class="muted">學習案例（可公開）</div><b>${all('pcases').length}（${all('pcases').filter(c=>c.auth==='已授權可公開').length}）</b></div>
+    <div><div class="muted">能力有證據</div><b>${all('skills').filter(s=>(s.evidence||'').trim()).length} / ${SKILL_MAP.reduce((a,g)=>a+g[1].length,0)}</b></div></div></div>`:'';
+  const C=spaceOK('C')?`<div class="card C"><h3>診所事業累積</h3><div class="grid g2" style="gap:8px">
+    <div><div class="muted">正式 SOP</div><b>${all('sops').filter(x=>x.status==='正式').length}</b></div>
+    <div><div class="muted">正式服務方案</div><b>${all('services').filter(x=>x.status==='正式').length}</b></div>
+    <div><div class="muted">合作中場館</div><b>${all('partners').filter(x=>x.status==='合作中').length}</b></div>
+    <div><div class="muted">8–12 週再測率</div><b>${kpiFmt(K[1],k.k2)}</b> <span class="muted">${k.k2.den?k.k2.num+'/'+k.k2.den:'尚無到期個案'}</span></div></div></div>`:'';
+  return P+C;
+}
+
+/* ---------- 五年藍圖 ---------- */
+function bumpDay(n){ const k=isoDate(new Date()), r=getRec('P','days',k)||{id:k,n:0}; putRaw('P','days',Object.assign({},r,{n:Math.max(0,(r.n||0)+n)})); }
+function dayN(k){ const r=getRec('P','days',k); return r&&!r.deleted?(r.n||0):0; }
+function heatmap(weeks, endDate){
+  const st=parseD(START); let end=endDate||today(); let start=addDays(monday(end),-(weeks-1)*7); if(start<monday(st)){ start=monday(st); } const last=addDays(start,weeks*7-1); end=end<last?end:last; const realEnd=endDate||today(); let cols='', tot=0, act=0, lastM=-1, months='';
+  for(let w=0;w<weeks;w++){ let c=''; const m0=addDays(start,w*7);
+    for(let d=0;d<7;d++){ const x=addDays(m0,d); if(x.getDate()===1){ months+=`<span style="grid-column:${w+1}">${x.getMonth()+1}月</span>`; } }
+    for(let d=0;d<7;d++){ const day=addDays(start,w*7+d), k=isoDate(day), n=dayN(k), fut=day>realEnd, pre=day<st;
+      if(n){ tot+=n; act++; }
+      c+=`<i class="${fut?'fut':pre?'pre':'h'+Math.min(4,n)} ${k===isoDate(today())?'td':''}" title="${md(day)}${pre?'（還沒開始）':fut?'':'：'+n+' 項'}" style="--d:${w}"></i>`; }
+    cols+=`<div class="hcol">${c}</div>`; }
+  return `<div class="heat"><div class="hmon" style="grid-template-columns:repeat(${weeks},1fr)">${months}</div><div class="hgrid">${cols}</div><div class="hleg"><span>${act} 天有訓練・共 ${tot} 項</span><span class="row" style="gap:3px">少 <i class="h0"></i><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i> 多</span></div></div>`;
+}
+function weekOK(d){ return weekPct(isoWeek(d))>=75; }
+function streaks(){
+  const start=monday(parseD(START)); let d=monday(new Date()), cur=0;
+  if(!weekOK(d)) d=addDays(d,-7);
+  while(d>=start&&weekOK(d)){ cur++; d=addDays(d,-7); }
+  let best=0, run=0; for(let w=start; w<=monday(new Date()); w=addDays(w,7)){ if(weekOK(w)){ run++; best=Math.max(best,run); } else run=0; }
+  return {cur,best};
+}
+function checkSeal(){
+  const st=settings(), cel=Object.assign({},st.celebrated||{});
+  for(const ph of PHASES){ const pr=prog(phaseItems(ph),'P'); if(pr.total&&pr.done===pr.total&&!cel[ph.id]){ cel[ph.id]=isoDate(new Date()); saveSettings({celebrated:cel}); addLog('P','解除',ph.name,ph.title); showSeal(ph); return; } }
+}
+function showSeal(ph){
+  const next=PHASES[phaseIndex(ph)+1];
+  openModal(`<div class="seal"><div class="sealmark"><div class="ring"></div><div class="glyph">封</div><div class="glyph2">解</div></div>
+    <h2>${ph.name}・解除</h2><p class="sealsub">${esc(ph.title)}　全部條件完成</p>
+    <p class="muted">${fmtD(isoDate(new Date()))}${next?'　下一道：'+next.name+'・'+esc(next.title):'　五年篇，完成。'}</p>
+    <button class="btn" data-act="close">繼續前進</button></div>`);
+  $('toast').classList.remove('on');
+  const mk=$('modal').querySelector('.sealmark');
+  if(mk&&!REDUCED){ for(let i=0;i<28;i++){ const d=document.createElement('i'); d.className='spark'; const a=i/28*Math.PI*2+Math.random()*.2, r=90+Math.random()*80; d.style.setProperty('--x',Math.cos(a)*r+'px'); d.style.setProperty('--y',Math.sin(a)*r+'px'); d.style.setProperty('--dl',(0.95+Math.random()*.25).toFixed(2)+'s'); mk.appendChild(d); }
+    const f=document.createElement('div'); f.className='sealflash'; document.body.appendChild(f); setTimeout(()=>f.remove(),2400); }
+}
+
+function vPlan(){
+  const cp=currentPhase();
+  return head('五年藍圖', trackSeg()+'<span class="muted">勾選＝完成；點「證據／調整」可以附上證據，或把不再適用的條件改成「調整」</span>')+
+  PHASES.map(ph=>{ const items=phaseItems(ph), a=prog(items,'P'), b=prog(items,'C'), now=ph===cp;
+    const listFor=s=>{ const its=items.filter(i=>i.s===s); return its.map(i=>{ const st=itemState(i), r=msRec(i)||{};
+      return `<div class="item ${st}"><input type="checkbox" data-act="msq" data-id="${i.id}" ${st==='done'?'checked':''} ${st==='skip'?'disabled':''}>
+        <span class="t"><span class="nm">${esc(i.t)}</span> ${i.deliver?'<span class="chip gold">交付成果</span>':''}${i.custom?'<span class="chip">自訂</span>':''}${st==='done'&&!(r.evidence||'').trim()?' <span class="chip warn">待補證據</span>':''}${st==='skip'?' <span class="chip">調整</span>':''}
+        ${st==='done'&&r.evidence?`<div class="muted small">證據：${esc(r.evidence)}${r.doneAt?'（'+fmtD(r.doneAt)+'）':''}</div>`:''}${st==='skip'&&r.reason?`<div class="muted small">原因：${esc(r.reason)}</div>`:''}</span>
+        <button class="btn ghost sm" data-act="ms" data-id="${i.id}">證據／調整</button>${i.custom?`<button class="btn ghost sm" data-act="edit" data-col="cms" data-id="${esc(i.id)}" data-s="${i.s}">編輯</button>`:''}</div>`; }).join('')||'<p class="muted">這個階段沒有這個軌道的條件。</p>'; };
+    const cl=(settings().celebrated||{})[ph.id], stc=cl?'clear':now?'now':phaseIndex(ph)>phaseIndex(cp)?'lock':'past';
+    return `<details class="card phasecard ${stc}" style="margin-bottom:14px" ${now?'open':''}>
+      <summary style="cursor:pointer;list-style:none"><div class="row between"><span class="row" style="gap:14px"><span class="qn ${stc} mini" aria-hidden="true"><span class="qorb"><span class="qnum">${ROMAN[phaseIndex(ph)]}</span></span></span><span><span class="sealno">SEAL ${ROMAN[phaseIndex(ph)]}</span><br><b style="font-family:var(--serif);font-size:19px">${ph.name}：${ph.title}</b></span></span><span class="muted">${stc==='lock'?`<span class="chip lockc">🔒 ${a.total} 個條件</span> `:''}${fmtD(ph.start).slice(0,7)} – ${fmtD(ph.end).slice(0,7)} ${(settings().celebrated||{})[ph.id]?'<span class="chip ok">已解除 '+fmtD((settings().celebrated||{})[ph.id])+'</span>':now?'<span class="chip gold">進行中</span>':''}</span></div>
+      <div class="grid g2" style="gap:10px;margin-top:8px">${spaceOK('P')?`<div><span class="chip gold">完成 ${a.done}/${a.total}</span>${bar(a.pct,'P')}</div>`:''}${spaceOK('C')&&b.total+items.filter(i=>i.s==='C').length?`<div><span class="chip C">CLINIC ${b.done}/${b.total}</span>${bar(b.pct,'C')}</div>`:''}</div></summary>
+      <p class="muted">${esc(ph.goal)}</p>
+      <div class="grid ${trackF==='ALL'?'g2':''}">${spaceOK('P')?`<div>${listFor('P')}</div>`:''}${spaceOK('C')?`<div><h4 style="color:var(--C)">CLINIC 診所事業</h4>${listFor('C')}</div>`:''}</div>
+      <button class="btn ghost sm" style="margin-top:8px" data-act="new" data-col="cms" data-preset="${esc(JSON.stringify({phase:ph.id+'｜'+ph.name,track:trackF==='C'?'CLINIC':'PERSONAL'}))}">＋ 新增自訂條件</button>
+      </details>`; }).join('')+(spaceOK('P')?optionsMatrix():'');
+}
+function settings(){ return Object.assign({id:'main',weights:{income:3,stable:3,auto:3,growth:3,life:3,risk:3},cscsCh:0,cscsExam:'',celebrated:{}}, getRec('P','settings','main')||{}); }
+function saveSettings(patch){ putRaw('P','settings',Object.assign(settings(),patch)); }
+function optionsMatrix(){
+  const st=settings(), W=st.weights||{};
+  const opts=OPTIONS_DEFAULT.map(o=>({key:o[0],name:o[1]})).concat(live('P','options').filter(o=>o.custom).map(o=>({key:o.id,name:o.name,custom:1})));
+  const rows=opts.map(o=>{ const r=getRec('P','options',o.key)||{}; const sc=r.scores||{}; let sw=0,tot=0; CRITERIA.forEach(c=>{ const v=+sc[c[0]]; const w=+(W[c[0]]??3); if(v){ sw+=w; tot+=v*w; } });
+    return `<tr><td>${esc(o.name)}${o.custom?` <button class="x" data-act="optdel" data-id="${esc(o.key)}" title="刪除">×</button>`:''}</td>${CRITERIA.map(c=>`<td><select data-act="optsc" data-id="${esc(o.key)}" data-c="${c[0]}" style="width:56px"><option value="">–</option>${[1,2,3,4,5].map(n=>`<option ${+sc[c[0]]===n?'selected':''}>${n}</option>`).join('')}</select></td>`).join('')}<td class="num"><b>${sw?(tot/sw).toFixed(2):'—'}</b></td></tr>`; }).join('');
+  return `<div class="card S" id="options"><h3>五年末職涯選擇評估 <span class="muted" style="font-weight:400">每項 1–5 分，加權平均；這是幫你思考，不是幫你決定</span></h3>
+    <div class="tw opttable"><table><tr><th>方向</th>${CRITERIA.map(c=>`<th>${c[1]}</th>`).join('')}<th class="num">加權分數</th></tr>
+    <tr><td class="muted">權重（0–5）</td>${CRITERIA.map(c=>`<td><input type="number" min="0" max="5" data-act="optw" data-c="${c[0]}" value="${esc(W[c[0]]??3)}" style="width:56px"></td>`).join('')}<td></td></tr>${rows}</table></div>
+    <div class="optcards">
+      <div class="optc"><b>權重（0–5，越重要越高）</b>${CRITERIA.map(c=>`<div class="cr"><span>${c[1]}</span><input type="number" min="0" max="5" data-act="optw" data-c="${c[0]}" value="${esc(W[c[0]]??3)}"></div>`).join('')}</div>
+      ${opts.map(o=>{ const r=getRec('P','options',o.key)||{}; const sc=r.scores||{}; let sw=0,tot=0; CRITERIA.forEach(c=>{ const v=+sc[c[0]], w=+(W[c[0]]??3); if(v){ sw+=w; tot+=v*w; } });
+        return `<div class="optc"><div class="row between"><b>${esc(o.name)}</b><span>加權 <b>${sw?(tot/sw).toFixed(2):'—'}</b>${o.custom?` <button class="x" data-act="optdel" data-id="${esc(o.key)}" aria-label="刪除">×</button>`:''}</span></div>
+        ${CRITERIA.map(c=>`<div class="cr"><span>${c[1]}</span><select data-act="optsc" data-id="${esc(o.key)}" data-c="${c[0]}"><option value="">–</option>${[1,2,3,4,5].map(n=>`<option ${+sc[c[0]]===n?'selected':''}>${n}</option>`).join('')}</select></div>`).join('')}</div>`; }).join('')}
+    </div>
+    <div class="row" style="margin-top:8px"><input type="text" id="opt-new" placeholder="新增其他方向" style="max-width:260px"><button class="btn sm" data-act="optadd">新增</button></div></div>`;
+}
+
+/* ---------- 目標與週計畫 ---------- */
+function vGoals(){
+  const base=addDays(new Date(),weekOff*7), k=isoWeek(base), mon=monday(base), w=week(k);
+  const prevK=isoWeek(addDays(base,-7)), pw=getRec('P','weeks',prevK), carry=pw?(pw.top3||[]).filter((x,i)=>x&&x.trim()&&!(pw.top3done||[])[i]):[];
+  const hist=[]; for(let i=7;i>=0;i--){ const d=addDays(new Date(),-i*7); hist.push([md(monday(d)),addDays(monday(d),6)>=parseD(START)?weekPct(isoWeek(d)):null,i===0]); }
+  return head('本週與本月','')+
+  `<div class="grid g2" style="margin-top:16px;align-items:start"><div class="col">
+    <div class="card P"><h3><span>每週例行 <span class="muted" style="font-weight:400">${md(mon)}–${md(addDays(mon,6))}${weekOff===0?'・本週':''}</span></span><span class="row"><button class="btn ghost sm" data-act="rtedit">編輯</button><button class="btn ghost sm" data-act="wk" data-n="-1">‹</button>${weekOff?'<button class="btn ghost sm" data-act="wk0">本週</button>':''}<button class="btn ghost sm" data-act="wk" data-n="1">›</button></span></h3>
+      ${bar(weekPct(k))}<div class="muted small" style="margin:4px 0">完成率 ${cnt('wk'+k,weekPct(k))}%（固定事項完成 75% 就算達標）・連續達標 <b>${streaks().cur}</b> 週・最佳 ${streaks().best} 週</div>
+      ${routine().map(r=>{ const on=w.done.includes(r[0]), td=weekOff===0&&r[4].includes(new Date().getDay()); return `<div class="item ${on?'done':''}" style="${td?'background:var(--accent-soft);border-radius:8px':''}"><input type="checkbox" data-act="rt" data-k="${k}" data-id="${r[0]}" ${on?'checked':''}><span class="t"><span class="chip ${td?'warn':r[5]?'':'P'}">${td?'今天':esc(r[1])}</span> <span class="nm">${esc(r[2])}</span>${r[6]?' <span class="chip gold" title="打勾時 CSCS 章數 +1">CSCS +1</span>':''}${r[5]?' <span class="chip">加分</span>':''}</span><span class="muted">${esc(r[3])}</span></div>`; }).join('')}
+      <h4>最近 8 週</h4><div class="weeks">${hist.map(h=>h[1]==null?`<div class="pre" title="還沒開始"><span></span><small>${h[0]}</small></div>`:`<div class="${h[1]>=75?'ok':''} ${h[2]?'cur':''}" title="${h[1]}%"><em>${h[1]}%</em><span style="height:${Math.max(3,h[1]*.4)}px"></span><small>${h[0]}</small></div>`).join('')}</div></div>
+  </div><div class="col">
+    <div class="card"><h3><span>這週三件最重要的事</span>${carry.length&&w.top3.some(x=>!(x||'').trim())?`<button class="btn ghost sm" data-act="carry" data-k="${k}" data-p="${prevK}">帶入上週沒做完的（${carry.length}）</button>`:''}</h3>${top3Inputs(k,w)}
+      <h4>週回顧</h4><textarea data-bind="note" data-k="${k}" placeholder="這週做到什麼？卡在哪？">${esc(w.note||'')}</textarea></div>
+    ${cGoals()}${cMonthIdeas()}
+    <div class="card"><h3>期限</h3>${listBlock('deadlines',{sort:(a,b)=>a.date<b.date?-1:1,row:r=>`${esc(r.title)} <span class="muted">${fmtD(r.date)}</span>`})}</div>
+  </div></div>
+`;
+}
+
+/* ---------- 專案 ---------- */
+function vProjects(){
+  const ps=all('projects').filter(p=>trackOK(p.track)), t=today();
+  const cnt=s=>ps.filter(p=>p.status===s).length;
+  return head('專案', trackSeg())+
+  `<div class="grid g4" style="margin-bottom:16px">${['待開始','進行中','待確認','暫停'].map(s=>`<div class="card stat"><div class="k">${s}</div><div class="v">${cnt(s)}</div></div>`).join('')}</div>
+  <div class="card">${listBlock('projects',{sort:(a,b)=>(a.status==='已完成')-(b.status==='已完成')||String(a.due||'9').localeCompare(String(b.due||'9')),
+    row:r=>{ const late=r.due&&r.status!=='已完成'&&parseD(r.due)<t; return `<div class="row between"><span>${trackChip(r.track)} <span class="nm">${esc(r.name)}</span> <span class="chip ${r.status==='進行中'?'gold':r.status==='已完成'?'ok':''}">${esc(r.status)}</span> <span class="chip">優先 ${esc(r.priority||'')}</span>${r.riskLevel&&r.riskLevel!=='無'?` <span class="chip ${r.riskLevel==='高'?'warn':''}">風險 ${esc(r.riskLevel)}</span>`:''}${r.status==='已完成'&&!(r.evidence||'').trim()?' <span class="chip warn">待補證據</span>':''}</span><span class="muted" style="${late?'color:var(--warn)':''}">${r.due?'預計 '+fmtD(r.due)+(late?'（已延遲）':''):''}</span></div>${r.next?`<div class="muted">下一步：${esc(r.next)}</div>`:''}`; },
+    empty:'還沒有專案。建議同時進行的專案不超過 3–5 個。'})}</div>`;
+}
+
+/* ---------- 能力與學習 ---------- */
+function vSkills(){
+  const rated=all('skills').filter(s=>lvl(s.current)>0).length, total=SKILL_MAP.reduce((a,g)=>a+g[1].length,0);
+  const dots=(n,t,id)=>`<span class="segs rate">${[1,2,3,4,5].map(i=>`<i class="${i<=n?'f':''} ${i<=t&&i>n?'t':''}" style="--i:${i}" data-act="srate" data-id="${id}" data-v="${i}" title="點：目前＝${LEVELS[i]}　Shift＋點：目標＝${LEVELS[i]}"></i>`).join('')}</span>`;
+  return head('能力與證照','')+cscsCard()+
+  `<div class="note" style="margin-bottom:14px"><b>直接點格子評分</b>：點＝目前程度，Shift＋點＝目標程度，再點一次同一格可以退一級。點名稱可以寫用過的例子。<b>讀完一本書不等於會用</b>：自評「能應用」以上的能力，請填一個用過的例子。已評分 ${rated} / ${total} 項。</div>
+  <div class="grid g3">${SKILL_MAP.map(g=>{ const ls=g[1].map(s=>lvl((getRec('P','skills',s[0])||{}).current)), avg=ls.reduce((a,b)=>a+b,0)/ls.length; return `<div class="card P"><h3><span>${g[0]}</span><span class="muted" style="font-weight:400">平均 ${avg.toFixed(1)}</span></h3>${g[1].map(s=>{ const r=getRec('P','skills',s[0])||{}; const c=lvl(r.current), t=lvl(r.target); const noEv=c>=3&&!(r.evidence||'').trim();
+      return `<div class="rec" data-act="skill" data-id="${s[0]}"><div class="row between"><span class="nm">${esc(s[1])}</span>${dots(c,t,s[0])}</div><div class="muted small">${LEVELS[c]}${t?' → '+LEVELS[t]:''}${noEv?' <span class="chip warn">缺用過的例子</span>':''}</div></div>`; }).join('')}</div>`; }).join('')}</div>
+  <div class="grid g2" style="margin-top:16px;align-items:start">
+    <div class="card P"><h3>證照</h3>${listBlock('certs',{filter:r=>r.kind==='證照',preset:{kind:'證照'},row:certRow})}</div>
+    <div class="card P"><h3>課程・研討會・工作坊</h3>${listBlock('certs',{filter:r=>r.kind!=='證照',preset:{kind:'課程'},row:certRow,empty:'課程和證照分開記錄：上完課不等於取得證照。'})}</div></div>`;
+}
+function certRow(r){ return `<div class="row between"><span><span class="nm">${esc(r.name)}</span> <span class="chip ${['已取得','已完成'].includes(r.status)?'ok':['準備中','進行中'].includes(r.status)?'gold':''}">${esc(r.status)}</span></span><span class="muted">${r.date?fmtD(r.date):''}${r.expire?'・到期 '+fmtD(r.expire):''}</span></div>${r.cost?`<div class="muted small">費用 ${money(r.cost)} 元${r.hours?'・'+r.hours+' 小時':''}</div>`:''}`; }
+
+/* ---------- 案例與研究 ---------- */
+function vCases(){
+  const q=retestQueue(), k=kpiAuto();
+  return head('案例與研究','')+
+  `<div class="grid g2" style="align-items:start"><div class="col">
+    <div class="card P"><h3><span>個人學習案例 ${trackChip('PERSONAL')}</span></h3><div class="note" style="margin-bottom:8px">只放去識別化內容，不寫姓名、生日、電話。來自診所個案的，取得授權後才能標「已授權可公開」。</div>
+      ${listBlock('pcases',{statusField:'auth',row:r=>`<div class="row between"><span><span class="nm">${esc(r.code)}</span> <span class="chip ${r.auth==='已授權可公開'?'ok':r.auth==='待授權'?'warn':''}">${esc(r.auth)}</span> <span class="chip">${esc(r.source||'')}</span></span><span class="muted">${fmtD(r.date)}</span></div>${r.change?`<div class="muted small">${esc(r.change.slice(0,60))}</div>`:''}`})}</div>
+    <div class="card P"><h3>研究文獻 ${trackChip('PERSONAL')}</h3>${listBlock('lit',{row:r=>`<span class="nm">${esc(r.title)}</span> <span class="muted">${esc(r.authors||'')} ${r.year||''}</span>${r.topic?` <span class="chip">${esc(r.topic)}</span>`:''}`})}</div>
+  </div><div class="col">
+    <div class="card C"><h3><span>診所個案索引 ${trackChip('CLINIC')}</span></h3>
+      <div class="note" style="margin-bottom:8px"><b>這裡只記代碼與日期。</b>客戶姓名、聯絡方式、檢測數據與正式報告屬於診所資產，留在曼齡評估系統。這份索引存在獨立的診所資料檔，用來安排再測與計算營運指標。</div>
+      <div class="grid g3" style="gap:8px;margin-bottom:10px"><div><div class="muted">8–12 週再測率</div><b>${kpiFmt(KPIS[1],k.k2)}</b> <span class="muted small">${k.k2.den?k.k2.num+'/'+k.k2.den:'尚無到期個案'}</span></div><div><div class="muted">訓練持續率</div><b>${kpiFmt(KPIS[3],k.k4)}</b></div><div><div class="muted">目標達成率</div><b>${kpiFmt(KPIS[4],k.k5)}</b></div></div>
+      <h4>待再測</h4>${q.length? `<div class="tw"><table><tr><th>代碼</th><th>初測</th><th>再測期間（第 8–12 週）</th><th>狀況</th></tr>${q.map(c=>`<tr><td><a href="#" data-act="edit" data-col="ccases" data-id="${esc(c.id)}" data-s="C">${esc(c.code)}</a></td><td>${fmtD(c.firstDate)}</td><td>${md(c.open)}–${md(c.close)}</td><td>${c.d>84?'<span class="chip warn">已逾期</span>':c.d>=56?'<span class="chip gold">現在該再測</span>':'<span class="chip">'+(56-c.d)+' 天後開始</span>'}</td></tr>`).join('')}</table></div>`:'<p class="muted">目前沒有待再測的個案。</p>'}
+      <h4>全部個案</h4>${listBlock('ccases',{sort:(a,b)=>String(b.firstDate).localeCompare(String(a.firstDate)),row:r=>`<div class="row between"><span><span class="nm">${esc(r.code)}</span> <span class="chip">${esc(r.group||'')}</span> <span class="chip ${r.status==='已再測'?'ok':r.status==='流失'?'warn':''}">${esc(r.status)}</span></span><span class="muted">初測 ${fmtD(r.firstDate)}${r.retestDate?'・再測 '+fmtD(r.retestDate):''}</span></div>`})}</div>
+  </div></div>`;
+}
+
+/* ---------- 診所事業 ---------- */
+function vClinic(){
+  const k=kpiAuto(); const months=[]; for(let i=5;i>=0;i--){ const d=new Date(); d.setDate(1); d.setMonth(d.getMonth()-i); months.push(monthKey(d)); }
+  const rows=KPIS.map(K=>{ let cur='—', hist='';
+    if(K.auto){ cur=kpiFmt(K,k[K.id])+(k[K.id]&&k[K.id].den?`<div class="muted small">${K.id==='k8'?money(k[K.id].num)+' ／ '+money(k[K.id].den)+' 元':k[K.id].num+' / '+k[K.id].den}</div>`:''); hist='<span class="muted small">自動計算</span>'; }
+    else { const recs=kpiManual(K.id); if(recs[0]) cur=kpiFmt(K,recs[0])+`<div class="muted small">${recs[0].month}</div>`; hist=months.map(m=>{ const r=recs.find(x=>x.month===m); return `<span class="chip" title="${m}">${m.slice(5)}月 ${r?kpiFmt(K,r):'—'}</span>`; }).join(' '); }
+    return `<tr><td><b>${K.n}</b></td><td class="small">${esc(K.f)}</td><td class="small">${esc(K.src)}</td><td class="num">${cur}</td><td>${hist}</td></tr>`; }).join('');
+  return head('診所事業','<span class="chip C">CLINIC</span>')+
+  `<div class="card C" style="margin-bottom:16px"><h3><span>營運指標</span><button class="btn sm" data-act="new" data-col="kpiv">＋ 登記本月數字</button></h3>
+    <div class="tw"><table><tr><th>指標</th><th>計算方式</th><th>資料來源</th><th class="num">目前</th><th>近 6 個月</th></tr>${rows}</table></div>
+    <p class="muted small">手動指標每月登記一次分子與分母（只填人數或金額，不填個資）。自動指標由個案索引與財務頁計算。</p>
+    <details><summary class="muted" style="cursor:pointer">查看已登記的指標紀錄</summary>${listBlock('kpiv',{sort:(a,b)=>b.month.localeCompare(a.month),row:r=>`${esc(r.month)} ${esc(r.kpi)}：${esc(r.num)} / ${esc(r.den)}`})}</details></div>
+  <div class="grid g3" style="align-items:start">
+    <div class="card C"><h3>服務方案</h3>${listBlock('services',{row:r=>{ const m=+r.price? Math.round((r.price-(+r.cost||0))/r.price*100):null; return `<span class="nm">${esc(r.name)}</span> <span class="chip ${r.status==='正式'?'ok':''}">${esc(r.status)}</span><div class="muted small">${r.price?'售價 '+money(r.price)+' 元':''}${m!=null&&r.cost?'・毛利率 '+m+'%':''}${r.target?'・'+esc(r.target):''}</div>`; }})}</div>
+    <div class="card C"><h3>合作場館</h3>${listBlock('partners',{row:r=>`<span class="nm">${esc(r.name)}</span> <span class="chip">${esc(r.type)}</span> <span class="chip ${r.status==='合作中'?'ok':''}">${esc(r.status)}</span>${r.next?`<div class="muted small">下一步：${esc(r.next)}</div>`:''}`})}</div>
+    <div class="card C"><h3>SOP</h3>${listBlock('sops',{row:r=>`<span class="nm">${esc(r.name)}</span> <span class="chip">${esc(r.version||'')}</span> <span class="chip ${r.status==='正式'?'ok':''}">${esc(r.status)}</span><div class="muted small">${r.updated?'更新 '+fmtD(r.updated):''}${r.location?'・'+esc(r.location):''}</div>`})}</div>
+  </div>`;
+}
+
+const CERT_LINK={'seed-c4':{ms:'ph1p1',goal:'seed-g0'},'seed-c5':{ms:'ph3p1'}};
+function certLinked(c){
+  const L=CERT_LINK[c.id]; if(!L||!['已取得','已完成'].includes(c.status)) return;
+  const ev=c.name+' 已取得'+(c.date?'（'+fmtD(c.date)+'）':'');
+  if(L.ms&&itemState({id:L.ms,s:'P'})!=='done') setMs(L.ms,{state:'done',evidence:ev});
+  if(L.goal){ const g=getRec('P','goals',L.goal); if(g&&g.status!=='完成') upsert('goals',Object.assign({_s:'P'},g,{status:'完成',evidence:ev})); }
+  setTimeout(()=>{ checkSeal(); },3400);
+}
+function setCscs(n, quiet){
+  n=Math.max(0,Math.min(24,n)); const prevCh=settings().cscsCh||0; saveSettings({cscsCh:n});
+  if(n>prevCh&&[4,8,12,16,20,24].includes(n)) setTimeout(()=>showBadge('📘','CSCS 讀到第 '+n+' 章',n===24?'全書第一輪完成！':'已完成 '+Math.round(n/24*100)+'%'),60); addLog('P','更新','CSCS 進度','第 '+n+' 章');
+  if(n>=8){ const it={id:'ph1p3',s:'P'}; if(itemState(it)!=='done'){ setMs('ph1p3',{state:'done',evidence:'CSCS 讀到第 '+n+' 章'}); if(!quiet) toast('CSCS 讀完 8 章，第一封印條件自動完成'); checkSeal(); } }
+}
+function cscsPace(ch,ex){
+  if(!ex){ return '<div class="pace">設定預計考試日後，這裡會算出「照目前速度讀不讀得完」，總覽也會多一格考試倒數。</div>'; }
+  const left=days(today(),parseD(ex)); if(left<0) return '';
+  const rem=24-ch, wk=Math.max(1,left/7), need=rem/wk;
+  if(rem<=0) return '<div class="pace ok">第一輪讀完了，接下來可以做題目和第二輪複習。</div>';
+  const per=need<=1?'ok':need<=1.6?'mid':'warn';
+  return `<div class="pace ${per}">考前還要讀 <b>${rem}</b> 章，平均每週 <b>${need.toFixed(1)}</b> 章。${per==='ok'?'照每週例行的 1 章就來得及，還能留時間複習。':per==='mid'?'每週例行只排 1 章，有幾週要多讀一章才追得上。':'每週例行只排 1 章，照這速度讀不完，建議多排一天讀書，或把考試日往後。'}</div>`;
+}
+function cscsCard(compact){
+  const st=settings(), ch=st.cscsCh||0, ex=st.cscsExam, left=ex?days(today(),parseD(ex)):null;
+  if(compact) return `<div class="card stat"><div class="k">CSCS 讀書進度</div><div class="v">${cnt('cscs',ch)} / 24 章</div>${bar(ch/24*100)}<div class="s">${ex?(left>=0?'距離考試 '+left+' 天':'考試日已過'):'還沒設定考試日'}</div></div>`;
+  return `<div class="card" style="margin-bottom:16px"><h3><span>CSCS 讀書進度</span><span class="muted">${ex?(left>=0?'距離考試 <b style="color:var(--accent)">'+left+'</b> 天':'考試日已過'):''}</span></h3>
+    <div class="row"><b style="font-size:26px">${cnt('cscs2',ch)} / 24 章</b><button class="btn sm plain" data-act="cscs" data-n="-1" aria-label="減一章">−</button><button class="btn sm plain" data-act="cscs" data-n="1" aria-label="加一章">＋</button>
+      <span class="muted" style="margin-left:auto">預計考試日</span><input type="date" data-act="cscsexam" value="${esc(ex||'')}" style="max-width:170px"></div>
+    <div style="margin:8px 0">${bar(ch/24*100)}</div>
+    ${cscsPace(ch,ex)}<p class="muted small" style="margin:0">標著「CSCS +1」的每週例行打勾會自動 +1 章，取消打勾會 −1（可以在每週例行的「編輯」裡改由哪一項連動）。讀到第 8 章，藍圖的「CSCS 第一輪學習」會自動完成。</p></div>`;
+}
+
+/* ---------- 作品集 ---------- */
+const PF_ICON={'專業證照':'🎓','專業報告':'📄','案例研究':'🧪','研究成果':'🔬','專案成果':'🚀','簡報與提案':'🎤','教學內容':'🧑‍🏫','AI／系統開發成果':'🤖'};
+function vPortfolio(){
+  const q=(ui.q.portfolio||'').toLowerCase(), fv=ui.f.portfolio||'', Y=String(new Date().getFullYear());
+  const allP=all('portfolio'); let list=allP.slice();
+  if(q) list=list.filter(r=>JSON.stringify(r).toLowerCase().includes(q)); if(fv) list=list.filter(r=>r.cat===fv);
+  list.sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
+  const cats=COLS.portfolio.fields.find(f=>f.k==='cat').o;
+  return head('作品集','')+`<div class="pfhead"><div class="pfstat"><b>${cnt('pfall',allP.length)}</b><span>件作品</span></div><div class="pfstat"><b>${cnt('pfy',allP.filter(r=>String(r.date||'').startsWith(Y)).length)}</b><span>${Y} 年</span></div>
+    <div class="tool" style="margin:0 0 0 auto"><input type="search" placeholder="搜尋" data-q="portfolio" value="${esc(ui.q.portfolio||'')}"><select data-f="portfolio"><option value="">全部分類</option>${cats.map(c=>`<option ${c===fv?'selected':''}>${esc(c)}</option>`).join('')}</select></div></div>
+  <div class="pfwall"><button class="pfcard pfadd" data-act="new" data-col="portfolio"><span>＋</span>記一件作品<small>報告、案例、簡報、系統都算</small></button>
+  ${list.map(r=>`<div class="pfcard" data-act="edit" data-col="portfolio" data-id="${esc(r.id)}" data-s="${r._s}"><div class="pfic">${PF_ICON[r.cat]||'✦'}</div><div class="pfcat">${esc(r.cat||'')}</div><div class="pfname">${esc(r.name)}</div>${r.desc?`<div class="pfdesc">${esc(r.desc)}</div>`:''}<div class="pfft"><span class="pfdate">${fmtD(r.date)||'—'}</span>${(r.evidence||'').trim()?'<span class="chip ok">有檔案</span>':'<span class="chip">待補檔案位置</span>'}</div></div>`).join('')}</div>
+  ${!list.length&&(q||fv)?'<p class="muted">沒有符合的作品。</p>':''}`;
+}
+
+/* ---------- 財務 ---------- */
+function vFinance(){
+  const st=settings(); const pf=all('pfin'); const months=[...new Set(pf.map(r=>r.month))].sort().reverse().slice(0,6);
+  const sum=(m,types)=>pf.filter(r=>r.month===m&&types.includes(r.type)).reduce((a,r)=>a+(+r.amount||0),0);
+  const ef=pf.filter(r=>r.type.startsWith('緊急預備金')).sort((a,b)=>b.month.localeCompare(a.month))[0];
+  const cf=all('cfin'), byP={}; cf.forEach(f=>{ const p=byP[f.project]||(byP[f.project]={inc:0,cost:0,equip:0}); if(f.type.includes('收入')) p.inc+=+f.amount||0; else { p.cost+=+f.amount||0; if(f.type==='設備投入') p.equip+=+f.amount||0; } });
+  const since=isoDate(addDays(today(),-90)), recent=cf.filter(f=>f.date>=since); const gp3=recent.reduce((a,f)=>a+(f.type.includes('收入')?1:f.type==='設備投入'?0:-1)*(+f.amount||0),0)/3;
+  const equip=cf.filter(f=>f.type==='設備投入').reduce((a,f)=>a+(+f.amount||0),0);
+  return head('財務與資源','')+
+  `<div class="note" style="margin-bottom:14px">個人財務存在<b>個人資料檔</b>，診所專案財務存在<b>診所資料檔</b>，兩邊分開計算、分開匯出，不會混在一起。</div>
+  <div class="grid g2" style="align-items:start">
+    <div class="card P"><h3>個人財務 ${trackChip('PERSONAL')}</h3>
+      <div class="row" style="margin-bottom:8px"><span class="muted">緊急預備金目標</span><input type="number" data-act="eftarget" value="${esc(st.efTarget||'')}" style="max-width:140px" placeholder="例如 6 個月生活費"><span class="muted">元</span></div>
+      ${ef?`<div>目前緊急預備金 <b>${money(ef.amount)}</b> 元${+st.efTarget?`（目標的 ${Math.round(ef.amount/st.efTarget*100)}%）`+bar(ef.amount/st.efTarget*100):''}</div>`:'<p class="muted">還沒有登記緊急預備金。</p>'}
+      ${months.length?`<div class="tw"><table style="margin-top:8px"><tr><th>月份</th><th class="num">收入</th><th class="num">儲蓄</th><th class="num">進修＋證照</th><th class="num">投資</th></tr>${months.map(m=>`<tr><td>${m}</td><td class="num">${money(sum(m,['月收入']))}</td><td class="num">${money(sum(m,['儲蓄']))}</td><td class="num">${money(sum(m,['進修支出','證照支出']))}</td><td class="num">${money(sum(m,['個人投資']))}</td></tr>`).join('')}</table></div>`:''}
+      <h4>明細</h4>${listBlock('pfin',{statusField:'type',sort:(a,b)=>b.month.localeCompare(a.month),row:r=>`<div class="row between"><span>${esc(r.month)} <span class="chip">${esc(r.type)}</span></span><b>${money(r.amount)}</b></div>`})}</div>
+    <div class="card C"><h3>診所專案財務 ${trackChip('CLINIC')}</h3>
+      ${Object.keys(byP).length?`<div class="tw"><table><tr><th>專案</th><th class="num">收入</th><th class="num">成本</th><th class="num">毛利</th><th class="num">毛利率</th></tr>${Object.entries(byP).map(([n,p])=>`<tr><td>${esc(n)}</td><td class="num">${money(p.inc)}</td><td class="num">${money(p.cost)}</td><td class="num">${money(p.inc-p.cost)}</td><td class="num">${p.inc?Math.round((p.inc-p.cost)/p.inc*100)+'%':'—'}</td></tr>`).join('')}</table></div>`:'<p class="muted">還沒有診所專案財務紀錄。</p>'}
+      ${equip?`<p>設備投入合計 <b>${money(equip)}</b> 元；近 3 個月平均每月毛利 ${money(gp3)} 元，${gp3>0?'預估回收期約 <b>'+Math.ceil(equip/gp3)+' 個月</b>':'目前還無法估算回收期'}。</p>`:''}
+      <h4>明細</h4>${listBlock('cfin',{statusField:'type',sort:(a,b)=>b.date.localeCompare(a.date),row:r=>`<div class="row between"><span>${fmtD(r.date)} ${esc(r.project)} <span class="chip">${esc(r.type)}</span></span><b>${money(r.amount)}</b></div>`})}</div>
+  </div>`;
+}
+
+/* ---------- 月度・季度檢核 ---------- */
+const MQ=[['q1','本月完成什麼？'],['q2','哪些沒完成？為什麼？'],['q3','這個月學到什麼？'],['q8','下個月最重要的三件事？']];
+const QQ=[['d1','五年方向還適合嗎？有什麼新的想法？'],['d2','這一季最重要的成果'],['d3','要調整哪些目標或階段？（調整不等於失敗）'],['d4','職涯選擇評估有沒有變化？'],['d5','個人與診所的風險'],['d6','下一季的重點']];
+function monthAuto(m){
+  const done=[]; PHASES.forEach(ph=>phaseItems(ph).forEach(i=>{ const r=msRec(i); if(r&&r.state==='done'&&String(r.doneAt||'').startsWith(m)) done.push(i.t); }));
+  const inM=ts=>ts&&monthKey(new Date(ts))===m;
+  const pj=all('projects').filter(p=>p.status==='已完成'&&inM(p.updatedAt)).map(p=>p.name);
+  const gs=all('goals').filter(g=>g.level==='月'&&g.period===m), gd=gs.filter(g=>g.status==='完成').map(g=>g.title), gn=gs.filter(g=>!['完成','調整','取消'].includes(g.status)).map(g=>g.title);
+  const pfo=all('portfolio').filter(p=>String(p.date||'').startsWith(m)).map(p=>p.name);
+  const nc=all('ccases').filter(c=>String(c.firstDate||'').startsWith(m)).length, nr=all('ccases').filter(c=>String(c.retestDate||'').startsWith(m)).length;
+  const wk=[], notes=[], t3=[]; const seen=new Set();
+  for(let d=monday(new Date(+m.slice(0,4),+m.slice(5)-1,1)); d<=new Date(+m.slice(0,4),+m.slice(5),0); d=addDays(d,7)){ const k=isoWeek(d); if(seen.has(k)) continue; seen.add(k);
+    wk.push(weekPct(k)); const w=getRec('P','weeks',k); if(!w) continue;
+    if((w.note||'').trim()) notes.push(md(d)+' 那週：'+w.note.trim());
+    (w.top3||[]).forEach((x,i)=>{ if((x||'').trim()&&(w.top3done||[])[i]) t3.push(x.trim()); }); }
+  return {done,pj,gd,gn,pfo,nc,nr,notes,t3,wk:wk.length?Math.round(wk.reduce((a,b)=>a+b,0)/wk.length):0};
+}
+function vReview(){
+  reviewKind='M'; const tabs='';
+  const _t=`<span class="seg"><button class="${reviewKind==='M'?'on':''}" data-act="rk" data-v="M">月度檢核</button><button class="${reviewKind==='Q'?'on':''}" data-act="rk" data-v="Q">季度檢核</button></span>`;
+  const hist=live('P','reviews').filter(r=>r.kind===reviewKind).sort((a,b)=>b.period.localeCompare(a.period));
+  if(reviewKind==='M'){
+    const r=getRec('P','reviews','M-'+reviewMonth)||{}, a=monthAuto(reviewMonth);
+    return head('月檢核','<button class="btn" data-page="report">年度成長報告</button>')+`<div class="grid g2" style="align-items:start"><div class="card">
+      <div class="row" style="margin-bottom:10px"><span class="muted">月份</span><input type="month" data-act="rvm" value="${reviewMonth}" style="max-width:190px">${r.period?'<span class="chip ok">已填過，可以修改</span>':''}</div>
+      <div class="row between" style="margin:0 0 8px"><span class="muted small">右邊是系統自動整理的本月數字，可以一鍵帶入再修改。</span><button class="btn ghost sm" data-act="rvauto">把自動摘要帶入</button></div>
+      ${MQ.map(q=>`<div class="field" style="margin-bottom:8px"><label>${q[1]}</label><textarea id="rv-${q[0]}">${esc(r[q[0]]||'')}</textarea></div>`).join('')}
+      <button class="btn" data-act="rvsave">儲存這個月</button></div>
+      <div class="col"><div class="rvstats">
+        <div class="card stat"><div class="k">完成解封條件</div><div class="v">${cnt('rv1',a.done.length)}<small> 項</small></div></div>
+        <div class="card stat"><div class="k">本月目標</div><div class="v">${cnt('rv2',a.gd.length)}<small> / ${a.gd.length+a.gn.length}</small></div></div>
+        <div class="card stat"><div class="k">每週例行平均</div><div class="v">${cnt('rv3',a.wk)}<small>%</small></div>${bar(a.wk)}</div>
+        <div class="card stat"><div class="k">週回顧</div><div class="v">${cnt('rv4',a.notes.length)}<small> 週</small></div></div></div>
+      <div class="card"><h3>本月細節</h3><div class="rvd">${a.done.length?`<div><b>解封條件</b>${a.done.map(x=>`<div>✔ ${esc(x)}</div>`).join('')}</div>`:''}${a.gn.length?`<div><b>沒完成的目標</b>${a.gn.map(x=>`<div class="warnt">✗ ${esc(x)}</div>`).join('')}</div>`:''}${a.pfo.length?`<div><b>新作品</b>${a.pfo.map(x=>`<div>★ ${esc(x)}</div>`).join('')}</div>`:''}${a.t3.length?`<div><b>完成的本週三件事</b><div class="muted small">${a.t3.length} 件</div></div>`:''}${a.pj.length?`<div><b>完成專案</b>${a.pj.map(x=>`<div>✔ ${esc(x)}</div>`).join('')}</div>`:''}${!(a.done.length||a.gn.length||a.pfo.length||a.t3.length||a.pj.length)?'<p class="muted" style="margin:0">這個月還沒有紀錄。</p>':''}</div></div>
+      <div class="card"><h3>歷史紀錄</h3>${hist.length?hist.map(h=>`<div class="rec" data-act="rvopen" data-v="${esc(h.period)}"><b>${esc(h.period)}</b>${h.q1?`<div class="muted small">✔ ${esc(h.q1.slice(0,80))}</div>`:''}${h.q8?`<div class="muted small">下月：${esc(h.q8.slice(0,80))}</div>`:''}</div>`).join(''):'<p class="muted">還沒有紀錄。</p>'}</div></div></div>`;
+  }
+  const r=getRec('P','reviews','Q-'+reviewQ)||{}; const qs=[]; for(let i=-4;i<=1;i++){ const d=new Date(); d.setDate(1); d.setMonth(d.getMonth()+i*3); qs.push(quarterKey(d)); }
+  return head('月度・季度檢核',tabs)+`<div class="grid g2" style="align-items:start"><div class="card">
+    <div class="row" style="margin-bottom:10px"><span class="muted">季度</span><select data-act="rvq" style="max-width:160px">${[...new Set(qs)].map(q=>`<option ${q===reviewQ?'selected':''}>${q}</option>`).join('')}</select>${r.period?'<span class="chip ok">已填過</span>':''}</div>
+    <div class="note">每季重新評估五年方向。<b>五年計畫是導航，不是固定命令</b>：某項任務沒完成，就調整它，不代表整份計畫失效。職涯選擇評估在「五年藍圖」最下方。</div>
+    ${QQ.map(q=>`<div class="field" style="margin:8px 0"><label>${q[1]}</label><textarea id="rv-${q[0]}">${esc(r[q[0]]||'')}</textarea></div>`).join('')}
+    <div class="row"><button class="btn" data-act="rvqsave">儲存這一季</button><button class="btn ghost" data-page="plan">打開選擇評估</button></div></div>
+    <div class="card"><h3>歷史紀錄</h3>${hist.length?hist.map(h=>`<div class="rec" data-act="rvqopen" data-v="${esc(h.period)}"><b>${esc(h.period)}</b>${h.d3?`<div class="muted small">調整：${esc(h.d3.slice(0,80))}</div>`:''}</div>`).join(''):'<p class="muted">還沒有紀錄。</p>'}</div></div>`;
+}
+
+/* ---------- 想法池 ---------- */
+function vIdeas(){
+  const doing=all('ideas').filter(i=>i.status==='本月做').length;
+  return head('想法池', trackSeg())+`<div class="note" style="margin-bottom:14px">不用每個想法都馬上做。每月和老闆對焦時帶去問：「這個月先做這兩個，其他先放著，可以嗎？」本月做 ${doing} / 2。任何頁面按 <b>N</b> 可以快速記一個想法。</div>
+  <div class="card">${listBlock('ideas',{row:r=>`<div class="row between"><span>${trackChip(r.track)} <span class="nm">${esc(r.t)}</span> <span class="muted small">${esc(r.who||'')}・${fmtD(r.d||'')}</span></span><span class="seg">${['待評估','本月做','擱置','完成'].map(s=>`<button class="${s===r.status?'on':''}" data-act="istat" data-id="${esc(r.id)}" data-s="${r._s}" data-v="${s}">${s}</button>`).join('')}</span></div>${r.p?`<div class="muted small">想解決：${esc(r.p)}</div>`:''}`})}</div>`;
+}function addIdea(t,who){ t=(t||'').trim(); if(!t) return; upsert('ideas',Object.assign(COLS.ideas.def(),{_s:'P',t,who:who||'自己'})); render(); toast('已放進想法池'); }
+function quickIdea(){
+  if(modalOpen()) return;
+  openModal(`<h3 style="margin:0 0 10px">快速記想法</h3><input id="qi-t" placeholder="想法是什麼？" autofocus><div class="row" style="margin-top:10px"><span class="muted">誰提的</span><span class="seg" id="qi-who">${['自己','老闆','客戶','其他'].map((w,i)=>`<button class="${i?'':'on'}" data-act="qiwho" data-v="${w}">${w}</button>`).join('')}</span><span style="margin-left:auto" class="muted small">Enter 儲存・Esc 關閉</span></div><div class="row" style="margin-top:12px;justify-content:flex-end"><button class="btn plain" data-act="close">取消</button><button class="btn" data-act="qisave">放進想法池</button></div>`);
+  setTimeout(()=>{ const e=$('qi-t'); if(e) e.focus(); },30);
+}
+
+
+/* ---------- 資料與設定 ---------- */
+function vData(){
+  const cnt=Object.entries(DB.P.cols).filter(([n])=>n!=='log').reduce((a,[,v])=>a+v.filter(r=>!r.deleted).length,0);
+  const b=importBuf; let imp='';
+  if(b) imp=`<div class="note" style="margin-top:8px">${b.kind==='v1'?'這是 1.x 版的資料，會轉換後合併進來。':'合併＝逐筆比較，保留較新的；取代＝整份換掉（會先在瀏覽器留一份原本的）。'}</div><div class="row" style="margin-top:8px"><button class="btn sm" data-act="imp" data-v="merge">合併匯入</button>${b.kind==='v2'?'<button class="btn sm danger" data-act="imp" data-v="replace">取代</button>':''}<button class="btn sm plain" data-act="impcancel">取消</button></div>`;
+  return head('資料與備份','')+`<div class="grid g2" style="align-items:start"><div class="col">
+    <div class="card"><h3>存檔位置</h3><div>${cnt} 筆資料・最後修改 ${fmtDT(DB.P.updatedAt)}</div>
+      <div class="muted">${cloud?'<b style="color:var(--ok)">已同步到 claude.ai 雲端</b>：電腦和手機打開這個連結，看到的是同一份資料。'+(META.cloudP?'上次同步 '+fmtDT(META.cloudP):''):esc(fileState.P||(FS_OK?'尚未連結資料夾：目前只存在這個瀏覽器':'這個瀏覽器不支援資料夾存檔，請改用 Chrome 或 Edge，或定期匯出'))}</div>
+      <div class="row" style="margin-top:8px">${FS_OK&&!IN_ART?(pendH.P?'<button class="btn sm" data-act="reconn" data-s="P">重新連線資料夾</button>':`<button class="btn sm ${dirH.P?'plain':''}" data-act="folder" data-s="P">${dirH.P?'換一個資料夾':'連結資料夾'}</button>`):''}<button class="btn sm plain" data-act="expjson" data-s="P">匯出 JSON 備份</button></div>
+      <p class="muted small">建議連結雲端硬碟裡的資料夾（例如「封印解除」），換電腦也能接著用。資料夾裡會存「${FILE_NAME.P}」，並在「備份」子資料夾每天留一份，保留 14 天。</p></div>
+    <div class="card"><h3>匯入備份</h3><label class="btn sm plain filebtn">選擇備份檔（.json）<input type="file" accept=".json,application/json" id="impfile" hidden></label><p class="muted small" style="margin:6px 0 0">可以匯入「匯出 JSON 備份」的檔案，或資料夾裡的「備份」檔。</p>${imp}</div>
+   </div><div class="col">
+    <div class="card"><h3>匯出 CSV</h3><div class="row"><select id="csvcol" style="max-width:220px">${CSV_COLS.map(c=>`<option value="${c}">${COLS[c].title}</option>`).join('')}</select><button class="btn sm" data-act="expcsv">匯出</button></div></div>
+   </div></div>`;
+}
+/* =====================================================================
+   彈出表單
+   ===================================================================== */
+function openModal(html){ $('modal').innerHTML=`<div class="modal" data-act="bg"><div class="box">${html}</div></div>`; const f=$('modal').querySelector('input,textarea,select'); if(f) f.focus(); }
+function modalOpen(){ return !!$('modal').querySelector('.modal:not(.closing)'); }
+function closeModal(){ const m=$('modal').querySelector('.modal'); modalCtx=null; if(!m) return; if(REDUCED){ $('modal').innerHTML=''; return; } if(document.activeElement&&m.contains(document.activeElement)) document.activeElement.blur(); m.classList.add('closing'); m.removeAttribute('data-act'); setTimeout(()=>{ if(m.isConnected) $('modal').innerHTML=''; },170); }
+const NOTES={
+  ccases:'只放代碼與日期。姓名、電話、檢測數據與正式報告留在曼齡評估系統（診所資產）。',
+  pcases:'只放去識別化內容。來自診所個案的，要先取得授權才能標「已授權可公開」。',
+  pfin:'個人財務只存在個人資料檔，不會出現在診所資料裡。',
+  cfin:'診所專案財務只存在診所資料檔。同一個合作案的收入與成本請用相同的專案名稱，才算得出毛利。',
+  kpiv:'只填人數或金額，不填個資。',
+  skills:'讀完一本書不等於會用。「能應用」以上請填實際應用紀錄或證據。'
+};
+function openForm(colKey, rec, preset){
+  const d=COLS[colKey], isNew=!rec; const r=rec?Object.assign({},rec):Object.assign(d.def(),preset||{});
+  modalCtx={colKey,rec:r,isNew};
+  const fh=d.fields.map(f=>{ const v=r[f.k]??''; let inp;
+    if(f.t==='textarea') inp=`<textarea data-fk="${f.k}">${esc(v)}</textarea>`;
+    else if(f.t==='select'){ const opts=(v===''||f.o.includes(v))?f.o:[v].concat(f.o); inp=`<select data-fk="${f.k}">${opts.map(x=>`<option ${x===v?'selected':''}>${esc(x)}</option>`).join('')}</select>`; }
+    else if(f.t==='date') inp=`<input type="date" data-fk="${f.k}" value="${esc(v)}"><span class="dquick"><button type="button" data-act="dset" data-k="${f.k}" data-v="0">今天</button><button type="button" data-act="dset" data-k="${f.k}" data-v="-1">昨天</button><button type="button" data-act="dset" data-k="${f.k}" data-v="x">清除</button></span>`;
+    else inp=`<input type="${f.t}" data-fk="${f.k}" value="${esc(v)}"${f.t==='number'?' step="any"':''}>`;
+    return `<div class="field ${f.full?'full':''}"><label>${esc(f.l)}${f.req?' *':''}</label>${inp}</div>`; }).join('');
+  openModal(`<h3>${isNew?'新增':'編輯'}${esc(d.title)}${colKey==='skills'?'：'+esc(skillName(r.id)):''}</h3>${NOTES[colKey]?`<div class="note" style="margin-bottom:10px">${NOTES[colKey]}</div>`:''}<div class="fgrid">${fh}</div><p class="ferr" id="ferr"></p>
+    <div class="mfoot">${!isNew&&colKey!=='skills'?'<button class="btn plain" data-act="fdel">刪除</button>':'<span></span>'}<div class="row"><button class="btn plain" data-act="close">取消</button><button class="btn" data-act="fsave">儲存</button></div></div>`);
+}
+function piiProblem(r,d,colKey){
+  for(const f of d.fields){ if(f.t==='number'||f.t==='date'||f.t==='month') continue; const v=String(r[f.k]||'');
+    if(/(^|\D)09\d{2}[-\s]?\d{3}[-\s]?\d{3}(\D|$)/.test(v)) return '「'+f.l+'」看起來有手機號碼，請移除。';
+    if(/[A-Z][12]\d{8}/i.test(v)) return '「'+f.l+'」看起來有身分證字號，請移除。';
+    if(d.pii&&/[\w.+-]+@[\w-]+\.[\w.]+/.test(v)) return '「'+f.l+'」看起來有電子郵件，請移除。'; }
+  if((colKey==='ccases'||colKey==='pcases')&&/^[一-鿿]{2,4}$/.test(String(r.code||'').trim())) return '代碼看起來像姓名，請改用編號（例如評估系統的會員編號，或 C-001）。';
+  return '';
+}
+function saveForm(){
+  const {colKey,rec}=modalCtx, d=COLS[colKey], r=Object.assign({},rec);
+  $('modal').querySelectorAll('[data-fk]').forEach(el=>{ const f=d.fields.find(x=>x.k===el.dataset.fk); let v=el.value; if(f.t==='number') v=v===''?'':Number(v); else v=String(v).trim(); r[f.k]=v; });
+  const miss=d.fields.filter(f=>f.req&&(r[f.k]===''||r[f.k]==null)).map(f=>f.l); if(miss.length){ $('ferr').textContent='請填寫：'+miss.join('、'); return; }
+  const pii=piiProblem(r,d,colKey); if(pii){ $('ferr').textContent=pii; return; }
+  if(colKey==='ccases'&&r.retestDate&&r.firstDate&&r.retestDate<r.firstDate){ $('ferr').textContent='再測日不能早於初測日。'; return; }
+  if(colKey==='ccases'&&r.retestDate&&r.status==='追蹤中') r.status='已再測';
+  if(colKey==='goals'){ const ok=r.level==='年度'?/^\d{4}$/.test(r.period):r.level==='季度'?/^\d{4}-Q[1-4]$/.test(r.period):/^\d{4}-\d{2}$/.test(r.period); if(!ok){ $('ferr').textContent='期間格式：年度 2027、季度 2027-Q1、月 2026-12。'; return; } }
+  if(colKey==='skills'){ r.id=rec.id; putRaw('P','skills',Object.assign({},r)); addLog('P','修改','能力',skillName(r.id)); }
+  else { const prevSt=rec.status; const saved=upsert(colKey,r); if(colKey==='certs') certLinked(saved);
+    if(colKey==='certs'&&['已取得','已完成'].includes(saved.status)&&prevSt!==saved.status) setTimeout(()=>showBadge('🏅',(saved.kind==='證照'?'取得 ':'完成 ')+saved.name,'記得放進作品集'),120);
+    if(colKey==='goals'&&saved.status==='完成'&&prevSt!=='完成') setTimeout(()=>showBadge('✦','目標完成',saved.title),120); }
+  closeModal(); render(); toast('已儲存');
+}
+function rtRow(r){
+  return `<div class="rtrow" data-id="${esc(r[0])}" style="border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-bottom:8px">
+    <div class="row"><input type="text" class="rt-t" value="${esc(r[2])}" placeholder="要做什麼" style="flex:1;min-width:180px"><input type="text" class="rt-h" value="${esc(r[3])}" placeholder="時間" style="width:80px"><button class="x" data-act="rtdel" aria-label="刪除這項">×</button></div>
+    <div class="row" style="margin-top:6px"><span class="seg">${[1,2,3,4,5,6,0].map(d=>`<button type="button" class="${r[4].includes(d)?'on':''}" data-act="rtday" data-d="${d}">${WD[d]}</button>`).join('')}</span>
+      <label class="muted small"><input type="checkbox" class="rt-o" ${r[5]?'checked':''}> 加分項（不計入完成率）</label>
+      <label class="muted small"><input type="radio" name="rtcscs" class="rt-c" ${r[6]?'checked':''}> 打勾時 CSCS +1</label></div></div>`;
+}
+function openRoutineEditor(){
+  modalCtx={rt:1};
+  openModal(`<h3>編輯每週例行</h3><p class="muted small" style="margin-top:0">點星期選擇哪幾天做；都不選就是「彈性」。完成率只算固定事項，完成 75% 就算這週達標。改了之後，過去週次的完成率也會用新的清單重新計算。</p>
+    <div id="rtlist">${routine().map(rtRow).join('')}</div>
+    <div class="row"><button class="btn sm plain" data-act="rtadd">＋ 新增一項</button><button class="btn sm plain" data-act="rtreset">恢復預設</button><label class="muted small"><input type="radio" name="rtcscs" class="rt-none"> 都不連動 CSCS</label></div>
+    <p class="ferr" id="ferr"></p><div class="row"><button class="btn" data-act="rtsave">儲存</button><button class="btn plain" data-act="close">取消</button></div>`);
+}
+function openMs(id){
+  let it=null; PHASES.forEach(p=>phaseItems(p).forEach(x=>{ if(x.id===id) it=x; })); if(!it) return;
+  const r=msRec(it)||{}; modalCtx={ms:id};
+  openModal(`<h3>${esc(it.t)}</h3><div class="fgrid"><div class="field full"><label>狀態</label><select id="ms-state"><option value="">未完成</option><option value="done" ${r.state==='done'?'selected':''}>已完成</option><option value="skip" ${r.state==='skip'?'selected':''}>調整（不再適用，不計入進度）</option></select></div>
+    <div class="field full"><label>完成證據（文件位置、成果連結、考試結果……）</label><textarea id="ms-ev">${esc(r.evidence||'')}</textarea></div>
+    <div class="field full"><label>調整原因</label><textarea id="ms-rs">${esc(r.reason||'')}</textarea></div></div>
+    <p class="muted small">完成任務不等於取得成果：沒有證據的「已完成」會在總覽提醒你補上。</p><p class="ferr" id="ferr"></p>
+    <div class="mfoot"><span></span><div class="row"><button class="btn plain" data-act="close">取消</button><button class="btn" data-act="mssave">儲存</button></div></div>`);
+}
+
+
+/* 第一次打開時，放入 12 月的起步計畫（只是計畫，狀態都是「未開始」；刪掉也不會再出現） */
+function seedMine(){
+  const st=settings();
+  const g1=getRec('P','goals','seed-g1'); if(g1&&g1.status==='未開始'&&/CSCS/.test(g1.title)) tomb('P','goals','seed-g1');
+  if(st.seeded2) return;
+  [['seed-c1','NSCA-CPT','證照','已取得',''],['seed-c2','EMT-1 初級救護技術員','證照','已取得',''],['seed-c3','PADI Open Water','證照','已取得',''],
+   ['seed-c4','運科數據分析師（國家運動科學中心）','證照','準備中','2026-12-12'],['seed-c5','NSCA-CSCS','證照','準備中',''],['seed-c6','NASM-CES','證照','規劃中','']]
+   .forEach(c=>{ if(!getRec('P','certs',c[0])) upsert('certs',{id:c[0],name:c[1],kind:c[2],status:c[3],date:c[4]}); });
+  if(!getRec('P','portfolio','seed-w1')) upsert('portfolio',{id:'seed-w1',name:'曼齡評估系統',cat:'AI／系統開發成果',date:'',desc:'自己建置的健康與運動評估網頁系統：整合 InBody、MOTi、測力板等檢測資料，產出客戶版與專業版報告、綜合分數、歷次比較與再測提醒。',evidence:'GitHub：tftta/manling-assessment'});
+  saveSettings({seeded2:1});
+}
+function seedDecember(){
+  const st=getRec('P','settings','main'); if(st&&st.seeded) return;
+  if(all('goals').length||all('deadlines').length){ putRaw('P','settings',Object.assign(settings(),{seeded:1})); return; }
+  [['通過運科數據分析師檢定（12/12）','PERSONAL']]
+    .forEach((g,i)=>upsert('goals',{id:'seed-g'+i,title:g[0],track:g[1],level:'月',period:'2026-12',status:'未開始'}));
+  [['考完試，恢復 CSCS 每週讀一章','2026-12-14','PERSONAL'],['第一次月檢核（按「帶入自動摘要」）','2026-12-31','PERSONAL']]
+    .forEach((d,i)=>upsert('deadlines',{id:'seed-d'+i,title:d[0],date:d[1],track:d[2]}));
+  putRaw('P','settings',Object.assign(settings(),{seeded:1}));
+}
+/* =====================================================================
+   主畫面、事件
+   ===================================================================== */
+function vReport(){
+  const y0=+START.slice(0,4), yNow=new Date().getFullYear(); if(!reportYear) reportYear=Math.max(y0,yNow);
+  const Y=String(reportYear), inY=d=>String(d||'').startsWith(Y);
+  const cel=settings().celebrated||{}; const seals=PHASES.filter(ph=>inY(cel[ph.id]));
+  const ms=[]; PHASES.forEach(ph=>phaseItems(ph).forEach(i=>{ const r=msRec(i); if(r&&r.state==='done'&&inY(r.doneAt)&&i.s==='P') ms.push([r.doneAt,i.t,r.evidence]); })); ms.sort();
+  const certs=all('certs').filter(c=>['已取得','已完成'].includes(c.status)&&inY(c.date||(String(c.id).startsWith('seed-c')?'':isoDate(new Date(c.updatedAt)))));
+  const works=all('portfolio').filter(p=>inY(p.date)).sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+  const goals=all('goals').filter(g=>String(g.period).startsWith(Y)), gDone=goals.filter(g=>g.status==='完成').length;
+  const yEnd=new Date(reportYear,11,31), heatEnd=yEnd<today()?yEnd:today(), heatW=Math.min(53,Math.max(4,Math.ceil((days(new Date(Math.max(new Date(reportYear,0,1),parseD(START))),heatEnd)+7)/7)+1));
+  let wN=0,wOK=0,best=0,run=0; for(let d=monday(parseD(Y+'-01-01')); d.getFullYear()<=+Y && d<=new Date(); d=addDays(d,7)){ if(addDays(d,6)<parseD(START)) continue; wN++; if(weekPct(isoWeek(d))>=75){ wOK++; run++; best=Math.max(best,run); } else run=0; }
+  const revs=live('P','reviews').filter(r=>r.kind==='M'&&String(r.period).startsWith(Y)).sort((a,b)=>a.period.localeCompare(b.period));
+  const skills=SKILL_MAP.flatMap(g=>g[1]).map(s=>[s[1],lvl((getRec('P','skills',s[0])||{}).current)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);
+  const years=[]; for(let y=y0;y<=Math.max(y0,yNow);y++) years.push(y);
+  return `<div class="ptitle noprint"><div><div class="eyebrow">SEASON REVIEW</div><h2>${ico('report')}年度成長報告</h2></div><div class="row"><select data-act="ryear" style="width:auto">${years.map(y=>`<option ${y==reportYear?'selected':''}>${y}</option>`).join('')}</select><button class="btn" data-act="print">${IN_ART?'列印（請用電腦版檔案）':'列印／存成 PDF'}</button><button class="btn plain" data-page="review">回月檢核</button></div></div>
+  <div class="report">
+    <div class="rhead"><div><div class="muted">封印解除：五年篇</div><h1>${Y} 年度成長報告</h1><div class="muted">謝卉榆・產生於 ${fmtD(isoDate(new Date()))}</div></div><div class="rseal">${seals.length?'✦'.repeat(seals.length):'封'}</div></div>
+    <div class="grid g4 rstats">
+      <div class="card stat"><div class="k">解除的封印</div><div class="v">${seals.length}</div><div class="s">${seals.map(p=>p.name).join('、')||'—'}</div></div>
+      <div class="card stat"><div class="k">完成的解封條件</div><div class="v">${ms.length}</div></div>
+      <div class="card stat"><div class="k">每週例行達標</div><div class="v">${wOK} / ${wN} 週</div><div class="s">最長連續 ${best} 週</div></div>
+      <div class="card stat"><div class="k">月目標完成</div><div class="v">${gDone} / ${goals.length}</div></div></div>
+    <div class="grid g2" style="align-items:start">
+      <div class="card"><h3>完成的解封條件</h3>${ms.length?ms.map(m=>`<div class="item"><span class="muted small" style="white-space:nowrap">${fmtD(m[0]).slice(5)}</span><span class="t">${esc(m[1])}${m[2]?`<div class="muted small">證據：${esc(m[2])}</div>`:''}</span></div>`).join(''):'<p class="muted">這一年還沒有完成紀錄。</p>'}</div>
+      <div class="col">
+        <div class="card"><h3>證照與課程</h3>${certs.length?certs.map(c=>`<div class="item"><span class="t">${esc(c.name)} <span class="chip ok">${esc(c.status)}</span></span><span class="muted small">${fmtD(c.date)}</span></div>`).join(''):'<p class="muted">這一年沒有新取得的證照或完成的課程。</p>'}</div>
+        <div class="card"><h3>作品</h3>${works.length?works.map(w=>`<div class="item"><span class="t">${esc(w.name)} <span class="chip">${esc(w.cat)}</span></span><span class="muted small">${fmtD(w.date)}</span></div>`).join(''):'<p class="muted">這一年還沒有作品紀錄。</p>'}</div>
+        <div class="card"><h3>能力現況</h3>${skills.length?skills.map(x=>`<div class="row between" style="padding:2px 0"><span>${esc(x[0])}</span><span class="dots">${[1,2,3,4,5].map(i=>`<i class="${i<=x[1]?'f':''}"></i>`).join('')}</span></div>`).join(''):'<p class="muted">還沒有能力評分。</p>'}<div class="muted small" style="margin-top:4px">CSCS 讀書進度：${settings().cscsCh||0} / 24 章</div></div>
+      </div></div>
+    <div class="card" style="margin-top:16px"><h3>每月回顧</h3>${revs.length?revs.map(r=>`<div class="item"><b style="white-space:nowrap">${esc(r.period.slice(5))} 月</b><span class="t">${esc((r.q1||'').split('\n').slice(0,3).join('；'))||'<span class=muted>—</span>'}${r.q3?`<div class="muted small">學到：${esc(r.q3.split('\n')[0])}</div>`:''}</span></div>`).join(''):'<p class="muted">這一年還沒有月檢核。</p>'}</div>
+  </div>`;
+}
+const VIEWS={report:vReport,dash:vDash,plan:vPlan,goals:vGoals,projects:vProjects,skills:vSkills,cases:vCases,clinic:vClinic,portfolio:vPortfolio,finance:vFinance,review:vReview,ideas:vIdeas,data:vData};
+function render(){
+  const ae=document.activeElement, key=ae&&(ae.dataset.q?'[data-q="'+ae.dataset.q+'"]':ae.dataset.bind?`[data-bind="${ae.dataset.bind}"][data-k="${ae.dataset.k}"]${ae.dataset.i?`[data-i="${ae.dataset.i}"]`:''}`:null), pos=ae&&ae.selectionStart;
+  renderNav(); renderFoot();
+  $('view').innerHTML=VIEWS[page]();
+  afterRender();
+  if(key&&!$('modal').innerHTML){ const el=$('view').querySelector(key); if(el){ el.focus(); try{ el.setSelectionRange(pos,pos); }catch(e){} } }
+}
+const REDUCED=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+let lastPage=null, popKey=null, pendingFx=null, bootDone=false; const prevCnt={};
+function floatXP(n,x,y){
+  const f=document.createElement('div'); f.className='fxp'; f.textContent='+'+n+' 修為'; f.style.left=(x+46)+'px'; f.style.top=y+'px'; document.body.appendChild(f); setTimeout(()=>f.remove(),1300);
+  if(REDUCED) return; for(let i=0;i<10;i++){ const d=document.createElement('i'); d.className='msp'; const a=Math.random()*Math.PI*2, r=18+Math.random()*26; d.style.left=x+'px'; d.style.top=y+'px'; d.style.setProperty('--x',Math.cos(a)*r+'px'); d.style.setProperty('--y',Math.sin(a)*r+'px'); document.body.appendChild(d); setTimeout(()=>d.remove(),800); }
+}
+function stampAt(x,y){
+  const s=document.createElement('div'); s.className='stamp'; s.textContent='封'; s.style.left=(x+30)+'px'; s.style.top=y+'px'; document.body.appendChild(s); setTimeout(()=>s.remove(),1500);
+  if(REDUCED) return; for(let i=0;i<16;i++){ const d=document.createElement('i'); d.className='msp'+(i%3?'':' big'); const a=i/16*Math.PI*2, r=30+Math.random()*24; d.style.left=(x+30)+'px'; d.style.top=y+'px'; d.style.setProperty('--x',Math.cos(a)*r+'px'); d.style.setProperty('--y',Math.sin(a)*r+'px'); document.body.appendChild(d); setTimeout(()=>d.remove(),800); }
+}
+function confetti(x,y){
+  if(REDUCED) return; const C=['#c9a24a','#e8cf86','#5b5fc7','#e3a066','#6fcf9f','#f5e6b8'];
+  for(let i=0;i<34;i++){ const d=document.createElement('i'); d.className='cf'; d.style.left=x+'px'; d.style.top=y+'px'; d.style.background=C[i%C.length];
+    d.style.setProperty('--x',(Math.random()*240-150)+'px'); d.style.setProperty('--y',(-60-Math.random()*120)+'px'); d.style.setProperty('--r',(Math.random()*720-360)+'deg'); d.style.setProperty('--dl',(Math.random()*.15)+'s');
+    document.body.appendChild(d); setTimeout(()=>d.remove(),1700); }
+}
+function cnt(key,v){ return `<span class="cnt" data-key="${key}" data-to="${v}">${v}</span>`; }
+function animateNum(el,from,to){
+  const t0=performance.now(), dur=600; el.classList.add('bump');
+  (function step(t){ const k=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-k,3); el.textContent=Math.round(from+(to-from)*e); if(k<1) requestAnimationFrame(step); })(t0);
+}
+function afterRender(){
+  const v=$('view');
+  if(lastPage!==page){ v.classList.remove('enter'); void v.offsetWidth; [...v.querySelectorAll('.card,.ptitle,.banner')].forEach((el,i)=>el.style.setProperty('--i',Math.min(i,14))); v.classList.add('enter'); lastPage=page; clearTimeout(afterRender.t); afterRender.t=setTimeout(()=>{ v.classList.remove('enter'); afterRender.counted=false; },2200); }
+  if(v.classList.contains('enter')&&afterRender.revealFor!==page&&'IntersectionObserver' in window&&!REDUCED){ afterRender.revealFor=page; if(afterRender.io) afterRender.io.disconnect();
+    const io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } }),{rootMargin:'0px 0px -40px 0px'}); afterRender.io=io;
+    v.querySelectorAll('.card,.pfcard').forEach(el=>{ if(el.getBoundingClientRect().top>innerHeight-20){ el.classList.add('rv'); io.observe(el); } }); }
+  if(lastPage===page&&!v.classList.contains('enter')) afterRender.revealFor=null;
+  if(pendingFx){ const d=xpTotal()-pendingFx.xp; if(d>0) floatXP(d,pendingFx.x,pendingFx.y); pendingFx=null; }
+  if(popKey){ const el=v.querySelector(popKey); if(el){ const it=el.closest('.item,.top3'); if(it) it.classList.add('pop'); } popKey=null; }
+  const entering=v.classList.contains('enter')&&!afterRender.counted; afterRender.counted=v.classList.contains('enter');
+  v.querySelectorAll('.cnt').forEach(el=>{ const k=el.dataset.key, to=+el.dataset.to; let from=prevCnt[k]; if(entering&&to>0) from=0; prevCnt[k]=to; if(from==null||from===to||REDUCED) return; setTimeout(()=>animateNum(el,from,to),entering?350:0); });
+}
+function showBadge(icon,title,sub){
+  document.querySelectorAll('.badgepop').forEach(x=>x.remove());
+  const b=document.createElement('div'); b.className='badgepop'; b.setAttribute('role','status');
+  b.innerHTML=`<span class="bi">${icon}</span><div><b>${esc(title)}</b>${sub?`<div>${esc(sub)}</div>`:''}</div>`;
+  document.body.appendChild(b); setTimeout(()=>b.classList.add('out'),2800); setTimeout(()=>b.remove(),3300);
+}
+(function stars(){ const s=$('stars'); if(!s) return; let h=''; for(let i=0;i<34;i++) h+=`<i style="left:${(Math.random()*100).toFixed(1)}%;top:${(Math.random()*100).toFixed(1)}%;--d:${(3+Math.random()*4).toFixed(1)}s;--dl:${(Math.random()*4).toFixed(1)}s"></i>`; s.innerHTML=h; })();
+function go(p){ page=p; try{ history.replaceState(null,'','#'+p); }catch(e){} render(); window.scrollTo(0,0); }
+let cloudTimer=null;
+const _touch=touch; touch=function(s){ _touch(s); if(cloud){ clearTimeout(cloudTimer); cloudTimer=setTimeout(writeCloud,1500); } };
+
+document.addEventListener('click', async e=>{
+  const t=e.target.closest('[data-act],[data-page]'); if(!t) return;
+  if(t.dataset.page&&!t.dataset.act){ closeModal(); go(t.dataset.page); return; }
+  const a=t.dataset.act;
+  if(a==='bg'){ if(e.target===t) closeModal(); return; }
+  if(a==='close'){ closeModal(); return; }
+  if(a==='track'){ trackF=t.dataset.v; render(); return; }
+  if(a==='new'){ openForm(t.dataset.col,null,t.dataset.preset?JSON.parse(t.dataset.preset):null); return; }
+  if(a==='edit'){ e.preventDefault(); const r=getRec(t.dataset.s,t.dataset.col,t.dataset.id); if(r) openForm(t.dataset.col,Object.assign({_s:t.dataset.s},r)); return; }
+  if(a==='skill'){ const r=getRec('P','skills',t.dataset.id)||Object.assign(COLS.skills.def(),{id:t.dataset.id}); openForm('skills',Object.assign({_s:'P'},r)); return; }
+  if(a==='fsave'){ saveForm(); return; }
+  if(a==='dset'){ const i=$('modal').querySelector(`[data-fk="${t.dataset.k}"]`); if(i) i.value=t.dataset.v==='x'?'':isoDate(addDays(new Date(),+t.dataset.v)); return; }
+  if(a==='srate'){ e.stopPropagation(); const id=t.dataset.id, v=+t.dataset.v, r=getRec('P','skills',id)||Object.assign(COLS.skills.def(),{id}); const key=e.shiftKey?'target':'current', cur=lvl(r[key]), nv=cur===v?v-1:v;
+    upsert('skills',Object.assign({_s:'P'},r,{[key]:nv+'｜'+LEVELS[nv]})); render(); toast(skillName(id)+'：'+(e.shiftKey?'目標':'目前')+'＝'+LEVELS[nv]+(key==='current'&&nv>=3&&!(r.evidence||'').trim()?'　記得點名稱補一個用過的例子':'')); return; }
+  if(a==='qiwho'){ t.parentNode.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===t)); $('qi-t').focus(); return; }
+  if(a==='qisave'){ const w=$('qi-who').querySelector('.on'); const v=$('qi-t').value; closeModal(); addIdea(v,w?w.dataset.v:'自己'); return; }
+  if(a==='fdel'){ if(!t.dataset.armed){ t.dataset.armed=1; t.textContent='確定刪除？'; t.classList.add('danger'); return; } removeRec(modalCtx.colKey,modalCtx.rec); closeModal(); render(); toast('已刪除'); return; }
+  if(a==='ms'){ openMs(t.dataset.id); return; }
+  if(a==='mssave'){ setMs(modalCtx.ms,{state:$('ms-state').value,evidence:$('ms-ev').value.trim(),reason:$('ms-rs').value.trim()}); closeModal(); render(); checkSeal(); return; }
+  if(a==='wk'){ weekOff+=+t.dataset.n; render(); return; }
+  if(a==='wk0'){ weekOff=0; render(); return; }
+  if(a==='carry'){ const w=week(t.dataset.k), pw=getRec('P','weeks',t.dataset.p); const c=(pw.top3||[]).filter((x,i)=>x&&x.trim()&&!(pw.top3done||[])[i]); for(let i=0;i<3&&c.length;i++) if(!(w.top3[i]||'').trim()){ w.top3[i]=c.shift(); w.top3done[i]=false; } saveWeek(w); render(); return; }
+  if(a==='istat'){ e.stopPropagation(); const r=getRec(t.dataset.s,'ideas',t.dataset.id); if(r){ upsert('ideas',Object.assign({_s:t.dataset.s},r,{status:t.dataset.v})); render(); } return; }
+  if(a==='optadd'){ const n=$('opt-new').value.trim(); if(!n) return; putRaw('P','options',{id:'o'+uid(),name:n,custom:1,scores:{}}); render(); return; }
+  if(a==='optdel'){ tomb('P','options',t.dataset.id); render(); return; }
+  if(a==='cscs'){ setCscs((settings().cscsCh||0)+(+t.dataset.n)); render(); return; }
+  if(a==='gcarry'){ const g=getRec('P','goals',t.dataset.id); if(g){ upsert('goals',Object.assign({_s:'P'},g,{period:t.dataset.m,note:((g.note||'')+' 從 '+g.period+' 延續').trim()})); render(); toast('已帶入本月'); } return; }
+  if(a==='gdrop'){ const g=getRec('P','goals',t.dataset.id); if(g){ upsert('goals',Object.assign({_s:'P'},g,{status:'調整'})); render(); toast('已標成調整，不算未完成'); } return; }
+  if(a==='rtedit'){ openRoutineEditor(); return; }
+  if(a==='rtday'){ t.classList.toggle('on'); return; }
+  if(a==='rtdel'){ t.closest('.rtrow').remove(); return; }
+  if(a==='rtadd'){ $('rtlist').insertAdjacentHTML('beforeend',rtRow(['r'+uid(),'','','',[],0,0])); return; }
+  if(a==='rtreset'){ $('rtlist').innerHTML=ROUTINE.map(x=>[x[0],x[1],x[2],x[3],x[4],x[5]?1:0,x[0]==='r1'?1:0]).map(rtRow).join(''); return; }
+  if(a==='rtsave'){ const rows=[...document.querySelectorAll('.rtrow')].map(el=>{ const ds=[...el.querySelectorAll('[data-act="rtday"].on')].map(b=>+b.dataset.d);
+      return [el.dataset.id, dayLabel(ds), el.querySelector('.rt-t').value.trim(), el.querySelector('.rt-h').value.trim(), ds, el.querySelector('.rt-o').checked?1:0, el.querySelector('.rt-c').checked?1:0]; });
+    if(!rows.length){ $('ferr').textContent='至少要有一項。'; return; } if(rows.some(r=>!r[2])){ $('ferr').textContent='每一項都要寫內容。'; return; } if(!rows.some(r=>!r[5])){ $('ferr').textContent='至少要有一項固定事項。'; return; }
+    saveSettings({routine:rows}); addLog('P','修改','每週例行',rows.length+' 項'); closeModal(); render(); toast('已更新每週例行'); return; }
+  if(a==='print'){ if(IN_ART){ toast('claude.ai 裡無法列印，請用電腦版檔案打開這一頁'); return; } window.print(); return; }
+  if(a==='rk'){ reviewKind=t.dataset.v; render(); return; }
+  if(a==='rvopen'){ reviewMonth=t.dataset.v; render(); window.scrollTo(0,0); return; }
+  if(a==='rvqopen'){ reviewQ=t.dataset.v; render(); window.scrollTo(0,0); return; }
+  if(a==='rvauto'){ const s=monthAuto(reviewMonth); const set=(id,v)=>{ const el=$(id); if(el&&!el.value.trim()) el.value=v; };
+    set('rv-q1',[...s.done.map(x=>'解封條件：'+x),...s.gd.map(x=>'目標：'+x),...s.t3.map(x=>'本週三件事：'+x),...s.pfo.map(x=>'作品：'+x)].join('\n')); set('rv-q2',s.gn.join('\n')); set('rv-q3',s.notes.join('\n'));  toast('已帶入（只填空白的題目）'); return; }
+  if(a==='rvsave'){ const r={id:'M-'+reviewMonth,kind:'M',period:reviewMonth}; MQ.forEach(q=>r[q[0]]=$('rv-'+q[0]).value.trim()); const old=getRec('P','reviews',r.id); putRaw('P','reviews',Object.assign({createdAt:old?old.createdAt:Date.now()},r)); addLog('P','儲存','月度檢核',reviewMonth); render(); toast('已儲存 '+reviewMonth+' 月檢核'); return; }
+  if(a==='rvqsave'){ const r={id:'Q-'+reviewQ,kind:'Q',period:reviewQ}; QQ.forEach(q=>r[q[0]]=$('rv-'+q[0]).value.trim()); putRaw('P','reviews',r); addLog('P','儲存','季度檢核',reviewQ); render(); toast('已儲存 '+reviewQ+' 季度檢核'); return; }
+  if(a==='folder'){ try{ const h=await window.showDirectoryPicker({id:'seal2-'+t.dataset.s,mode:'readwrite'}); if(!await perm(h,true)) throw new Error('沒有取得資料夾的寫入權限'); await attachFolder(t.dataset.s,h); toast('已連結資料夾'); }catch(err){ if(err&&err.name!=='AbortError'){ fileState[t.dataset.s]=err.message||'無法使用這個資料夾（在 claude.ai 預覽中無法使用，請用 Chrome 直接打開檔案）'; render(); } } return; }
+  if(a==='reconn'){ const s=t.dataset.s; try{ if(!await perm(pendH[s],true)) throw new Error('沒有取得權限'); await attachFolder(s,pendH[s]); }catch(err){ fileState[s]=err.message||'重新連線失敗'; render(); } return; }
+  if(a==='expjson'){ exportJSON(t.dataset.s); render(); return; }
+  if(a==='expcsv'){ exportCSV($('csvcol').value); return; }
+  if(a==='imp'){ applyImport(t.dataset.v); return; }
+  if(a==='impcancel'){ importBuf=null; render(); return; }
+  if(a==='purge'){ const lim=Date.now()-180*864e5; let n=0; ['P','C'].forEach(s=>{ Object.keys(DB[s].cols).forEach(k=>{ const before=DB[s].cols[k].length; DB[s].cols[k]=DB[s].cols[k].filter(r=>!(r.deleted&&r.updatedAt<lim)); n+=before-DB[s].cols[k].length; }); touch(s); }); toast('已清除 '+n+' 筆舊的刪除標記'); render(); return; }
+  if(a==='wipe'){ if(!t.dataset.armed){ t.dataset.armed=1; t.textContent='再按一次確認清空'; return; } const s=t.dataset.s; DB[s]=emptySpace(s); try{ localStorage.removeItem(LS_KEY[s]); }catch(err){} dirH[s]=null; pendH[s]=null; await idbDel('dir-'+s); fileState[s]=''; render(); toast('已清空這台電腦的'+(s==='P'?'個人':'診所')+'暫存'); return; }
+  if(a==='logs'){ logSpace=t.dataset.v; render(); return; }
+});
+document.addEventListener('change', e=>{
+  const t=e.target, a=t.dataset.act;
+  if(t.type==='checkbox'&&t.checked&&['rt','t3','msq'].includes(a)){ const r=t.getBoundingClientRect(); pendingFx={xp:xpTotal(),x:r.left+r.width/2,y:r.top+r.height/2}; }
+  if(a==='msq'){ const rc=t.getBoundingClientRect(); if(t.checked) popKey=`input[data-act="msq"][data-id="${t.dataset.id}"]`; setMs(t.dataset.id,{state:t.checked?'done':''}); render(); if(t.checked){ stampAt(rc.left+rc.width/2,rc.top+rc.height/2); toast('解封條件完成。記得補上證據'); checkSeal(); } return; }
+  if(a==='rt'){ if(t.checked) popKey=`input[data-act="rt"][data-id="${t.dataset.id}"]`; const w=week(t.dataset.k), had=w.done.includes(t.dataset.id), before=streaks().cur, pb=weekPct(t.dataset.k); w.done=t.checked?[...new Set([...w.done,t.dataset.id])]:w.done.filter(x=>x!==t.dataset.id); saveWeek(w); if(had!==t.checked) bumpDay(t.checked?1:-1);
+    if(isCscsItem(t.dataset.id)&&had!==t.checked) setCscs((settings().cscsCh||0)+(t.checked?1:-1), true);
+    render(); const after=streaks().cur; if(pb<75&&weekPct(t.dataset.k)>=75){ const bb=document.querySelector('#view .bar'); if(bb){ const q=bb.getBoundingClientRect(); confetti(q.left+q.width*.75,q.top); } if(after<=before) showBadge('💪','本週例行達標','固定事項完成 75%'); } if(after>before){ showBadge('🔥', after>=2?'連續達標 '+after+' 週':'本週例行達標', after>=2?'最佳紀錄 '+streaks().best+' 週':'固定事項完成 75%'); } else if(isCscsItem(t.dataset.id)&&t.checked) toast('CSCS +1 章，目前第 '+settings().cscsCh+' 章');
+    return; }
+  if(a==='t3'){ if(t.checked) popKey=`input[data-act="t3"][data-i="${t.dataset.i}"]`; const w=week(t.dataset.k); if(!!w.top3done[+t.dataset.i]!==t.checked) bumpDay(t.checked?1:-1); w.top3done[+t.dataset.i]=t.checked; saveWeek(w); render(); return; }
+  if(a==='optsc'){ const old=getRec('P','options',t.dataset.id)||{id:t.dataset.id,scores:{}}; const r=Object.assign({},old,{scores:Object.assign({},old.scores,{[t.dataset.c]:t.value?+t.value:''})}); putRaw('P','options',r); render(); return; }
+  if(a==='cscsexam'){ saveSettings({cscsExam:t.value}); render(); return; }
+  if(a==='optw'){ const st=settings(); st.weights=Object.assign({},st.weights,{[t.dataset.c]:Math.max(0,Math.min(5,+t.value||0))}); putRaw('P','settings',st); render(); return; }
+  if(a==='eftarget'){ const st=settings(); st.efTarget=t.value===''?'':+t.value; putRaw('P','settings',st); render(); return; }
+  if(a==='rvm'){ if(t.value){ reviewMonth=t.value; render(); } return; }
+  if(a==='ryear'){ reportYear=+t.value; render(); return; }
+  if(a==='rvq'){ reviewQ=t.value; render(); return; }
+  if(t.id==='impfile'&&t.files[0]){ readImport(t.files[0]); return; }
+  if(t.dataset.f){ ui.f[t.dataset.f]=t.value; render(); return; }
+});
+document.addEventListener('input', e=>{
+  const t=e.target;
+  if(t.dataset.q){ ui.q[t.dataset.q]=t.value; render(); return; }
+  if(t.dataset.bind==='top3'){ const w=week(t.dataset.k), i=+t.dataset.i; w.top3[i]=t.value; if(!t.value.trim()) w.top3done[i]=false; saveWeek(w); const cb=t.previousElementSibling; cb.disabled=!t.value.trim(); if(!t.value.trim()){ cb.checked=false; t.parentNode.classList.remove('done'); } return; }
+  if(t.dataset.bind==='note'){ const w=week(t.dataset.k); w.note=t.value; saveWeek(w); return; }
+});
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'&&modalOpen()){ closeModal(); return; }
+  if($('qi-t')&&e.key==='Enter'&&!e.isComposing){ e.preventDefault(); document.querySelector('[data-act="qisave"]').click(); return; }
+  if(e.target.id==='kadd'&&e.key==='Enter'&&!e.isComposing){ e.preventDefault(); const v=e.target.value; addIdea(v,'自己'); setTimeout(()=>{ const k=$('kadd'); if(k) k.focus(); },30); return; }
+  const typing=/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||e.target.isContentEditable;
+  if(!typing&&!modalOpen()&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+    if(/^[1-9]$/.test(e.key)&&PAGES[+e.key-1]){ e.preventDefault(); go(PAGES[+e.key-1][0]); return; }
+    if(e.key==='n'||e.key==='N'){ e.preventDefault(); quickIdea(); return; }
+    if(e.key==='?'){ document.body.classList.add('showkeys'); return; }
+  }
+  if(e.key==='Enter'&&$('modal').innerHTML&&e.target.tagName==='INPUT'){ e.preventDefault(); const b=$('modal').querySelector('[data-act="fsave"],[data-act="mssave"]'); if(b) b.click(); }
+  if(e.key==='Enter'&&e.target.id==='opt-new'){ document.querySelector('[data-act="optadd"]').click(); }
+});
+document.addEventListener('dragstart',e=>{ const c=e.target.closest&&e.target.closest('[data-drag]'); if(!c) return; e.dataTransfer.setData('text/plain',c.dataset.drag+'|'+c.dataset.s); e.dataTransfer.effectAllowed='move'; c.classList.add('dragging'); });
+document.addEventListener('dragend',e=>{ document.querySelectorAll('.dragging,.kcol.hover').forEach(x=>x.classList.remove('dragging','hover')); });
+document.addEventListener('dragover',e=>{ const c=e.target.closest&&e.target.closest('[data-drop]'); if(!c) return; e.preventDefault(); document.querySelectorAll('.kcol.hover').forEach(x=>x!==c&&x.classList.remove('hover')); c.classList.add('hover'); });
+document.addEventListener('drop',e=>{ const c=e.target.closest&&e.target.closest('[data-drop]'); if(!c) return; e.preventDefault(); const [id,sp]=(e.dataTransfer.getData('text/plain')||'').split('|'); const r=getRec(sp,'ideas',id); if(r&&r.status!==c.dataset.drop){ upsert('ideas',Object.assign({_s:sp},r,{status:c.dataset.drop})); render(); if(c.dataset.drop==='本月做'&&all('ideas').filter(i=>i.status==='本月做').length>2) toast('本月做已經超過 2 個'); } });
+document.addEventListener('keyup',e=>{ if(e.key==='?'||e.key==='/'||e.key==='Shift') document.body.classList.remove('showkeys'); });
+window.addEventListener('hashchange',()=>{ const h=location.hash.slice(1); if(VIEWS[h]&&h!==page){ page=h; render(); } });
+window.addEventListener('beforeunload',()=>{ clearTimeout(saveTimer); ['P','C'].forEach(s=>{ if(dirty[s]){ try{ localStorage.setItem(LS_KEY[s],JSON.stringify(DB[s])); }catch(e){} } }); });
+
+loadLocal();
+render();
+/* 先讀完資料夾與雲端，再決定要不要放入預設內容，避免新裝置的預設內容蓋掉已經存在的紀錄 */
+Promise.all([initFolders().catch(()=>{}), initCloud().catch(()=>{})]).then(()=>{
+  if(pendH.P && !getRec('P','settings','main')) return;   /* 資料夾還沒重新允許，先不要放預設內容 */
+  seedDecember(); seedMine(); render(); setTimeout(()=>{ bootDone=true; },1500);
+});
+
+</script>
+</body>
+</html>
