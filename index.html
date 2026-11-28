@@ -834,7 +834,7 @@ function touch(s){ DB[s].updatedAt=Date.now(); dirty[s]=true; clearTimeout(saveT
 function persist(){
   ['P','C'].forEach(s=>{ if(!dirty[s]) return; dirty[s]=false;
     try{ localStorage.setItem(LS_KEY[s], JSON.stringify(DB[s])); }catch(e){ toast('瀏覽器空間不足，請連結資料夾或匯出備份'); }
-    writeFolder(s); });
+    writeFolder(s); if(s==='P') gasSchedule(); });
   renderFoot();
 }
 function loadLocal(){
@@ -921,6 +921,45 @@ async function writeCloud(){
       await ref.set({data:JSON.parse(JSON.stringify(cur))}); META['cloud'+s]=Date.now(); }catch(e){} }
   saveMeta(); cloudBusy=false; renderFoot();
 }
+
+/* ---------- 儲存：Google 雲端（自己的 Apps Script） ---------- */
+const GAS_KEY='seal2-gas';
+let GAS=''; try{ GAS=localStorage.getItem(GAS_KEY)||''; }catch(e){}
+let gasState='', gasTimer=null, gasBusy=false, gasAgain=false, gasOK=false;
+function gasValid(u){ return /^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test((u||'').trim()); }
+async function gasGet(url){ const r=await fetch(url+'?a=load&t='+Date.now(),{redirect:'follow'}); const j=await r.json(); if(!j.ok) throw new Error(j.err||'讀取失敗'); return j.data; }
+async function gasPull(url){
+  const x=await gasGet(url||GAS);
+  if(x){ if(!validSpace(x)||x.space!=='P') throw new Error('雲端的資料檔格式不對'); const m=mergeSpace(DB.P,migrate(x)); if(JSON.stringify(m.space.cols)!==JSON.stringify(DB.P.cols)){ DB.P=m.space; try{ localStorage.setItem(LS_KEY.P, JSON.stringify(DB.P)); }catch(e){} return true; } }
+  return false;
+}
+async function gasPush(){
+  if(!GAS) return; if(gasBusy){ gasAgain=true; return; } gasBusy=true;
+  try{
+    const changed=await gasPull();
+    const r=await fetch(GAS,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({a:'save',data:DB.P}),redirect:'follow'});
+    const j=await r.json(); if(!j.ok) throw new Error(j.err||'寫入失敗');
+    META.gasP=Date.now(); saveMeta(); gasOK=true; gasState='';
+    if(changed) setTimeout(render,0);
+  }catch(e){ gasOK=false; gasState='雲端同步失敗（'+(e.message||'網路問題')+'），資料仍在瀏覽器，連上網路後會自動再試'; clearTimeout(gasTimer); gasTimer=setTimeout(gasPush,60000); }
+  gasBusy=false; renderFoot(); if(page==='data') render();
+  if(gasAgain){ gasAgain=false; gasPush(); }
+}
+function gasSchedule(){ if(!GAS) return; clearTimeout(gasTimer); gasTimer=setTimeout(gasPush,1500); }
+async function initGas(){
+  if(!GAS) return;
+  try{ await gasPull(); gasOK=true; META.gasP=Date.now(); saveMeta(); }catch(e){ gasOK=false; gasState='目前連不到雲端（'+(e.message||'網路問題')+'），先用瀏覽器裡的資料'; }
+  render();
+}
+async function gasConnect(url){
+  url=(url||'').trim(); if(!gasValid(url)){ toast('網址格式不對：要是 https://script.google.com/macros/s/…/exec'); return; }
+  toast('連線中…');
+  try{ await gasPull(url); }catch(e){ toast('連不上：'+(e.message||'請確認部署時「誰可以存取」選了「所有人」')); return; }
+  GAS=url; try{ localStorage.setItem(GAS_KEY,url); }catch(e){}
+  gasOK=true; gasState=''; await gasPush(); render(); toast('已連上 Google 雲端，之後會自動同步');
+}
+function gasDisconnect(){ GAS=''; gasOK=false; gasState=''; try{ localStorage.removeItem(GAS_KEY); }catch(e){} render(); toast('已中斷雲端同步，資料仍留在瀏覽器'); }
+document.addEventListener('visibilitychange',()=>{ if(!GAS) return; if(document.visibilityState==='hidden'&&gasTimer){ clearTimeout(gasTimer); gasTimer=null; try{ navigator.sendBeacon(GAS,new Blob([JSON.stringify({a:'save',data:DB.P})],{type:'text/plain;charset=utf-8'})); }catch(e){} } else if(document.visibilityState==='visible'){ gasPull().then(c=>{ if(c) render(); }).catch(()=>{}); } });
 
 /* ---------- 匯出 ---------- */
 function download(name, text, mime){
@@ -1059,7 +1098,8 @@ function retestQueue(){ const t=today(); return all('ccases').filter(c=>c.firstD
 
 function risks(){
   const out=[];
-  if(!dirH.P&&!cloud){ const exp=META.expP; const n=exp?days(new Date(exp),new Date()):null; if(!exp||n>7) out.push(['warn','資料只存在這個瀏覽器'+(exp?'，上次匯出是 '+n+' 天前':'')+'。請連結資料夾或匯出備份','data']); }
+  if(GAS&&!gasOK) out.push(['warn',gasState||'雲端同步失敗','data']);
+  if(!dirH.P&&!cloud&&!GAS){ const exp=META.expP; const n=exp?days(new Date(exp),new Date()):null; if(!exp||n>7) out.push(['warn','資料只存在這個瀏覽器'+(exp?'，上次匯出是 '+n+' 天前':'')+'。請連結資料夾或匯出備份','data']); }
   let noEv=0; PHASES.forEach(p=>noEv+=prog(phaseItems(p),'P').noEv); if(noEv) out.push(['gold',noEv+' 個已完成的解封條件還沒附證據','plan']);
   const sk=all('skills').filter(r=>lvl(r.current)>=3&&!(r.evidence||'').trim()).length; if(sk) out.push(['gold',sk+' 項能力自評「能應用」以上，但沒有填用過的例子','skills']);
   const rd=reviewDue(); if(rd) out.push(['gold',rd+' 的月檢核還沒填','review']);
@@ -1133,7 +1173,7 @@ function renderLv(){
 }
 function renderFoot(){
   const f=s=>{ if(s==='C') return ''; if(dirH[s]) return `${s==='P'?'個人':'診所'}：<b>資料夾</b> ${META['saved'+s]?new Date(META['saved'+s]).toTimeString().slice(0,5):''}`; if(pendH[s]) return `${s==='P'?'個人':'診所'}：<b style="color:#e3a066">資料夾待重新連線</b>`; return `${s==='P'?'個人':'診所'}：僅瀏覽器`; };
-  $('foot').innerHTML='<span class="keys">按住 <kbd>?</kbd> 看快捷鍵・<kbd>N</kbd> 記想法</span><br>'+f('P')+(cloud?'<br>claude.ai 雲端同步中':'')+'<br>資料格式 v'+SCHEMA;
+  $('foot').innerHTML='<span class="keys">按住 <kbd>?</kbd> 看快捷鍵・<kbd>N</kbd> 記想法</span><br>'+(GAS?(gasOK?'個人：Google 雲端同步中'+(META.gasP?'（'+fmtDT(META.gasP).replace(/^.* /,'')+'）':''):'個人：<span style="color:#f0a27a">雲端同步失敗</span>'):f('P'))+(cloud?'<br>claude.ai 雲端同步中':'')+'<br>資料格式 v'+SCHEMA;
 }
 
 /* ---------- 通用清單 ---------- */
@@ -1226,7 +1266,7 @@ function cToday(){
 function cRisks(){
   const r=risks().filter(x=>x[2]!=='cases'&&x[2]!=='projects'||true);
   if(!r.length) return '';
-  return `<div class="card"><h3>提醒</h3>${r.length? r.map(x=>`<div class="risk"><span class="lv chip ${x[0]}">${x[0]==='warn'?'注意':'提醒'}</span><span style="flex:1">${esc(x[1])}</span>${x[1].startsWith('資料只存在')&&FS_OK&&!IN_ART&&!pendH.P?'<button class="btn sm" data-act="folder" data-s="P">連結資料夾</button>':`<button class="btn ghost sm" data-page="${x[2]}">前往</button>`}</div>`).join('') : '<p class="muted">目前沒有風險提醒。</p>'}</div>`;
+  return `<div class="card"><h3>提醒</h3>${r.length? r.map(x=>`<div class="risk"><span class="lv chip ${x[0]}">${x[0]==='warn'?'注意':'提醒'}</span><span style="flex:1">${esc(x[1])}</span>${x[1].startsWith('資料只存在')?'<button class="btn sm" data-page="data">設定雲端</button>':`<button class="btn ghost sm" data-page="${x[2]}">前往</button>`}</div>`).join('') : '<p class="muted">目前沒有風險提醒。</p>'}</div>`;
 }
 function cHeatMini(){ return `<div class="card heatmini"><h3><span>訓練日誌</span><button class="btn ghost sm" data-page="goals">本週 ›</button></h3>${heatmap(8)}</div>`; }
 function cMilestones(dls){
@@ -1553,10 +1593,15 @@ function vData(){
   const b=importBuf; let imp='';
   if(b) imp=`<div class="note" style="margin-top:8px">${b.kind==='v1'?'這是 1.x 版的資料，會轉換後合併進來。':'合併＝逐筆比較，保留較新的；取代＝整份換掉（會先在瀏覽器留一份原本的）。'}</div><div class="row" style="margin-top:8px"><button class="btn sm" data-act="imp" data-v="merge">合併匯入</button>${b.kind==='v2'?'<button class="btn sm danger" data-act="imp" data-v="replace">取代</button>':''}<button class="btn sm plain" data-act="impcancel">取消</button></div>`;
   return head('資料與備份','')+`<div class="grid g2" style="align-items:start"><div class="col">
+    <div class="card gascard"><h3><span>Google 雲端同步</span>${GAS?(gasOK?'<span class="chip ok">同步中</span>':'<span class="chip warn">連不上</span>'):''}</h3>
+      ${GAS?`<div>${gasOK?'每次修改約 2 秒後自動存到你 Google 雲端硬碟的「封印解除」資料夾，每天留一份備份（保留 14 天）。':esc(gasState)}</div><div class="muted small" style="margin-top:4px">上次同步 ${fmtDT(META.gasP)}・網址 …${esc(GAS.slice(-14))}</div>
+        <div class="row" style="margin-top:10px"><button class="btn sm" data-act="gassync">立即同步</button><button class="btn sm plain" data-act="gasoff">中斷同步</button></div>`
+      :`<p class="muted" style="margin:0 0 8px">用你自己 Google 帳號的 Apps Script，把資料自動存到個人雲端硬碟，換電腦打開網站貼上同一個網址，資料就回來了。</p>
+        <input id="gasurl" placeholder="貼上 Apps Script 網址：https://script.google.com/macros/s/…/exec"><div class="row" style="margin-top:8px"><button class="btn sm" data-act="gason">連線</button><span class="muted small">第一次設定請照「Apps Script 設定步驟」</span></div>`}</div>
     <div class="card"><h3>存檔位置</h3><div>${cnt} 筆資料・最後修改 ${fmtDT(DB.P.updatedAt)}</div>
-      <div class="muted">${cloud?'<b style="color:var(--ok)">已同步到 claude.ai 雲端</b>：電腦和手機打開這個連結，看到的是同一份資料。'+(META.cloudP?'上次同步 '+fmtDT(META.cloudP):''):esc(fileState.P||(FS_OK?'尚未連結資料夾：目前只存在這個瀏覽器':'這個瀏覽器不支援資料夾存檔，請改用 Chrome 或 Edge，或定期匯出'))}</div>
-      <div class="row" style="margin-top:8px">${FS_OK&&!IN_ART?(pendH.P?'<button class="btn sm" data-act="reconn" data-s="P">重新連線資料夾</button>':`<button class="btn sm ${dirH.P?'plain':''}" data-act="folder" data-s="P">${dirH.P?'換一個資料夾':'連結資料夾'}</button>`):''}<button class="btn sm plain" data-act="expjson" data-s="P">匯出 JSON 備份</button></div>
-      <p class="muted small">建議連結雲端硬碟裡的資料夾（例如「封印解除」），換電腦也能接著用。資料夾裡會存「${FILE_NAME.P}」，並在「備份」子資料夾每天留一份，保留 14 天。</p></div>
+      <div class="muted">${GAS&&gasOK?'<b style="color:var(--ok)">已同步到你的 Google 雲端硬碟</b>（同時也存在這個瀏覽器）':cloud?'<b style="color:var(--ok)">已同步到 claude.ai 雲端</b>：電腦和手機打開這個連結，看到的是同一份資料。'+(META.cloudP?'上次同步 '+fmtDT(META.cloudP):''):esc(fileState.P||(FS_OK?'尚未連結資料夾：目前只存在這個瀏覽器':'這個瀏覽器不支援資料夾存檔，請改用 Chrome 或 Edge，或定期匯出'))}</div>
+      <div class="row" style="margin-top:8px">${FS_OK&&!IN_ART?(pendH.P?'<button class="btn sm" data-act="reconn" data-s="P">重新連線資料夾</button>':`<button class="btn sm ${dirH.P||GAS?'plain':''}" data-act="folder" data-s="P">${dirH.P?'換一個資料夾':'連結資料夾'}</button>`):''}<button class="btn sm plain" data-act="expjson" data-s="P">匯出 JSON 備份</button></div>
+      <p class="muted small">已經開了上面的 Google 雲端同步，就不用連結資料夾。資料夾適合有裝電腦版雲端硬碟的人：資料夾裡會存「${FILE_NAME.P}」，並在「備份」子資料夾每天留一份，保留 14 天。</p></div>
     <div class="card"><h3>匯入備份</h3><label class="btn sm plain filebtn">選擇備份檔（.json）<input type="file" accept=".json,application/json" id="impfile" hidden></label><p class="muted small" style="margin:6px 0 0">可以匯入「匯出 JSON 備份」的檔案，或資料夾裡的「備份」檔。</p>${imp}</div>
    </div><div class="col">
     <div class="card"><h3>匯出 CSV</h3><div class="row"><select id="csvcol" style="max-width:220px">${CSV_COLS.map(c=>`<option value="${c}">${COLS[c].title}</option>`).join('')}</select><button class="btn sm" data-act="expcsv">匯出</button></div></div>
@@ -1752,6 +1797,9 @@ document.addEventListener('click', async e=>{
   if(a==='edit'){ e.preventDefault(); const r=getRec(t.dataset.s,t.dataset.col,t.dataset.id); if(r) openForm(t.dataset.col,Object.assign({_s:t.dataset.s},r)); return; }
   if(a==='skill'){ const r=getRec('P','skills',t.dataset.id)||Object.assign(COLS.skills.def(),{id:t.dataset.id}); openForm('skills',Object.assign({_s:'P'},r)); return; }
   if(a==='fsave'){ saveForm(); return; }
+  if(a==='gason'){ gasConnect($('gasurl').value); return; }
+  if(a==='gasoff'){ if(confirm('中斷後資料只會存在這個瀏覽器，雲端那份會保留。確定中斷？')) gasDisconnect(); return; }
+  if(a==='gassync'){ toast('同步中…'); gasPush().then(()=>{ if(gasOK) toast('已同步'); }); return; }
   if(a==='dset'){ const i=$('modal').querySelector(`[data-fk="${t.dataset.k}"]`); if(i) i.value=t.dataset.v==='x'?'':isoDate(addDays(new Date(),+t.dataset.v)); return; }
   if(a==='srate'){ e.stopPropagation(); const id=t.dataset.id, v=+t.dataset.v, r=getRec('P','skills',id)||Object.assign(COLS.skills.def(),{id}); const key=e.shiftKey?'target':'current', cur=lvl(r[key]), nv=cur===v?v-1:v;
     upsert('skills',Object.assign({_s:'P'},r,{[key]:nv+'｜'+LEVELS[nv]})); render(); toast(skillName(id)+'：'+(e.shiftKey?'目標':'目前')+'＝'+LEVELS[nv]+(key==='current'&&nv>=3&&!(r.evidence||'').trim()?'　記得點名稱補一個用過的例子':'')); return; }
@@ -1845,7 +1893,7 @@ window.addEventListener('beforeunload',()=>{ clearTimeout(saveTimer); ['P','C'].
 loadLocal();
 render();
 /* 先讀完資料夾與雲端，再決定要不要放入預設內容，避免新裝置的預設內容蓋掉已經存在的紀錄 */
-Promise.all([initFolders().catch(()=>{}), initCloud().catch(()=>{})]).then(()=>{
+Promise.all([initFolders().catch(()=>{}), initCloud().catch(()=>{}), initGas().catch(()=>{})]).then(()=>{
   if(pendH.P && !getRec('P','settings','main')) return;   /* 資料夾還沒重新允許，先不要放預設內容 */
   seedDecember(); seedMine(); render(); setTimeout(()=>{ bootDone=true; },1500);
 });
